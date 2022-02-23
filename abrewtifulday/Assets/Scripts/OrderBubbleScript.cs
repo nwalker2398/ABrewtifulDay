@@ -7,6 +7,6 @@ public class OrderBubbleScript : MonoBehaviour
     public GameObject customer;
     void Update()
     {
-        transform.position = customer.transform.position + new Vector3(0, 0.75f, 0);
+        transform.position = customer.transform.position + new Vector3(0, 2.0f, 0);
     }
 }
