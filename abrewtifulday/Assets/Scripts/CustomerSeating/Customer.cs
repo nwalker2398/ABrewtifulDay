@@ -5,14 +5,18 @@ using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
+    public Vector3 destination;
+    public bool atDestination = false;
+
+    public Material defaultMaterial;
+
     [SerializeField] GameObject order;
     [SerializeField] Vector3 waitlistArea = new Vector3(-3f, 0f, -2f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 1.5f;
+
     private float displayOrderIn;
     private bool displayingOrder = false;
-    private bool atDestination = false;
-    private Vector3 destination;
     private bool shouldMove = false;
 
     void Start()
@@ -31,18 +35,21 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
-        if (!shouldMove)
-        {
-            return;
-        }
-
+        // Display order after delay
         if (!displayingOrder && Time.realtimeSinceStartup > displayOrderIn)
         {
             order.SetActive(true);
             displayingOrder = true;
         }
 
-        CustomerList.waitingCustomers.ForEach(delegate (Customer c)
+        // Don't move if the character is a default prefab
+        if (!shouldMove)
+        {
+            return;
+        }
+
+        // Walk into the store and leave if the waiting room is full
+        SeatingData.waitingCustomers.ForEach(delegate (Customer c)
         {
             // Stop moving if another waiting customer is in the way
             if (!atDestination &&
@@ -50,7 +57,7 @@ public class Customer : MonoBehaviour
                 Vector3.Distance(transform.position, c.transform.position) < stopDistance)
             {
                 // If the waiting room is full, leave the shop
-                if (CustomerList.waitingCustomers.Count > 3)
+                if (SeatingData.waitingCustomers.Count > 3)
                 {
                     destination = returnArea;
                 }
@@ -67,7 +74,7 @@ public class Customer : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, returnArea) < 1f)
         {
-            CustomerList.waitingCustomers.Remove(this);
+            SeatingData.waitingCustomers.Remove(this);
             gameObject.SetActive(false);
             Destroy(this);
         }
