@@ -6,22 +6,26 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    public bool atDestination = false;
+    public bool toWaitingArea = false;
+    public bool atWaitingArea = false;
+    public bool toSeat = false;
+    public bool atSeat = false;
+    public Chair seat;
+    public float waitingTime = 0f;
 
     public Material defaultMaterial;
 
     [SerializeField] GameObject order;
+    [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitlistArea = new Vector3(-3f, 0f, -2f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
-    [SerializeField] float stopDistance = 1.5f;
+    [SerializeField] float stopDistance = 2.5f;
 
-    private float displayOrderIn;
     private bool displayingOrder = false;
     private bool shouldMove = false;
 
     void Start()
     {
-        displayOrderIn = Random.Range(3.0f, 7.0f);
         order.SetActive(false);
     }
 
@@ -31,47 +35,101 @@ public class Customer : MonoBehaviour
         displayingOrder = true;
         destination = waitlistArea;
         shouldMove = true;
+        toWaitingArea = true;
+    }
+
+    public void Seat(Chair chair)
+    {
+        Debug.Log(destination);
+        Debug.Log(transform.position);
+        destination = chair.transform.position;
+        atWaitingArea = false;
+        toSeat = true;
+        seat = chair;
+        controller.removeCustomerGlow(this);
+        SeatingData.seatWaitingCustomer(this);
+        GetComponent<NavMeshAgent>().SetDestination(chair.transform.position);
     }
 
     void Update()
     {
-        // Display order after delay
-        if (!displayingOrder && Time.realtimeSinceStartup > displayOrderIn)
-        {
-            order.SetActive(true);
-            displayingOrder = true;
-        }
-
-        // Don't move if the character is a default prefab
+        //Debug.Log("toWaiting: " + toWaitingArea);
+        //Debug.Log("atWaiting: " + atWaitingArea);
+        //Debug.Log("toSeat: " + toSeat);
+        //Debug.Log("atSeat: " + atSeat);
+        // Don't do anything if the character is a default prefab
         if (!shouldMove)
         {
             return;
         }
 
-        // Walk into the store and leave if the waiting room is full
-        SeatingData.waitingCustomers.ForEach(delegate (Customer c)
+        // Display order after customer is seated
+        if (!displayingOrder && atSeat)
         {
-            // Stop moving if another waiting customer is in the way
-            if (!atDestination &&
-                !GameObject.ReferenceEquals(this, c) &&
-                Vector3.Distance(transform.position, c.transform.position) < stopDistance)
+            waitingTime += Time.deltaTime;
+            if (waitingTime > 3f)
             {
-                // If the waiting room is full, leave the shop
-                if (SeatingData.waitingCustomers.Count > 3)
-                {
-                    destination = returnArea;
-                }
-                // Else, wait to be seated
-                else
-                {
-                    GetComponent<NavMeshAgent>().isStopped = true;
-                    atDestination = true;
-                }
+                order.SetActive(true);
+                displayingOrder = true;
             }
-        });
-        if (!atDestination) {
+        }
+
+        // If waiting
+        // Walk into the store and leave if the waiting room is full
+        if (toWaitingArea)
+        {
+            SeatingData.waitingCustomers.ForEach(delegate (Customer c)
+            {
+                // Stop moving if another waiting customer is in the way
+                if (!atWaitingArea &&
+                    !GameObject.ReferenceEquals(this, c) &&
+                    Vector3.Distance(transform.position, c.transform.position) < stopDistance)
+                {
+                    // If the waiting room is full, leave the shop
+                    if (SeatingData.waitingCustomers.Count > 3)
+                    {
+                        destination = returnArea;
+                    }
+                    // Else, wait to be seated
+                    else
+                    {
+                        GetComponent<NavMeshAgent>().isStopped = true;
+                        toWaitingArea = false;
+                        atWaitingArea = true;
+                    }
+                }
+            });
+        }
+
+        // If walking to seat
+        // Remove chair glow once reached
+        if (toSeat)
+        {
+            //Debug.Log("Walking to seat: ");
+            // Check if customer reached destination
+            if (Vector3.Distance(transform.position, destination) < 0.1)
+            {
+                Debug.Log("At seat!");
+                GetComponent<NavMeshAgent>().isStopped = true;
+                toSeat = false;
+                atSeat = true;
+                controller.removeChairGlow(seat);
+            }
+        }
+
+        // Move to destination
+        if (toWaitingArea) {
+            //Debug.Log("Walking to destination");
             GetComponent<NavMeshAgent>().SetDestination(destination);
         }
+
+        //if (toWaitingArea || toSeat)
+        //{
+        //    //Debug.Log("Walking to destination");
+        //    GetComponent<NavMeshAgent>().SetDestination(destination);
+        //}
+
+        // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 1f)
         {
             SeatingData.waitingCustomers.Remove(this);

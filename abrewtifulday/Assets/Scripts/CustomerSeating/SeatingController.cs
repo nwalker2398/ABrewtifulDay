@@ -29,8 +29,12 @@ public class SeatingController : MonoBehaviour
         timePassed += Time.deltaTime;
         if (timePassed > 5.0f)
         {
-            generateCustomer();
+            SeatingData.print();
             timePassed = 0f;
+        }
+        if (SeatingData.waitingCustomers.Count == 0)
+        {
+            generateCustomer();
         }
 
         // Glow customer if selected
@@ -42,12 +46,13 @@ public class SeatingController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
+                Debug.Log(objectHit);
 
                 if (objectHit.tag == "Customer")
                 {
                     if (SeatingData.selectedCustomer != null)
                     {
-                        removeCustomerGlow();
+                        removeCustomerGlow(SeatingData.selectedCustomer);
                     }
 
                     Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
@@ -58,11 +63,6 @@ public class SeatingController : MonoBehaviour
                 // Select a chair if a customer is selected
                 if (objectHit.tag == "Chair" && SeatingData.selectedCustomer != null)
                 {
-                    if (SeatingData.selectedChair != null)
-                    {
-                        removeChairGlow();
-                    }
-
                     Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     SeatingData.selectedChair = objectHit.gameObject.GetComponent<Chair>();
                     renderer.material = chair_glow;
@@ -77,20 +77,18 @@ public class SeatingController : MonoBehaviour
     {
         Chair chair = SeatingData.selectedChair;
         Customer customer = SeatingData.selectedCustomer;
-        removeCustomerGlow();
-
-        customer.destination = chair.transform.position;
-        customer.atDestination = false;
-        SeatingData.seatWaitingCustomer(customer);
+        customer.Seat(chair);
+        SeatingData.selectedChair = null;
+        SeatingData.selectedCustomer = null;
     }
 
-    void removeCustomerGlow() {
-        Renderer oldRenderer = SeatingData.selectedCustomer.gameObject.GetComponent<Renderer>();
-        oldRenderer.material = SeatingData.selectedCustomer.defaultMaterial;
+    public void removeCustomerGlow(Customer c) {
+        Renderer oldRenderer = c.gameObject.GetComponent<Renderer>();
+        oldRenderer.material = c.defaultMaterial;
     }
-    void removeChairGlow()
+    public void removeChairGlow(Chair chair)
     {
-        Renderer oldRenderer = SeatingData.selectedChair.gameObject.GetComponent<Renderer>();
+        Renderer oldRenderer = chair.GetComponent<Renderer>();
         oldRenderer.material = chair_normal;
     }
 

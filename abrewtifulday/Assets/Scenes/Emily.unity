@@ -3364,12 +3364,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
-  atDestination: 0
+  toWaitingArea: 0
+  atWaitingArea: 0
+  toSeat: 0
+  atSeat: 0
+  seat: {fileID: 0}
+  waitingTime: 0
   defaultMaterial: {fileID: 2100000, guid: 4f2ffa5f8a3c1734e8f5a073a3bddf94, type: 2}
   order: {fileID: 1002381467}
+  controller: {fileID: 425326271}
   waitlistArea: {x: -3, y: 0, z: -2}
   returnArea: {x: -10, y: 0, z: -10}
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!136 &492346404
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3869,12 +3875,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
-  atDestination: 0
+  toWaitingArea: 0
+  atWaitingArea: 0
+  toSeat: 0
+  atSeat: 0
+  seat: {fileID: 0}
+  waitingTime: 0
   defaultMaterial: {fileID: 2100000, guid: 4161bc6bcb31eb74dad45f6b79338493, type: 2}
   order: {fileID: 1489367569}
+  controller: {fileID: 425326271}
   waitlistArea: {x: -3, y: 0, z: -2}
   returnArea: {x: -10, y: 0, z: -10}
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!136 &530789895
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15212,12 +15224,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
-  atDestination: 0
+  toWaitingArea: 0
+  atWaitingArea: 0
+  toSeat: 0
+  atSeat: 0
+  seat: {fileID: 0}
+  waitingTime: 0
   defaultMaterial: {fileID: 2100000, guid: d3b9c3ec32da2e943829aacd5c3d94be, type: 2}
   order: {fileID: 1575605811}
+  controller: {fileID: 425326271}
   waitlistArea: {x: -3, y: 0, z: -2}
   returnArea: {x: -10, y: 0, z: -10}
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!136 &2130718227
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15228,7 +15246,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
