@@ -12,6 +12,7 @@ public class Customer : MonoBehaviour
     public bool atSeat = false;
     public Chair seat;
     public float waitingTime = 0f;
+    public bool rotate = false;
 
     public Material defaultMaterial;
 
@@ -53,10 +54,6 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("toWaiting: " + toWaitingArea);
-        //Debug.Log("atWaiting: " + atWaitingArea);
-        //Debug.Log("toSeat: " + toSeat);
-        //Debug.Log("atSeat: " + atSeat);
         // Don't do anything if the character is a default prefab
         if (!shouldMove)
         {
@@ -105,22 +102,37 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
+            toWaitingArea = false;
             Vector3 posdiff = transform.position - destination;
             posdiff.y = 0;
-            // Debug.Log("Walking to seat: ");
-            print(posdiff.magnitude);
             // Check if customer reached destination
             if (posdiff.magnitude < 0.1)
             {
-                Debug.Log("At seat!");
-                GetComponent<NavMeshAgent>().isStopped = true;
-                toSeat = false;
-                atSeat = true;
-                controller.removeChairGlow(seat);
-                transform.position += new Vector3(0f, 1.0f, 0f);
-                transform.LookAt(seat.table.transform);
-                shouldDisplayOrder = true;
+
+                GetComponent<NavMeshAgent>().enabled = false;
+                rotate = true;
+                if (transform.position.y < 0.5)
+                {
+                    transform.Translate(Vector3.up * 0.5f * Time.deltaTime);
+                }
+                else
+                {
+                    Debug.Log("At seat!");
+                    toSeat = false;
+                    atSeat = true;
+                    shouldDisplayOrder = true;
+                    controller.removeChairGlow(seat);
+                }
             }
+        }
+
+        if (rotate)
+        {
+            Vector3 lookAt = seat.table.transform.position;
+            lookAt.y = transform.position.y;
+            Vector3 relPos = lookAt - transform.position;
+            Quaternion toRot = Quaternion.LookRotation(relPos);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRot, 1 * Time.deltaTime * 10f);
         }
 
         // Move to destination
