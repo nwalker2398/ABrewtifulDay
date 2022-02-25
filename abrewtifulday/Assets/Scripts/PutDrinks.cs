@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Work done to put coffee on the table:
+- put coffee object on every table.
+- raycast from the coffee tray.
+- Box Collider with IsTrigger on for each table. (Collider is a must for raycast)
+- PutDrinks script for each table.
+- 
+*/
+
 public class PutDrinks : MonoBehaviour
 {
-    [SerializeField] private GameObject hand;
+    [SerializeField] private GameObject hand; // in this case the hand is the coffee tray.
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private float pickupRange;
     [SerializeField] private GameObject trayCoffee; 
@@ -17,8 +26,7 @@ public class PutDrinks : MonoBehaviour
     }
 
     void OnMouseDown() {
-        Debug.Log("Table is clicked.");
-
+        // cast a ray from the coffee tray.
         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
 
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
@@ -30,22 +38,4 @@ public class PutDrinks : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     Debug.DrawRay(hand.transform.position, hand.transform.forward, Color.green);
-    //     if(Input.GetKeyDown(KeyCode.E)) {
-    //         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
-
-    //         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
-    //             Debug.Log("Found a table");
-    //             // if we have coffee to serve
-    //             if (trayCoffee.active) {
-    //                 trayCoffee.active = false;
-    //                 tableCoffee.active = true;
-    //             }
-    //         }
-    //     }
-    // }
 }

@@ -1587,7 +1587,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436273833}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0356b8d2262b748f1a095c70b8cf058e, type: 3}
   m_Name: 
@@ -1596,9 +1596,22 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 10
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 697335656}
+--- !u!65 &436273836
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436273833}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &446225708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2595,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641101537}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0356b8d2262b748f1a095c70b8cf058e, type: 3}
   m_Name: 
@@ -2591,9 +2604,22 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 10
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 1596316589}
+--- !u!65 &641101540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641101537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &651770267
 GameObject:
   m_ObjectHideFlags: 0
@@ -5532,7 +5558,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190301387}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0356b8d2262b748f1a095c70b8cf058e, type: 3}
   m_Name: 
@@ -5541,9 +5567,22 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 10
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 90819383}
+--- !u!65 &1190301390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190301387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1200549747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6537,7 +6576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382368946}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0356b8d2262b748f1a095c70b8cf058e, type: 3}
   m_Name: 
@@ -6546,9 +6585,22 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 10
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 45701138}
+--- !u!65 &1382368949
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382368946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1401769516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6958,7 +7010,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 3
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 1036019162}
 --- !u!65 &1464207068
@@ -8003,7 +8055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761169223}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0356b8d2262b748f1a095c70b8cf058e, type: 3}
   m_Name: 
@@ -8012,9 +8064,22 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 10
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 1549285191}
+--- !u!65 &1761169226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761169223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1762008180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9698,7 +9763,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 3
+  pickupRange: 4
   trayCoffee: {fileID: 1765336828}
   tableCoffee: {fileID: 1335126148}
 --- !u!65 &2060675807
