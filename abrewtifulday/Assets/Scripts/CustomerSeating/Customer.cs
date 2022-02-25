@@ -17,11 +17,11 @@ public class Customer : MonoBehaviour
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
-    [SerializeField] Vector3 waitingArea = new Vector3(-1.5f, 0f, -2f);
+    [SerializeField] Vector3 waitingArea = new Vector3(-2f, 0f, -2.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
 
-    private bool displayingOrder = false;
+    private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
 
     void Start()
@@ -32,10 +32,10 @@ public class Customer : MonoBehaviour
     public void Generate()
     {
         gameObject.SetActive(true);
-        displayingOrder = true;
         destination = waitingArea;
         shouldMove = true;
         toWaitingArea = true;
+        order.SetActive(true);
     }
 
     public void Seat(Chair chair)
@@ -64,13 +64,13 @@ public class Customer : MonoBehaviour
         }
 
         // Display order after customer is seated
-        if (!displayingOrder && atSeat)
+        if (shouldDisplayOrder && atSeat)
         {
             waitingTime += Time.deltaTime;
             if (waitingTime > 3f)
             {
                 order.SetActive(true);
-                displayingOrder = true;
+                shouldDisplayOrder = false;
             }
         }
 
@@ -105,17 +105,21 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
+            Vector3 posdiff = transform.position - destination;
+            posdiff.y = 0;
             // Debug.Log("Walking to seat: ");
+            print(posdiff.magnitude);
             // Check if customer reached destination
-            if (Vector3.Distance(transform.position, destination) < 0.1)
+            if (posdiff.magnitude < 0.1)
             {
                 Debug.Log("At seat!");
                 GetComponent<NavMeshAgent>().isStopped = true;
                 toSeat = false;
                 atSeat = true;
                 controller.removeChairGlow(seat);
-                this.transform.position += new Vector3(0f, 0.5f, 0f);
-                this.transform.LookAt(seat.table.transform);
+                transform.position += new Vector3(0f, 1.0f, 0f);
+                transform.LookAt(seat.table.transform);
+                shouldDisplayOrder = true;
             }
         }
 
