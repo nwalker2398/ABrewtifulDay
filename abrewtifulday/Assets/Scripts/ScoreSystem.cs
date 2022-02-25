@@ -8,10 +8,10 @@ public class ScoreSystem : MonoBehaviour
 {
     private int score = 0;
     [SerializeField] ProgressBar heartBar;
-    [SerializeField] float gameTime;
+    //[SerializeField] float gameTime;
     static ScoreSystem instance;
-    private float timeRemaining;
-    private bool isRunning;
+    //private float timeRemaining;
+    //private bool isRunning;
     //[SerializeField] TMP_Text scoreText;
 
     void Awake() {
@@ -27,9 +27,9 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public static bool gameIsRunning() {
-        return instance.isRunning;
-    }
+    // public static bool gameIsRunning() {
+    //     return instance.isRunning;
+    // }
 
     // Start is called before the first frame update
     void Start()
