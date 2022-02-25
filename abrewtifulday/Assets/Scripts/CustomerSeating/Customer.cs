@@ -17,7 +17,7 @@ public class Customer : MonoBehaviour
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
-    [SerializeField] Vector3 waitlistArea = new Vector3(-3f, 0f, -2f);
+    [SerializeField] Vector3 waitingArea = new Vector3(-1.5f, 0f, -2f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
 
@@ -33,7 +33,7 @@ public class Customer : MonoBehaviour
     {
         gameObject.SetActive(true);
         displayingOrder = true;
-        destination = waitlistArea;
+        destination = waitingArea;
         shouldMove = true;
         toWaitingArea = true;
     }
@@ -105,7 +105,7 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
-            //Debug.Log("Walking to seat: ");
+            // Debug.Log("Walking to seat: ");
             // Check if customer reached destination
             if (Vector3.Distance(transform.position, destination) < 0.1)
             {
@@ -114,6 +114,8 @@ public class Customer : MonoBehaviour
                 toSeat = false;
                 atSeat = true;
                 controller.removeChairGlow(seat);
+                this.transform.position += new Vector3(0f, 0.5f, 0f);
+                this.transform.LookAt(seat.table.transform);
             }
         }
 
@@ -122,12 +124,6 @@ public class Customer : MonoBehaviour
             //Debug.Log("Walking to destination");
             GetComponent<NavMeshAgent>().SetDestination(destination);
         }
-
-        //if (toWaitingArea || toSeat)
-        //{
-        //    //Debug.Log("Walking to destination");
-        //    GetComponent<NavMeshAgent>().SetDestination(destination);
-        //}
 
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 1f)

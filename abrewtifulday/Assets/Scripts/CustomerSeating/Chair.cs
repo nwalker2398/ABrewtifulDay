@@ -5,12 +5,5 @@ using UnityEngine;
 public class Chair : MonoBehaviour
 {
 
-    private void Start()
-    {
-        //print("Starting chair controller");
-    }
-
-    void Update()
-    {
-    }
+    public GameObject table;
 }
