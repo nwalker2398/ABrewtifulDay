@@ -16,21 +16,36 @@ public class PutDrinks : MonoBehaviour
         tableCoffee.active = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("E");
-            Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
+    void OnMouseDown() {
+        Debug.Log("Table is clicked.");
 
-            if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
-                Debug.Log("Found a table");
-                // if we have coffee to serve
-                if (trayCoffee.active) {
-                    trayCoffee.active = false;
-                    tableCoffee.active = true;
-                }
+        Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
+
+        if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
+            Debug.Log("Found a table");
+            // if we have coffee to serve
+            if (trayCoffee.active) {
+                trayCoffee.active = false;
+                tableCoffee.active = true;
             }
         }
     }
+
+    // Update is called once per frame
+    // void Update()
+    // {
+    //     Debug.DrawRay(hand.transform.position, hand.transform.forward, Color.green);
+    //     if(Input.GetKeyDown(KeyCode.E)) {
+    //         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
+
+    //         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
+    //             Debug.Log("Found a table");
+    //             // if we have coffee to serve
+    //             if (trayCoffee.active) {
+    //                 trayCoffee.active = false;
+    //                 tableCoffee.active = true;
+    //             }
+    //         }
+    //     }
+    // }
 }
