@@ -54,6 +54,7 @@ public class CoffeeMaker : MonoBehaviour
     {
         Debug.Log("Coffee being picked up!");
         //must be within x dist of machine to pick up
+        //if gameobject with tag barrista colliding with coffee area
         thoughtBubble.active = false;
         trayCoffee.active = true;
     }
