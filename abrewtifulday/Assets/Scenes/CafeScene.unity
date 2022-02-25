@@ -929,10 +929,11 @@ MonoBehaviour:
   atSeat: 0
   seat: {fileID: 0}
   waitingTime: 0
+  rotate: 0
   defaultMaterial: {fileID: 0}
   order: {fileID: 2977435}
   controller: {fileID: 1727927455}
-  waitingArea: {x: -1.5, y: 0, z: -2}
+  waitingArea: {x: -2.5, y: 0, z: -3}
   returnArea: {x: -10, y: 0, z: -10}
   stopDistance: 1.5
 --- !u!65 &189313761
@@ -7131,10 +7132,11 @@ MonoBehaviour:
   atSeat: 0
   seat: {fileID: 0}
   waitingTime: 0
+  rotate: 0
   defaultMaterial: {fileID: 0}
   order: {fileID: 1457775083}
   controller: {fileID: 1727927455}
-  waitingArea: {x: -1.5, y: 0, z: -2}
+  waitingArea: {x: -2.5, y: 0, z: -3}
   returnArea: {x: -10, y: 0, z: -10}
   stopDistance: 1.5
 --- !u!195 &1013559867
@@ -9777,10 +9779,11 @@ MonoBehaviour:
   atSeat: 0
   seat: {fileID: 0}
   waitingTime: 0
+  rotate: 0
   defaultMaterial: {fileID: 0}
   order: {fileID: 1179800228}
   controller: {fileID: 1727927455}
-  waitingArea: {x: -1.5, y: 0, z: -2}
+  waitingArea: {x: -2.5, y: 0, z: -3}
   returnArea: {x: -10, y: 0, z: -10}
   stopDistance: 1.5
 --- !u!4 &1402977568

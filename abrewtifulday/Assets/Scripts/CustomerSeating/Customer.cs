@@ -18,7 +18,7 @@ public class Customer : MonoBehaviour
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
-    [SerializeField] Vector3 waitingArea = new Vector3(-2f, 0f, -2.5f);
+    [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
 
@@ -113,7 +113,7 @@ public class Customer : MonoBehaviour
                 rotate = true;
                 if (transform.position.y < 0.5)
                 {
-                    transform.Translate(Vector3.up * 0.5f * Time.deltaTime);
+                    transform.Translate(Vector3.up * 1.5f * Time.deltaTime);
                 }
                 else
                 {
