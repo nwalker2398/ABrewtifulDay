@@ -37,6 +37,7 @@ public class PutDrinks : MonoBehaviour
             if (trayCoffee.active) {
                 trayCoffee.active = false;
                 tableCoffee.active = true;
+                ScoreSystem.incrementScore(1);
             }
         }
     }
