@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeatingController : MonoBehaviour
 {
-    [SerializeField] Vector3 customerStartLocation = new Vector3(-10f, 0.25f, -5f);
+    [SerializeField] Vector3 customerStartLocation = new Vector3(-3f, 0.25f, -5f);
     [SerializeField] Material customer_glow, chair_glow, chair_normal;
     [SerializeField] Camera camera;
     private Customer[] customers;
@@ -21,7 +21,7 @@ public class SeatingController : MonoBehaviour
         {
             customers[i] = customerObjects[i].GetComponent<Customer>();
         }
-        timePassed = 0;
+        timePassed = 5.0f;
     }
 
     void Update()
@@ -33,8 +33,6 @@ public class SeatingController : MonoBehaviour
             timePassed = 0f;
         }
 
-
-
         // Glow customer if selected
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,11 +42,9 @@ public class SeatingController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
-                print(objectHit.tag);
 
                 if (objectHit.tag == "Customer")
                 {
-                    print(SeatingData.selectedCustomer);
                     if (SeatingData.selectedCustomer != null)
                     {
                         removeCustomerGlow();
@@ -62,11 +58,9 @@ public class SeatingController : MonoBehaviour
                 // Select a chair if a customer is selected
                 if (objectHit.tag == "Chair" && SeatingData.selectedCustomer != null)
                 {
-                    print(SeatingData.selectedChair); ;
                     if (SeatingData.selectedChair != null)
                     {
-                        Renderer oldRenderer = SeatingData.selectedChair.gameObject.GetComponent<Renderer>();
-                        oldRenderer.material = chair_normal;
+                        removeChairGlow();
                     }
 
                     Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
@@ -87,18 +81,22 @@ public class SeatingController : MonoBehaviour
 
         customer.destination = chair.transform.position;
         customer.atDestination = false;
+        SeatingData.seatWaitingCustomer(customer);
     }
 
     void removeCustomerGlow() {
         Renderer oldRenderer = SeatingData.selectedCustomer.gameObject.GetComponent<Renderer>();
         oldRenderer.material = SeatingData.selectedCustomer.defaultMaterial;
     }
+    void removeChairGlow()
+    {
+        Renderer oldRenderer = SeatingData.selectedChair.gameObject.GetComponent<Renderer>();
+        oldRenderer.material = chair_normal;
+    }
 
     void generateCustomer()
     {
         Customer customer = customers[Random.Range(0, customers.Length)];
-        print("Generating new customer");
-
         var new_customer = Instantiate(customer, customerStartLocation, Quaternion.identity);
         SeatingData.addWaitingCustomer(new_customer);
         new_customer.Generate();
