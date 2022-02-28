@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeatingController : MonoBehaviour
 {
-    [SerializeField] Vector3 customerStartLocation = new Vector3(-3f, 0.25f, -5f);
+    [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
     [SerializeField] Material customer_glow, chair_glow, chair_normal;
     [SerializeField] Camera camera;
     private Customer[] customers;

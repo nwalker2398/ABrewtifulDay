@@ -51,6 +51,7 @@ public class Customer : MonoBehaviour
         SeatingData.seatWaitingCustomer(this);
         chair.GetComponent<NavMeshObstacle>().enabled = false;
         chair.seatedCustomer = true;
+        Debug.Log(chair);
         GetComponent<NavMeshAgent>().SetDestination(chair.transform.position);
     }
 
@@ -126,6 +127,10 @@ public class Customer : MonoBehaviour
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
                 }
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().SetDestination(destination);
             }
         }
 
