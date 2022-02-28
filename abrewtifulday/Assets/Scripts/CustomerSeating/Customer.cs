@@ -49,6 +49,8 @@ public class Customer : MonoBehaviour
         seat = chair;
         controller.removeCustomerGlow(this);
         SeatingData.seatWaitingCustomer(this);
+        chair.GetComponent<NavMeshObstacle>().enabled = false;
+        chair.seatedCustomer = true;
         GetComponent<NavMeshAgent>().SetDestination(chair.transform.position);
     }
 
@@ -122,6 +124,7 @@ public class Customer : MonoBehaviour
                     atSeat = true;
                     shouldDisplayOrder = true;
                     controller.removeChairGlow(seat);
+                    seat.GetComponent<NavMeshObstacle>().enabled = true;
                 }
             }
         }

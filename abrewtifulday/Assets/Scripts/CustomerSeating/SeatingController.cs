@@ -47,7 +47,7 @@ public class SeatingController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
-                //Debug.Log(objectHit);
+                Debug.Log(objectHit);
 
                 if (objectHit.tag == "Customer")
                 {
@@ -64,11 +64,16 @@ public class SeatingController : MonoBehaviour
                 // Select a chair if a customer is selected
                 if (objectHit.tag == "Chair" && SeatingData.selectedCustomer != null)
                 {
+                    Chair chair = objectHit.gameObject.GetComponent<Chair>();
                     Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
-                    SeatingData.selectedChair = objectHit.gameObject.GetComponent<Chair>();
-                    renderer.material = chair_glow;
+                    if (!chair.seatedCustomer)
+                    {
+                        SeatingData.selectedChair = chair;
+                        renderer.material = chair_glow;
 
-                    seatCustomer();
+                        seatCustomer();
+                    }
+
                 }
             }
         }

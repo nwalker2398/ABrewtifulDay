@@ -7,4 +7,5 @@ public class Chair : MonoBehaviour
 
     public GameObject table;
     public float rotation = 90f;
+    public bool seatedCustomer = false;
 }
