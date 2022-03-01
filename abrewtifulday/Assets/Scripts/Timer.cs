@@ -13,6 +13,8 @@ public class Timer : MonoBehaviour
     private float timeRemaining;
     private bool isPaused = false;
 
+    public GameObject dailyRecapPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,9 +44,11 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused) {
+        if (!isPaused)
+        {
             timeHasEnd(timeRemaining);
-            if (timeRemaining >= 0) {
+            if (timeRemaining >= 0)
+            {
                 timeText.SetText(((int)timeRemaining).ToString());
                 fill.fillAmount = Mathf.InverseLerp(0, (int)gameDuration, (int)timeRemaining);
                 timeRemaining -= Time.deltaTime;
@@ -52,11 +56,27 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public bool timeHasEnd(float timeRemaining) {
-        if (timeRemaining <= 0) {
+    public bool timeHasEnd(float timeRemaining)
+    {
+        if (timeRemaining <= 0)
+        {
             Debug.Log("Time is up.");
+            dailyRecapPanel.SetActive(true);
             return true;
         }
         return false;
+    }
+
+    public void LoadNextLevel()
+    {
+        // need to change to next level once we have multiple
+        // currently just reloads the scene
+        // attach to Next Day button on Daily Recap Panel
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+    }
+
+    public void LoadStartMenu()
+    {
+        //add in stuff for loading start menu scene
     }
 }
