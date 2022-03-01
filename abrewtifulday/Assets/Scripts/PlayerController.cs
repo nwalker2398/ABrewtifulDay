@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     float speed = 3f;
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    int gravity = 10;
 
     void Update()
     {

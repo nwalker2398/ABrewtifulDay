@@ -5,14 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Customer
+  - CoffeeRange
+  - Barista
+  - Chair
+  - Arrow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Put
   - Water
   - UI
-  - 
+  - PostProcessing
   - 
   - 
   - 
