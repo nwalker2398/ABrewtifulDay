@@ -13,6 +13,7 @@ public class Customer : MonoBehaviour
     public Chair seat;
     public float waitingTime = 0f;
     public bool rotate = false;
+    public float drinkTime = 6f;
 
     public Material defaultMaterial;
 
@@ -37,6 +38,20 @@ public class Customer : MonoBehaviour
         shouldMove = true;
         toWaitingArea = true;
         order.SetActive(true);
+    }
+
+    public void Drink(Vector3 pos, GameObject tableCoffee)
+    {
+        Debug.Log("Drinking");
+        this.transform.position = pos;
+        StartCoroutine(RemoveDrinkDelayed(tableCoffee));
+    }
+
+    IEnumerator RemoveDrinkDelayed(GameObject tableCoffee)
+    {
+        yield return new WaitForSeconds(drinkTime);
+        tableCoffee.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void Seat(Chair chair)
