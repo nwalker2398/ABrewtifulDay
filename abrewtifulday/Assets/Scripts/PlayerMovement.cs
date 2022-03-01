@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             ScoreSystem.incrementScore(1);
         }
+        transform.position = new Vector3(transform.position.x, 0.047f, transform.position.z);
     }
 
     Vector3 GetPlayerInput()

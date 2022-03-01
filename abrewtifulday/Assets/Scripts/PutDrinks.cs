@@ -16,9 +16,10 @@ public class PutDrinks : MonoBehaviour
 {
     [SerializeField] private GameObject hand; // in this case the hand is the coffee tray.
     [SerializeField] private LayerMask pickupLayer;
-    [SerializeField] private float pickupRange;
+    [SerializeField] private float pickupRange = 10;
     [SerializeField] private GameObject trayCoffee; 
     [SerializeField] private GameObject tableCoffee;
+    [SerializeField] private float serveRadius = 2; 
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,20 @@ public class PutDrinks : MonoBehaviour
                 trayCoffee.active = false;
                 tableCoffee.active = true;
                 ScoreSystem.incrementScore(1);
+
+                Collider[] hitColliders = Physics.OverlapSphere(tableCoffee.transform.position, serveRadius);
+                foreach (var hitCollider in hitColliders)
+                {
+                   if (hitCollider.ToString().Contains("ustomer"))
+                    {
+                        Debug.Log("customer");
+                        Debug.Log(hitCollider.gameObject.GetComponent<Customer>());
+                        Customer c = hitCollider.gameObject.GetComponent<Customer>();
+                        c.Drink(tableCoffee.transform.position, tableCoffee);
+                        break;
+                        //((Customer)hitCollider.gameObject).Drink(tableCoffee.transform.position);
+                    }
+                }
             }
             // pick the coffee from the table
             else if (trayCoffee.active == false && tableCoffee.active == true) {
