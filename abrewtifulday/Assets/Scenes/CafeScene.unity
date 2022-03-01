@@ -1656,7 +1656,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 1310037380}
 --- !u!1 &167822224
@@ -3046,7 +3046,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 486092599}
 --- !u!1 &344032947
@@ -4054,7 +4054,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 899159232}
 --- !u!1 &520948198
@@ -4742,7 +4742,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &660714251
 MonoBehaviour:
@@ -4760,7 +4760,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 459853649}
 --- !u!1 &670128896
@@ -5428,7 +5428,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 1870828023}
 --- !u!1 &751141912
@@ -12207,7 +12207,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 674494261}
 --- !u!1 &1623411760
@@ -14816,7 +14816,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 1561392807}
 --- !u!1 &1966159236
@@ -15317,7 +15317,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
-  pickupRange: 5
+  pickupRange: 3
   trayCoffee: {fileID: 75354573}
   tableCoffee: {fileID: 421533049}
 --- !u!1 &2019261440

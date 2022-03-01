@@ -32,12 +32,18 @@ public class PutDrinks : MonoBehaviour
         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
 
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
-            Debug.Log("Found a table");
-            // if we have coffee to serve
-            if (trayCoffee.active) {
+            Debug.Log("Raycast hit:" + hitInfo.transform.gameObject.name);
+            // if we have coffee to serve, put the coffee onto the table
+            //if (trayCoffee.active) {
+            if (trayCoffee.active && tableCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
                 trayCoffee.active = false;
                 tableCoffee.active = true;
                 ScoreSystem.incrementScore(1);
+            }
+            // pick the coffee from the table
+            else if (trayCoffee.active == false && tableCoffee.active == true) {
+                trayCoffee.active = true;
+                tableCoffee.active = false;
             }
         }
     }
