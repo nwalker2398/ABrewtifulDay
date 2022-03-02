@@ -43,7 +43,8 @@ public class Customer : MonoBehaviour
     public void Drink(Vector3 pos, GameObject tableCoffee)
     {
         Debug.Log("Drinking");
-        this.transform.position = pos;
+        //this.transform.position = pos;
+        order.SetActive(false);
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
 
@@ -51,6 +52,10 @@ public class Customer : MonoBehaviour
     {
         yield return new WaitForSeconds(drinkTime);
         tableCoffee.SetActive(false);
+
+        seat.seatedCustomer = false;
+        seat.GetComponent<NavMeshObstacle>().enabled = true;
+
         gameObject.SetActive(false);
     }
 
