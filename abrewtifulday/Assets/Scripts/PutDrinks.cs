@@ -36,6 +36,7 @@ public class PutDrinks : MonoBehaviour
                 trayCoffee.active = false;
                 objectCoffee.active = true;
                 ScoreSystem.incrementScore(1);
+                hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
             }
             // pick the coffee from the object
             // else if (trayCoffee.active == false && objectCoffee.active == true) {
