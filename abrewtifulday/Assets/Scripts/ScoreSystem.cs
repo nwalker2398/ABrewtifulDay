@@ -13,18 +13,28 @@ public class ScoreSystem : MonoBehaviour
     //private float timeRemaining;
     //private bool isRunning;
     //[SerializeField] TMP_Text scoreText;
+    public TextMeshProUGUI finalScoreText;
 
-    void Awake() {
+    void Awake()
+    {
         instance = this;
     }
 
-    public static void incrementScore(int points) {
-        if (!instance.heartBar.IsDone()) {
+    public static void incrementScore(int points)
+    {
+        if (!instance.heartBar.IsDone())
+        {
             instance.score += points;
             //instance.scoreText.SetText(instance.score.ToString());
             Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
+            instance.SetFinalScoreText();
         }
+    }
+
+    private void SetFinalScoreText()
+    {
+        finalScoreText.text = instance.score.ToString() + "\nCustomers Served!";
     }
 
     // public static bool gameIsRunning() {
@@ -40,6 +50,6 @@ public class ScoreSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
