@@ -23,6 +23,7 @@ public class Customer : MonoBehaviour
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
+
     [SerializeField] CustomerTimer timer;
 
     private bool shouldDisplayOrder = false;

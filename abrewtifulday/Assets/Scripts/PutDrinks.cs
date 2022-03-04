@@ -19,9 +19,13 @@ public class PutDrinks : MonoBehaviour
     [SerializeField] private GameObject trayCoffee; 
     [SerializeField] private GameObject objectCoffee;
 
+    [SerializeField] GameObject timerIcon;
+    [SerializeField] GameObject heartIcon;
+
     void Start()
     {
         objectCoffee.active = false;
+        heartIcon.active = false;
     }
 
     void OnMouseDown() {
@@ -34,6 +38,8 @@ public class PutDrinks : MonoBehaviour
                 //Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
                 trayCoffee.active = false;
                 objectCoffee.active = true;
+                timerIcon.active = false;
+                heartIcon.active = true;
                 ScoreSystem.incrementScore(1);
                 hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
             }
