@@ -37,7 +37,7 @@ public class Customer : MonoBehaviour
         destination = waitingArea;
         shouldMove = true;
         toWaitingArea = true;
-        order.SetActive(true);
+        //order.SetActive(true);
     }
 
     public void Drink(Vector3 pos, GameObject tableCoffee)
@@ -91,7 +91,7 @@ public class Customer : MonoBehaviour
             waitingTime += Time.deltaTime;
             if (waitingTime > 3f)
             {
-                order.SetActive(true);
+                //order.SetActive(true);
                 shouldDisplayOrder = false;
             }
         }
