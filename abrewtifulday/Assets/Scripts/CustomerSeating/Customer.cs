@@ -6,29 +6,25 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    public float waitingSeatTime = 0f;
-    public float waitingRoomTime = 0f;
-    private bool rotate = false;
-    public float drinkTime = 6f;
-    public bool shouldRotate = false;
-
     public Material defaultMaterial;
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
-    [SerializeField] GameObject customerSkin;
     [SerializeField] Chair seat;
 
     private bool toWaitingArea = false;
     private bool atWaitingArea = false;
     private bool toSeat = false;
     private bool atSeat = false;
-    private bool toReturnArea = false;
     private float stopDistance = 2.5f;
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
+    private float waitingSeatTime = 0f;
+    private float waitingRoomTime = 0f;
+    private bool rotate = false;
+    private float drinkTime = 6f;
 
     void Start()
     {
@@ -47,7 +43,6 @@ public class Customer : MonoBehaviour
     public void Drink(Vector3 pos, GameObject tableCoffee)
     {
         Debug.Log("Drinking");
-        //this.transform.position = pos;
         order.SetActive(false);
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
@@ -165,7 +160,7 @@ public class Customer : MonoBehaviour
         }
 
         // Move to destination
-        if (toWaitingArea || toReturnArea) {
+        if (toWaitingArea ) {
             GetComponent<NavMeshAgent>().SetDestination(destination);
         }
 
@@ -179,20 +174,10 @@ public class Customer : MonoBehaviour
             }
         }
 
-        //if ((toWaitingArea || toSeat || toReturnArea)) // && distanceToDestination() > 1.0f)
-        //{
-        //    transform.rotation = Quaternion.LookRotation(GetComponent<NavMeshAgent>().velocity.normalized);
-        //}
-        if (shouldRotate)
-        {
-            customerSkin.transform.Rotate(0, 10, 0);
-        }
-
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 1f)
         {
             SeatingData.waitingCustomers.Remove(this);
-            gameObject.SetActive(false);
             Destroy(this);
         }
     }
@@ -216,13 +201,12 @@ public class Customer : MonoBehaviour
     void leaveCafe()
     {
         print("Waiting time exceeded");
+        atWaitingArea = false;
         destination = returnArea;
         GetComponent<NavMeshAgent>().SetDestination(destination);
         if (SeatingData.showArrow)
         {
             controller.removeArrow(true);
         }
-
-        customerSkin.transform.Rotate(0, 180, 0); 
     }
 }
