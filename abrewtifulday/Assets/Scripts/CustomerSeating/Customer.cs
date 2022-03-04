@@ -45,6 +45,7 @@ public class Customer : MonoBehaviour
         Debug.Log("Drinking");
         //this.transform.position = pos;
         order.SetActive(false);
+        // STOP CUSTOMER WAITING TIMER HERE (2)
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
 
@@ -65,6 +66,7 @@ public class Customer : MonoBehaviour
         destination = chair.transform.position;
         Debug.Log(destination);
         atWaitingArea = false;
+        // STOP CUSTOMER WAITING TIMER HERE (1)
         toSeat = true;
         seat = chair;
         controller.removeCustomerGlow(this);
@@ -120,6 +122,7 @@ public class Customer : MonoBehaviour
             { 
                 toWaitingArea = false;
                 atWaitingArea = true;
+                // START CUSTOMER WAITING TIMER HERE
                 controller.addArrow(transform.position);
             }
         }

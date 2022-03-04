@@ -61,7 +61,9 @@ public class Timer : MonoBehaviour
         if (timeRemaining <= 0)
         {
             Debug.Log("Time is up.");
-            dailyRecapPanel.SetActive(true);
+            if (dailyRecapPanel) { // only for the main game timer
+                dailyRecapPanel.SetActive(true);
+            }
             return true;
         }
         return false;
