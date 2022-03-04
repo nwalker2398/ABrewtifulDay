@@ -47,7 +47,6 @@ public class Customer : MonoBehaviour
         Debug.Log("Drinking");
         //this.transform.position = pos;
         //order.SetActive(false);
-        // STOP CUSTOMER WAITING TIMER HERE (2)
         isServed = true;
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
@@ -61,6 +60,7 @@ public class Customer : MonoBehaviour
         seat.GetComponent<NavMeshObstacle>().enabled = true;
 
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void Seat(Chair chair)
@@ -69,7 +69,6 @@ public class Customer : MonoBehaviour
         destination = chair.transform.position;
         Debug.Log(destination);
         atWaitingArea = false;
-        // STOP CUSTOMER WAITING TIMER HERE (1)
         toSeat = true;
         seat = chair;
         controller.removeCustomerGlow(this);
@@ -82,10 +81,20 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
-        // If character atSeat but is not being served, and the time is up, then leave
+        // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
         if (timer.timeHasEnd() && !isServed) {
             // CUSTOMER WALKS OUT OF THE CAFE
             Debug.Log("Customer (" + transform.gameObject.name + ") should leave the cafe");
+            //gameObject.SetActive(false);
+            if (atWaitingArea) {
+                atWaitingArea = false;
+                SeatingData.waitingCustomers.Remove(this);
+            }
+            // HANDLE IF (toSeat)
+            if (toSeat) {
+                
+            }
+            Destroy(gameObject); // REPLACE THIS WITH WALKING OUT OF THE CAFE
         }
 
         // Don't do anything if the character is a default prefab
@@ -187,7 +196,8 @@ public class Customer : MonoBehaviour
         {
             SeatingData.waitingCustomers.Remove(this);
             gameObject.SetActive(false);
-            Destroy(this);
+            //Destroy(this);
+            Destroy(gameObject);
         }
     }
 
