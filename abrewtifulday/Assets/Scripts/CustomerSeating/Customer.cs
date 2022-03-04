@@ -90,10 +90,6 @@ public class Customer : MonoBehaviour
                 atWaitingArea = false;
                 SeatingData.waitingCustomers.Remove(this);
             }
-            // HANDLE IF (toSeat)
-            if (toSeat) {
-                
-            }
             Destroy(gameObject); // REPLACE THIS WITH WALKING OUT OF THE CAFE
         }
 
@@ -147,7 +143,7 @@ public class Customer : MonoBehaviour
 
         // If walking to seat
         // Remove chair glow once reached
-        if (toSeat)
+        if (toSeat && !timer.timeHasEnd())
         {
             //print("To seat");
             // Check if customer reached destination
