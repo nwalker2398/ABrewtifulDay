@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Paving_Stones2_Wet
+  m_Name: Paving_Stones2
   m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 3eaa9b8f8f9b8764ab8c7ffc96d12e58, type: 3}
+        m_Texture: {fileID: 2800000, guid: 90a7085118132274cbd3f2c6ada5129b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,23 +40,23 @@ Material:
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 11aa1dc0e45f50644a51a4c6588020cd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 569648a9ea104af428d25bc674b2c631, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 3e359ca89b3bd6c4d993783d5dd3ce71, type: 3}
+        m_Texture: {fileID: 2800000, guid: d681d009a82bcd542b6d5fee0fe5963c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 9381d0e9a0407074f82129f215b48d94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4680b2122ed5f4345b13caafafb1b898, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 88154fff9e32e92468fa52c03fa97d25, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3845edc1618bc254d823c952c778968b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 2800000, guid: e3e8608e324734d43afb4b817f09e312, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c2a4c8957b2c86459e3495c67341483, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
