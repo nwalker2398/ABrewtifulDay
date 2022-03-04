@@ -44,7 +44,7 @@ public class Customer : MonoBehaviour
     {
         Debug.Log("Drinking");
         //this.transform.position = pos;
-        order.SetActive(false);
+        //order.SetActive(false);
         // STOP CUSTOMER WAITING TIMER HERE (2)
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
