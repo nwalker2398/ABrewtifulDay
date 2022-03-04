@@ -25,19 +25,19 @@ public class PutDrinks : MonoBehaviour
     }
 
     void OnMouseDown() {
-        Debug.Log("Table clicked.");
         // cast a ray from the coffee tray.
         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
 
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
             // if we have coffee to serve, put the coffee onto the object
             if (trayCoffee.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
-                Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
+                //Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
                 trayCoffee.active = false;
                 objectCoffee.active = true;
                 ScoreSystem.incrementScore(1);
                 hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
             }
+            
             // pick the coffee from the object
             // else if (trayCoffee.active == false && objectCoffee.active == true) {
             //     trayCoffee.active = true;

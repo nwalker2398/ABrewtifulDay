@@ -11,7 +11,8 @@ public class CustomerTimer : MonoBehaviour
     [SerializeField] TMP_Text timeText;
     [SerializeField] float waitDuration;
     private float timeRemaining;
-    private bool isPaused = false;
+    private bool isPaused = true;
+    private bool hasStarted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,7 @@ public class CustomerTimer : MonoBehaviour
     {
         if (!isPaused)
         {
-            timeHasEnd(timeRemaining);
+            //timeHasEnd(timeRemaining);
             if (timeRemaining >= 0)
             {
                 timeText.SetText(((int)timeRemaining).ToString());
@@ -54,7 +55,11 @@ public class CustomerTimer : MonoBehaviour
         }
     }
 
-    public bool timeHasEnd(float timeRemaining)
+    public void startTimer() {
+        isPaused = false;
+    }
+
+    public bool timeHasEnd()
     {
         if (timeRemaining <= 0)
         {

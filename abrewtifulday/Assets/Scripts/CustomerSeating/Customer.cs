@@ -14,6 +14,7 @@ public class Customer : MonoBehaviour
     public float waitingTime = 0f;
     public bool rotate = false;
     public float drinkTime = 6f;
+    private bool isServed = false;
 
     public Material defaultMaterial;
 
@@ -22,6 +23,7 @@ public class Customer : MonoBehaviour
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
+    [SerializeField] CustomerTimer timer;
 
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
@@ -46,6 +48,7 @@ public class Customer : MonoBehaviour
         //this.transform.position = pos;
         //order.SetActive(false);
         // STOP CUSTOMER WAITING TIMER HERE (2)
+        isServed = true;
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
     }
 
@@ -79,6 +82,12 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        // If character atSeat but is not being served, and the time is up, then leave
+        if (timer.timeHasEnd() && !isServed) {
+            // CUSTOMER WALKS OUT OF THE CAFE
+            Debug.Log("Customer (" + transform.gameObject.name + ") should leave the cafe");
+        }
+
         // Don't do anything if the character is a default prefab
         if (!shouldMove)
         {
@@ -100,7 +109,7 @@ public class Customer : MonoBehaviour
         // Walk into the store and leave if the waiting room is full
         if (toWaitingArea)
         {
-            print("To waiting area");
+            //print("To waiting area");
             bool waitingRoomFull = false;
             SeatingData.waitingCustomers.ForEach(delegate (Customer c)
             {
@@ -122,7 +131,7 @@ public class Customer : MonoBehaviour
             { 
                 toWaitingArea = false;
                 atWaitingArea = true;
-                // START CUSTOMER WAITING TIMER HERE
+                timer.startTimer(); // start the customer timer
                 controller.addArrow(transform.position);
             }
         }
@@ -131,7 +140,7 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
-            print("To seat");
+            //print("To seat");
             // Check if customer reached destination
             if (distanceToDestination() < 0.1)
             {
@@ -144,7 +153,7 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("At seat!");
+                    //Debug.Log("At seat!");
                     toSeat = false;
                     atSeat = true;
                     shouldDisplayOrder = true;
@@ -186,7 +195,7 @@ public class Customer : MonoBehaviour
     {
         Vector3 posdiff = transform.position - destination;
         posdiff.y = 0;
-        print(posdiff.magnitude);
+        //print(posdiff.magnitude);
         return posdiff.magnitude;
     }
 }

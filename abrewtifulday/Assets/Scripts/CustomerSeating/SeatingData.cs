@@ -25,9 +25,9 @@ public static class SeatingData
 
     public static void print()
     {
-        Debug.Log(waitingCustomers);
-        Debug.Log(seatedCustomers);
-        Debug.Log(selectedCustomer);
-        Debug.Log(selectedChair);
+        // Debug.Log(waitingCustomers);
+        // Debug.Log(seatedCustomers);
+        // Debug.Log(selectedCustomer);
+        // Debug.Log(selectedChair);
     }
 }
