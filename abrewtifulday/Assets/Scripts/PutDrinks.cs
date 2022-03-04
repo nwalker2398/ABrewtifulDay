@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-Work done to put coffee on the table:
-- put coffee object on every table.
+Work done to serve coffee to customers:
+- put coffee object on every customer object.
 - raycast from the coffee tray.
-- Box Collider with IsTrigger on for each table. (Collider is a must for raycast)
-- assign Put layer to all tables.
-- PutDrinks script for each table.
-- 
+- Box Collider for each customer object. (Collider is a must for raycast)
+- assign Put layer to customer object.
+- PutDrinks script for each customer.
 */
 
 public class PutDrinks : MonoBehaviour
@@ -18,12 +17,11 @@ public class PutDrinks : MonoBehaviour
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private float pickupRange;
     [SerializeField] private GameObject trayCoffee; 
-    [SerializeField] private GameObject tableCoffee;
+    [SerializeField] private GameObject objectCoffee;
 
-    // Start is called before the first frame update
     void Start()
     {
-        tableCoffee.active = false;
+        objectCoffee.active = false;
     }
 
     void OnMouseDown() {
@@ -32,13 +30,19 @@ public class PutDrinks : MonoBehaviour
         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
 
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
-            Debug.Log("Found a table");
-            // if we have coffee to serve
-            if (trayCoffee.active) {
+            // if we have coffee to serve, put the coffee onto the object
+            if (trayCoffee.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
+                Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
                 trayCoffee.active = false;
-                tableCoffee.active = true;
+                objectCoffee.active = true;
                 ScoreSystem.incrementScore(1);
+                hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
             }
+            // pick the coffee from the object
+            // else if (trayCoffee.active == false && objectCoffee.active == true) {
+            //     trayCoffee.active = true;
+            //     objectCoffee.active = false;
+            // }
         }
     }
 }

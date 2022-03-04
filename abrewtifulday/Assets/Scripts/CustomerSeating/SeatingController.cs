@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SeatingController : MonoBehaviour
 {
-    [SerializeField] Vector3 customerStartLocation = new Vector3(-3f, 0.25f, -5f);
+    [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
     [SerializeField] Material customer_glow, chair_glow, chair_normal;
+    [SerializeField] GameObject tutorialChair;
     [SerializeField] Camera camera;
     private Customer[] customers;
     private float timePassed;
@@ -47,7 +48,7 @@ public class SeatingController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
-                //Debug.Log(objectHit);
+                Debug.Log(objectHit);
 
                 if (objectHit.tag == "Customer")
                 {
@@ -58,17 +59,30 @@ public class SeatingController : MonoBehaviour
 
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     SeatingData.selectedCustomer = objectHit.gameObject.GetComponent<Customer>();
+                    if (SeatingData.showArrow)
+                    {
+                        removeArrow(true);
+                        addArrow(tutorialChair.transform.position);
+                    }
                     //renderer.material = customer_glow;
                 }
 
                 // Select a chair if a customer is selected
                 if (objectHit.tag == "Chair" && SeatingData.selectedCustomer != null)
                 {
+                    Chair chair = objectHit.gameObject.GetComponent<Chair>();
                     Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
-                    SeatingData.selectedChair = objectHit.gameObject.GetComponent<Chair>();
-                    renderer.material = chair_glow;
+                    if (!chair.seatedCustomer)
+                    {
+                        SeatingData.selectedChair = chair;
+                        renderer.material = chair_glow;
 
-                    seatCustomer();
+                        print("Removing arrow");
+                        removeArrow(false);
+                        print("Seating customer");
+                        seatCustomer();
+                    }
+
                 }
             }
         }
@@ -92,6 +106,27 @@ public class SeatingController : MonoBehaviour
     {
         Renderer oldRenderer = chair.GetComponent<Renderer>();
         oldRenderer.material = chair_normal;
+    }
+
+    public void addArrow(Vector3 pos)
+    {
+        if (SeatingData.showArrow)
+        {
+            var arrow = GameObject.FindGameObjectWithTag("Arrow");
+            pos.y = arrow.GetComponent<ArrowController>().calcY();
+            var new_arrow = Instantiate(arrow, pos, Quaternion.identity);
+            SeatingData.customerArrow = new_arrow;
+        }
+    }
+
+    public void removeArrow(bool showAgain)
+    {
+        if (SeatingData.showArrow)
+        {
+            Destroy(SeatingData.customerArrow);
+            SeatingData.customerArrow = null;
+            SeatingData.showArrow = showAgain;
+        }
     }
 
     void generateCustomer()

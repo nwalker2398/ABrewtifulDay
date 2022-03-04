@@ -8,11 +8,12 @@ TagManager:
   - CoffeeRange
   - Barista
   - Chair
+  - Arrow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Put
   - Water
   - UI
   - PostProcessing

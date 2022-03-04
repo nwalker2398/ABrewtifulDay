@@ -13,12 +13,13 @@ public class Customer : MonoBehaviour
     public Chair seat;
     public float waitingTime = 0f;
     public bool rotate = false;
+    public float drinkTime = 6f;
 
     public Material defaultMaterial;
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
-    [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3f);
+    [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
     [SerializeField] float stopDistance = 2.5f;
 
@@ -39,17 +40,39 @@ public class Customer : MonoBehaviour
         order.SetActive(true);
     }
 
+    public void Drink(Vector3 pos, GameObject tableCoffee)
+    {
+        Debug.Log("Drinking");
+        //this.transform.position = pos;
+        order.SetActive(false);
+        StartCoroutine(RemoveDrinkDelayed(tableCoffee));
+    }
+
+    IEnumerator RemoveDrinkDelayed(GameObject tableCoffee)
+    {
+        yield return new WaitForSeconds(drinkTime);
+        tableCoffee.SetActive(false);
+
+        seat.seatedCustomer = false;
+        seat.GetComponent<NavMeshObstacle>().enabled = true;
+
+        gameObject.SetActive(false);
+    }
+
     public void Seat(Chair chair)
     {
-        Debug.Log(destination);
         Debug.Log(transform.position);
         destination = chair.transform.position;
+        Debug.Log(destination);
         atWaitingArea = false;
         toSeat = true;
         seat = chair;
         controller.removeCustomerGlow(this);
         SeatingData.seatWaitingCustomer(this);
-        GetComponent<NavMeshAgent>().SetDestination(chair.transform.position);
+        // controller.removeArrow();
+        chair.GetComponent<NavMeshObstacle>().enabled = false;
+        chair.seatedCustomer = true;
+        GetComponent<NavMeshAgent>().SetDestination(destination);
     }
 
     void Update()
@@ -75,6 +98,8 @@ public class Customer : MonoBehaviour
         // Walk into the store and leave if the waiting room is full
         if (toWaitingArea)
         {
+            print("To waiting area");
+            bool waitingRoomFull = false;
             SeatingData.waitingCustomers.ForEach(delegate (Customer c)
             {
                 // Stop moving if another waiting customer is in the way
@@ -87,26 +112,25 @@ public class Customer : MonoBehaviour
                     {
                         destination = returnArea;
                     }
-                    // Else, wait to be seated
-                    else
-                    {
-                        GetComponent<NavMeshAgent>().isStopped = true;
-                        toWaitingArea = false;
-                        atWaitingArea = true;
-                    }
                 }
             });
+
+            // Enter waiting room
+            if (!waitingRoomFull && distanceToDestination() < 0.1)
+            { 
+                toWaitingArea = false;
+                atWaitingArea = true;
+                controller.addArrow(transform.position);
+            }
         }
 
         // If walking to seat
         // Remove chair glow once reached
         if (toSeat)
         {
-            toWaitingArea = false;
-            Vector3 posdiff = transform.position - destination;
-            posdiff.y = 0;
+            print("To seat");
             // Check if customer reached destination
-            if (posdiff.magnitude < 0.1)
+            if (distanceToDestination() < 0.1)
             {
 
                 GetComponent<NavMeshAgent>().enabled = false;
@@ -122,7 +146,12 @@ public class Customer : MonoBehaviour
                     atSeat = true;
                     shouldDisplayOrder = true;
                     controller.removeChairGlow(seat);
+                    seat.GetComponent<NavMeshObstacle>().enabled = true;
                 }
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().SetDestination(destination);
             }
         }
 
@@ -148,5 +177,13 @@ public class Customer : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(this);
         }
+    }
+
+    float distanceToDestination()
+    {
+        Vector3 posdiff = transform.position - destination;
+        posdiff.y = 0;
+        print(posdiff.magnitude);
+        return posdiff.magnitude;
     }
 }
