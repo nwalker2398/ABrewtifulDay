@@ -21,6 +21,14 @@ public class ScoreSystem : MonoBehaviour
         return instance.maxScore;
     }
 
+    public static void setScore(int score) {
+        instance.score = score;
+    }
+
+    public static int completionPercentage() {
+        return instance.score / instance.maxScore;
+    }
+
     public static void incrementScore(int points)
     {
         if (!instance.heartBar.IsDone())
