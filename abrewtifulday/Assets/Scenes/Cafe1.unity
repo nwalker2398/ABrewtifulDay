@@ -3526,18 +3526,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartBar: {fileID: 324397831}
   finalScoreText: {fileID: 1335380473}
---- !u!114 &471891260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471891254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d98c8c161759a4e9aaec7041a88330cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &472504911
 GameObject:
   m_ObjectHideFlags: 0
@@ -13385,7 +13373,7 @@ MonoBehaviour:
   customer_glow: {fileID: 0}
   chair_glow: {fileID: 2100000, guid: e7555413305da594cb39017249fb3f1a, type: 2}
   chair_normal: {fileID: 2100000, guid: 40baef27330ff456785f666f7fe11abf, type: 2}
-  tutorialChair: {fileID: 0}
+  tutorialChair: {fileID: 1882282537}
   camera: {fileID: 867772275}
 --- !u!4 &1951466706
 Transform:
