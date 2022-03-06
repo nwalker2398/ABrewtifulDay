@@ -26,6 +26,9 @@ public class Customer : MonoBehaviour
     private bool rotate = false;
     private float drinkTime = 6f;
 
+    [SerializeField] CustomerTimer timer;
+    private bool isServed = false;
+
     void Start()
     {
         order.SetActive(false);
@@ -42,6 +45,8 @@ public class Customer : MonoBehaviour
 
     public void Drink(Vector3 pos, GameObject tableCoffee)
     {
+        isServed = true;
+
         Debug.Log("Drinking");
         order.SetActive(false);
         StartCoroutine(RemoveDrinkDelayed(tableCoffee));
@@ -77,6 +82,18 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
+        if (timer.timeHasEnd() && !isServed) {
+            Debug.Log("Customer (" + transform.gameObject.name + ") should leave the cafe");
+    
+            if (atWaitingArea) {
+                atWaitingArea = false;
+                SeatingData.waitingCustomers.Remove(this);
+            }
+            //leaveCafe(); // error, cannot SetDestination
+            Destroy(gameObject);
+        }
+
         // Don't do anything if the character is a default prefab
         if (!shouldMove)
         {
@@ -89,7 +106,7 @@ public class Customer : MonoBehaviour
             waitingSeatTime += Time.deltaTime;
             if (waitingSeatTime > 3f)
             {
-                order.SetActive(true);
+                //order.SetActive(true);
                 shouldDisplayOrder = false;
             }
         }
@@ -120,6 +137,8 @@ public class Customer : MonoBehaviour
                 toWaitingArea = false;
                 atWaitingArea = true;
                 controller.addArrow(transform.position);
+
+                timer.startTimer(); // start the customer timer
             }
         }
 
@@ -139,7 +158,7 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("At seat!");
+                    //Debug.Log("At seat!");
                     toSeat = false;
                     atSeat = true;
                     shouldDisplayOrder = true;
@@ -200,13 +219,17 @@ public class Customer : MonoBehaviour
 
     void leaveCafe()
     {
-        print("Waiting time exceeded");
+        //print("Waiting time exceeded");
         atWaitingArea = false;
         destination = returnArea;
         GetComponent<NavMeshAgent>().SetDestination(destination);
         if (SeatingData.showArrow)
         {
             controller.removeArrow(true);
+        }
+
+        if (ScoreSystem.getCurrentScore() > 0) {
+            ScoreSystem.decrementScore(1);
         }
     }
 }

@@ -26,10 +26,26 @@ public class ScoreSystem : MonoBehaviour
         {
             instance.score += points;
             //instance.scoreText.SetText(instance.score.ToString());
-            Debug.Log(instance.score);
+            //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
             instance.SetFinalScoreText();
         }
+    }
+
+    public static void decrementScore(int points)
+    {
+        if (!instance.heartBar.IsDone())
+        {
+            instance.score -= points;
+            //instance.scoreText.SetText(instance.score.ToString());
+            //Debug.Log(instance.score);
+            instance.heartBar.SetProgress(instance.score);
+            instance.SetFinalScoreText();
+        }
+    }
+
+    public static int getCurrentScore() {
+        return instance.score;
     }
 
     private void SetFinalScoreText()
