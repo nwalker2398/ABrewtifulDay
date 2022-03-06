@@ -9,6 +9,8 @@ TagManager:
   - Barista
   - Chair
   - Arrow
+  - CoffeeMaker
+  - CoffeeReadyBubble
   layers:
   - Default
   - TransparentFX
