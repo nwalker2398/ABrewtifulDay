@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CoffeeMaker : MonoBehaviour
 {
-    private BoxCollider collider;
+    private BoxCollider coffeeMakerCollider;
     private const int COFFEE_WAIT_TIME = 5;
-    public  GameObject thoughtBubble;
+    public GameObject thoughtBubble;
     public GameObject trayCoffee;
     private AudioSource audioSource;
     public AudioClip bell;
@@ -19,17 +19,18 @@ public class CoffeeMaker : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        collider = GetComponent<BoxCollider>();
+        coffeeMakerCollider = GetComponent<BoxCollider>();
         thoughtBubble.active = false;
         trayCoffee.active = false;
     }
 
     void OnMouseDown() {
-        if (!thoughtBubble.active)
+        Debug.Log("Clicking Coffee!");
+        if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
         {
             StartCoroutine(waitToMake());
         }
-        else if (thoughtBubble.active)
+        else if (coffeeRange.inCoffeeRange && thoughtBubble.active)
         {
             pickUpCoffee();
         }        
@@ -55,7 +56,9 @@ public class CoffeeMaker : MonoBehaviour
         Debug.Log("Coffee being picked up!");
         //must be within x dist of machine to pick up
         //if gameobject with tag barrista colliding with coffee area
+        
         thoughtBubble.active = false;
         trayCoffee.active = true;
+        
     }
 }

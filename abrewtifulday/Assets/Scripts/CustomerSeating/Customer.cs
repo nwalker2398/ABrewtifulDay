@@ -183,7 +183,7 @@ public class Customer : MonoBehaviour
     {
         Vector3 posdiff = transform.position - destination;
         posdiff.y = 0;
-        print(posdiff.magnitude);
+        //print(posdiff.magnitude);
         return posdiff.magnitude;
     }
 }
