@@ -21,7 +21,6 @@ public class SeatingController : MonoBehaviour
         for (int i = 0; i < customerObjects.Length; i++)
         {
             customers[i] = customerObjects[i].GetComponent<Customer>();
-            print(customers[i]);
         }
         timePassed = 5.0f;
     }
@@ -31,7 +30,6 @@ public class SeatingController : MonoBehaviour
         timePassed += Time.deltaTime;
         if (timePassed > 5.0f)
         {
-            //SeatingData.print();
             timePassed = 0f;
         }
         if (SeatingData.waitingCustomers.Count == 0)
@@ -48,7 +46,6 @@ public class SeatingController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
-                Debug.Log(objectHit);
 
                 if (objectHit.tag == "Customer")
                 {
@@ -77,7 +74,6 @@ public class SeatingController : MonoBehaviour
                         SeatingData.selectedChair = chair;
                         renderer.material = chair_glow;
 
-                        print("Removing arrow");
                         removeArrow(false);
                         print("Seating customer");
                         seatCustomer();
@@ -132,7 +128,6 @@ public class SeatingController : MonoBehaviour
     void generateCustomer()
     {
         Customer customer = customers[Random.Range(0, customers.Length)];
-        Debug.Log(customer);
         var new_customer = Instantiate(customer, customerStartLocation, Quaternion.identity);
         SeatingData.addWaitingCustomer(new_customer);
         new_customer.Generate();
