@@ -6,18 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class ScoreSystem : MonoBehaviour
 {
-    private int score = 0;
     [SerializeField] ProgressBar heartBar;
-    //[SerializeField] float gameTime;
+    [SerializeField] int maxScore;
+    private int score = 0;
     static ScoreSystem instance;
-    //private float timeRemaining;
-    //private bool isRunning;
-    //[SerializeField] TMP_Text scoreText;
     public TextMeshProUGUI finalScoreText;
 
     void Awake()
     {
         instance = this;
+    }
+
+    public static int getMaxScore() {
+        return instance.maxScore;
     }
 
     public static void incrementScore(int points)

@@ -3825,6 +3825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartBar: {fileID: 324397831}
+  maxScore: 5
   finalScoreText: {fileID: 1335380473}
 --- !u!114 &471891260
 MonoBehaviour:

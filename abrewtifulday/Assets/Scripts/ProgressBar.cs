@@ -9,6 +9,8 @@ public class ProgressBar : MonoBehaviour
     private float maxProgress;
 
     void Start() {
+        //maxProgress = slider.maxValue;
+        slider.maxValue = ScoreSystem.getMaxScore();
         maxProgress = slider.maxValue;
     }
 
