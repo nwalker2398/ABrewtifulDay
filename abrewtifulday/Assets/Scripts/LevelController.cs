@@ -2,64 +2,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class LevelController : MonoBehaviour
+public static class LevelController
 {
-    static LevelController instance;
-    List<Dictionary<string, dynamic>> levels;
+    public static List<Dictionary<string, object>> levels;
+    public static int currentLevel = 0;
+    public static Dictionary<string, object> currentLevelData;
 
-    void Awake()
+    static void getLevels()
     {
-        instance = this;
-    }
-
-    void getLevels()
-    {
-        levels = new List<Dictionary<string, dynamic>>();
+        levels = new List<Dictionary<string, object>>();
         int i = 0;
-        foreach (string line in  File.ReadLines("levels.csv"))
+        foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
-            levels.Add(new Dictionary<string, dynamic>());
+            if (i == 0)
+            {
+                i++;
+                continue;
+            }
+            Dictionary<string, dynamic> level = new Dictionary<string, dynamic>();
             string[] words = line.Split(',');
-            levels[i]["Scene"] = words[1];
-            levels[i]["CustomerSpeed"] = int.Parse(words[2]);
-            levels[i]["NumWaves"] = int.Parse(words[3]);
-            levels[i]["CustomersPerWave"] = int.Parse(words[4]);
-            levels[i]["HeartQuota"] = int.Parse(words[5]);
-            levels[i]["CoffeeEnabled"] = bool.Parse(words[6]);
-            levels[i]["MatchaEnabled"] = bool.Parse(words[7]);
-            levels[i]["BobaEnables"] = bool.Parse(words[8]);
-            levels[i]["Picture1Enabled"] = bool.Parse(words[9]);
-            levels[i]["Plant1Enabled"] = bool.Parse(words[10]);
-            levels[i]["WallPainted"] = bool.Parse(words[11]);
-            levels[i]["WallChoices"] = bool.Parse(words[12]);
-            levels[i]["Picture2Enabled"] = bool.Parse(words[13]);
+            level["Scene"] = words[1];
+            level["GenerateCustomerIn"] = float.Parse(words[2]);
+            level["NumWaves"] = int.Parse(words[3]);
+            level["CustomersPerWave"] = int.Parse(words[4]);
+            level["HeartQuota"] = int.Parse(words[5]);
+            level["CoffeeEnabled"] = bool.Parse(words[6]);
+            level["MatchaEnabled"] = bool.Parse(words[7]);
+            level["BobaEnables"] = bool.Parse(words[8]);
+            level["Picture1Enabled"] = bool.Parse(words[9]);
+            level["Plant1Enabled"] = bool.Parse(words[10]);
+            level["WallPainted"] = bool.Parse(words[11]);
+            level["WallChoices"] = bool.Parse(words[12]);
+            level["Picture2Enabled"] = bool.Parse(words[13]);
             string[] locations = words[14].Split('|');
-            levels[i]["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
-            levels[i]["Plant2Enabled"] = bool.Parse(words[15]);
-            levels[i]["Dialog"] = words[16];
+            level["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
+            level["Plant2Enabled"] = bool.Parse(words[15]);
+            level["Dialog"] = words.Length > 16 ? words[16] : "";
+
+            levels.Add(level);
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    // Call this once when the game first loads
+    public static void StartLevels()
     {
         getLevels();
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
+        currentLevelData = levels[currentLevel];
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void printLevel(int levelNumber)
     {
-
+        Dictionary<string, object> level = levels[levelNumber];
+        foreach(KeyValuePair<string, object> kvp in level)
+        {
+            Debug.Log(string.Format("{0}={1}", kvp.Key, kvp.Value));
+        }
     }
 }

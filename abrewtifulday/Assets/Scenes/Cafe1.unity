@@ -871,6 +871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrayCoffee
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
+      propertyPath: m_TagString
+      value: TrayCoffee
+      objectReference: {fileID: 0}
     - target: {fileID: 7136060801434843705, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1309,12 +1313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d59d84604234275b6298f6ac590bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2034641974}
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
   pickupRange: 3
-  trayCoffee: {fileID: 75354573}
   objectCoffee: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
@@ -3214,12 +3216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d59d84604234275b6298f6ac590bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2034641974}
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
   pickupRange: 3
-  trayCoffee: {fileID: 75354573}
   objectCoffee: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
@@ -5156,6 +5156,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006214685}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1015270229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+  m_PrefabInstance: {fileID: 5288643093635276742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26581ec401f4b34284215fa8da4fb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039473884
 GameObject:
   m_ObjectHideFlags: 0
@@ -9263,12 +9274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d59d84604234275b6298f6ac590bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2034641974}
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
   pickupRange: 3
-  trayCoffee: {fileID: 75354573}
   objectCoffee: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
@@ -11645,12 +11654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d59d84604234275b6298f6ac590bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2034641974}
   pickupLayer:
     serializedVersion: 2
     m_Bits: 8
   pickupRange: 3
-  trayCoffee: {fileID: 75354573}
   objectCoffee: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
@@ -12198,7 +12205,7 @@ GameObject:
   - component: {fileID: 2034641976}
   m_Layer: 0
   m_Name: Tray
-  m_TagString: Untagged
+  m_TagString: Tray
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13171,7 +13178,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4114787274324381785, guid: 361e0c2f58fdb43198dca382499d5e4f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4114787274324381785, guid: 361e0c2f58fdb43198dca382499d5e4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13219,6 +13226,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 361e0c2f58fdb43198dca382499d5e4f, type: 3}
+--- !u!1001 &5288643093635276742
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3913786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.87847173
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.3946495
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328530, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_Name
+      value: LevelController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
 --- !u!1001 &5469383880697615056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13238,6 +13302,10 @@ PrefabInstance:
       propertyPath: tutorialChair
       value: 
       objectReference: {fileID: 1882282537}
+    - target: {fileID: 5469383879828411905, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: levelController
+      value: 
+      objectReference: {fileID: 1015270229}
     - target: {fileID: 5469383879964275304, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
@@ -13245,11 +13313,11 @@ PrefabInstance:
     - target: {fileID: 5469383879966104966, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: hand
       value: 
-      objectReference: {fileID: 2034641974}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879966104966, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: trayCoffee
       value: 
-      objectReference: {fileID: 75354573}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879980217707, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: m_Name
       value: Customers
@@ -13309,11 +13377,11 @@ PrefabInstance:
     - target: {fileID: 5469383880512871227, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: hand
       value: 
-      objectReference: {fileID: 2034641974}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383880512871227, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: trayCoffee
       value: 
-      objectReference: {fileID: 75354573}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383880989838686, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
@@ -13321,11 +13389,11 @@ PrefabInstance:
     - target: {fileID: 5469383881068280634, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: hand
       value: 
-      objectReference: {fileID: 2034641974}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383881068280634, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: trayCoffee
       value: 
-      objectReference: {fileID: 75354573}
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383881097852547, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 

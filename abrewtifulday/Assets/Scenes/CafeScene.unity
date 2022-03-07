@@ -871,6 +871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrayCoffee
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
+      propertyPath: m_TagString
+      value: TrayCoffee
+      objectReference: {fileID: 0}
     - target: {fileID: 7136060801434843705, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14065,7 +14069,7 @@ GameObject:
   - component: {fileID: 2034641976}
   m_Layer: 0
   m_Name: Tray
-  m_TagString: Untagged
+  m_TagString: Tray
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

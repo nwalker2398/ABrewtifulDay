@@ -205,7 +205,7 @@ public class Customer : MonoBehaviour
         }
 
         // Remove customer once they leave the cafe
-        if (Vector3.Distance(transform.position, returnArea) < 1f)
+        if (Vector3.Distance(transform.position, returnArea) < 2f)
         {
             SeatingData.waitingCustomers.Remove(this);
             Destroy(this);
