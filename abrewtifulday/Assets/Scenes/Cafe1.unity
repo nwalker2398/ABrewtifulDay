@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465767, g: 0.49641162, b: 0.57481784, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4042,6 +4042,7 @@ GameObject:
   - component: {fileID: 520948201}
   - component: {fileID: 520948200}
   - component: {fileID: 520948203}
+  - component: {fileID: 520948204}
   m_Layer: 3
   m_Name: Customer3
   m_TagString: Customer
@@ -4116,11 +4117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
   defaultMaterial: {fileID: 0}
+  stopDistance: 1.7
   order: {fileID: 2092834998}
   controller: {fileID: 1951466705}
   waitingArea: {x: -3, y: 0, z: -3.5}
   returnArea: {x: -10, y: 0, z: -10}
   seat: {fileID: 0}
+  toWaitingArea: 0
+  atWaitingArea: 0
   timer: {fileID: 2067075536}
 --- !u!114 &520948203
 MonoBehaviour:
@@ -4143,6 +4147,22 @@ MonoBehaviour:
   objectCoffee: {fileID: 1037580760}
   timerIcon: {fileID: 758396416}
   heartIcon: {fileID: 509676212}
+--- !u!54 &520948204
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520948198}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &521869232
 GameObject:
   m_ObjectHideFlags: 0
@@ -7636,6 +7656,7 @@ GameObject:
   - component: {fileID: 1047063016}
   - component: {fileID: 1047063015}
   - component: {fileID: 1047063018}
+  - component: {fileID: 1047063019}
   m_Layer: 3
   m_Name: Customer2
   m_TagString: Customer
@@ -7710,11 +7731,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
   defaultMaterial: {fileID: 0}
+  stopDistance: 1.7
   order: {fileID: 942613585}
   controller: {fileID: 1951466705}
   waitingArea: {x: -3, y: 0, z: -3.5}
   returnArea: {x: -10, y: 0, z: -10}
   seat: {fileID: 0}
+  toWaitingArea: 0
+  atWaitingArea: 0
   timer: {fileID: 919811732}
 --- !u!114 &1047063018
 MonoBehaviour:
@@ -7737,6 +7761,22 @@ MonoBehaviour:
   objectCoffee: {fileID: 2034952954}
   timerIcon: {fileID: 534805506}
   heartIcon: {fileID: 98248411}
+--- !u!54 &1047063019
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047063013}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1067035300
 GameObject:
   m_ObjectHideFlags: 0
@@ -15952,6 +15992,7 @@ GameObject:
   - component: {fileID: 2090471252}
   - component: {fileID: 2090471251}
   - component: {fileID: 2090471254}
+  - component: {fileID: 2090471255}
   m_Layer: 3
   m_Name: Customer1
   m_TagString: Customer
@@ -16026,11 +16067,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
   defaultMaterial: {fileID: 0}
+  stopDistance: 1.7
   order: {fileID: 1514395430}
   controller: {fileID: 1951466705}
   waitingArea: {x: -3, y: 0, z: -3.5}
   returnArea: {x: -10, y: 0, z: -10}
   seat: {fileID: 0}
+  toWaitingArea: 0
+  atWaitingArea: 0
   timer: {fileID: 984320149}
 --- !u!114 &2090471254
 MonoBehaviour:
@@ -16053,6 +16097,22 @@ MonoBehaviour:
   objectCoffee: {fileID: 1275383674}
   timerIcon: {fileID: 1788776140}
   heartIcon: {fileID: 319760502}
+--- !u!54 &2090471255
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090471249}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2091621023
 GameObject:
   m_ObjectHideFlags: 0

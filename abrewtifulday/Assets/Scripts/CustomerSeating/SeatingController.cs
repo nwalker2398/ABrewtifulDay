@@ -10,6 +10,7 @@ public class SeatingController : MonoBehaviour
     [SerializeField] Camera camera;
     private Customer[] customers;
     private float timePassed;
+    private float generateCustomerIn;
 
     void Start()
     {
@@ -28,13 +29,16 @@ public class SeatingController : MonoBehaviour
     void Update()
     {
         timePassed += Time.deltaTime;
-        if (timePassed > 5.0f)
+        //print(SeatingData.waitingCustomers.Count);
+        if (timePassed > generateCustomerIn && SeatingData.waitingCustomers.Count < 5)
         {
             timePassed = 0f;
+            generateCustomerIn = Random.Range(4, 8);
+            generateCustomer();
         }
         if (SeatingData.waitingCustomers.Count == 0)
         {
-            generateCustomer();
+            // generateCustomer();
         }
 
         // Glow customer if selected
@@ -55,7 +59,11 @@ public class SeatingController : MonoBehaviour
                     }
 
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
-                    SeatingData.selectedCustomer = objectHit.gameObject.GetComponent<Customer>();
+                    Customer c = objectHit.gameObject.GetComponent<Customer>();
+                    SeatingData.selectedCustomer = c;
+                    c.toWaitingArea = false;
+                    c.atWaitingArea = true;
+
                     if (SeatingData.showArrow)
                     {
                         removeArrow(true);
