@@ -9,16 +9,7 @@ public class LevelController: MonoBehaviour
     public List<Dictionary<string, object>> levels;
     public int currentLevel = 0;
     public Dictionary<string, object> currentLevelData;
-
-    public GameObject coffeeMachine;
-    public GameObject matchaMachine;
-    public GameObject bobaMachine;
-    public GameObject picture1;
-    public GameObject plant1;
-    public GameObject walls;
-    public GameObject picture2;
-    public GameObject plant2;
-    public GameObject camera;
+    public List<AudioClip> songs;
 
     private int oldLevel;
 
@@ -65,11 +56,22 @@ public class LevelController: MonoBehaviour
             string[] locations = words[14].Split('|');
             level["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
             level["Plant2Enabled"] = bool.Parse(words[15]);
-            level["Dialog"] = words.Length > 16 ? words[16] : "";
+            level["Dialog"] = words.Length > 16 ? words[16].Replace("^", ",") : "";
 
             levels.Add(level);
         }
         Debug.Log("Loaded " + levels.Count + " levels.");
+    }
+
+    public void getSongs()
+    {
+        songs = new List<AudioClip>();
+        songs.Add(null);
+        for(int i = 1; i < levels.Count + 1; i++)
+        {
+            songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
+            Debug.Log(songs[i]);
+        }
     }
 
     // Call this once when the game first loads
@@ -77,6 +79,7 @@ public class LevelController: MonoBehaviour
     {
         oldLevel = -1;
         getLevels();
+        getSongs();
         currentLevelData = levels[currentLevel];
     }
 
@@ -93,33 +96,42 @@ public class LevelController: MonoBehaviour
     {
         if(currentLevel > 0 && currentLevel < 18 && (!currentLevel.Equals(oldLevel)))
         {
-            Debug.Log(currentLevel + " != " + oldLevel);
-            oldLevel = currentLevel;
             setLevel(currentLevel);
         }
+        loadLevel();
     }
 
     public void setLevel(int l)
     {
         Debug.Log("Setting level to " + l);
         currentLevel = l;
+        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
         oldLevel = currentLevel;
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+            o.GetComponent<AudioSource>().Play();
     }
 
     public void nextLevel()
     {
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
+        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
         oldLevel = currentLevel;
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+            o.GetComponent<AudioSource>().Play();
     }
 
     public void loadLevel()
     {
         int level = currentLevel;
-        SceneManager.LoadScene("" + levels[level]["Scene"]);
-        
+
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+        {
+            o.GetComponent<AudioSource>().clip = songs[level];
+        }
+
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
             o.SetActive((bool)levels[level]["CoffeeEnabled"]);
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
@@ -136,11 +148,5 @@ public class LevelController: MonoBehaviour
             o.SetActive((bool)levels[level]["Picture2Enabled"]);
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
             o.SetActive((bool)levels[level]["Plant2Enabled"]);
-
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
-        {
-            o.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
-            o.GetComponent<AudioSource>().Play();
-        }
     }
 }
