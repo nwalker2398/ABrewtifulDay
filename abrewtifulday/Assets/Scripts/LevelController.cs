@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
     static LevelController instance;
     List<Dictionary<string, object>> levels;
 
-    [SerializeField] int currentLevel;
+    [SerializeField] int currentLevel = -1;
     public GameObject coffeeMachine;
     public GameObject matchaMachine;
     public GameObject bobaMachine;
@@ -18,7 +19,7 @@ public class LevelController : MonoBehaviour
     public GameObject plant2;
     public GameObject camera;
 
-    private int oldLevel;
+    private int oldLevel = -1;
 
     void Awake()
     {
@@ -31,12 +32,12 @@ public class LevelController : MonoBehaviour
         int i = 0;
         foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
+            levels.Add(new Dictionary<string, object>());
             if (i == 0)
             {
                 i++;
                 continue;
             }
-            levels.Add(new Dictionary<string, object>());
             string[] words = line.Split(',');
             levels[i]["Scene"] = words[1];
             levels[i]["CustomerSpeed"] = int.Parse(words[2]);
@@ -57,6 +58,7 @@ public class LevelController : MonoBehaviour
             levels[i]["Dialog"] = words[16];
             i++;
         }
+        Debug.Log("Loaded " + levels.Count + " levels.");
     }
 
     // Start is called before the first frame update
@@ -68,21 +70,50 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(currentLevel > 0 && (!currentLevel.Equals(oldLevel)))
+        {
+            setLevel(currentLevel);
+            oldLevel = currentLevel;
+        }
+    }
 
+    public void setLevel(int l)
+    {
+        Debug.Log("Setting level to " + l);
+        currentLevel = l;
+        loadLevel(currentLevel);
+        oldLevel = currentLevel;
+    }
+
+    public void nextLevel()
+    {
+        Debug.Log("Next Level: " + (currentLevel + 1));
+        currentLevel++;
+        loadLevel(currentLevel);
+        oldLevel = currentLevel;
     }
 
     void loadLevel(int level)
     {
-        coffeeMachine.active = (bool)levels[level]["CoffeeEnabled"];
-        matchaMachine.active = (bool)levels[level]["MatchaEnabled"];
-        bobaMachine.active = (bool)levels[level]["BobaEnabled"];
-        picture1.active = (bool)levels[level]["Picture1Enabled"];
-        plant1.active = (bool)levels[level]["Plant1Enabled"];
+        SceneManager.LoadScene("" + levels[level]["Scene"]);
+        if(coffeeMachine)
+            coffeeMachine.SetActive((bool)levels[level]["CoffeeEnabled"]);
+        if(matchaMachine)
+            matchaMachine.SetActive((bool)levels[level]["MatchaEnabled"]);
+        if (bobaMachine)
+            bobaMachine.SetActive((bool)levels[level]["BobaEnabled"]);
+        if (picture1)
+            picture1.SetActive((bool)levels[level]["Picture1Enabled"]);
+        if (plant1)
+            plant1.SetActive((bool)levels[level]["Plant1Enabled"]);
         //if(levels[level]["WallPainted"])
-        //    walls.active = levels[level]["CoffeeEnabled"];
-        picture2.active = (bool)levels[level]["Picture2Enabled"];
-        plant2.active = (bool)levels[level]["Plant2Enabled"];
+        //    walls.color = levels[level]["WallColor"];
+        if (picture2)
+            picture2.SetActive((bool)levels[level]["Picture2Enabled"]);
+        if (plant2)
+            plant2.SetActive((bool)levels[level]["Plant2Enabled"]);
 
-        camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
+        if (camera)
+            camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
     }
 }
