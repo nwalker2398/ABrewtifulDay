@@ -10,7 +10,6 @@ public class LevelController: MonoBehaviour
     public int currentLevel = 0;
     public Dictionary<string, object> currentLevelData;
 
-    // [SerializeField] int currentLevel = -1;
     public GameObject coffeeMachine;
     public GameObject matchaMachine;
     public GameObject bobaMachine;
@@ -21,7 +20,7 @@ public class LevelController: MonoBehaviour
     public GameObject plant2;
     public GameObject camera;
 
-    private int oldLevel = -1;
+    private int oldLevel;
 
     void Awake()
     {
@@ -57,7 +56,7 @@ public class LevelController: MonoBehaviour
             level["HeartQuota"] = int.Parse(words[5]);
             level["CoffeeEnabled"] = bool.Parse(words[6]);
             level["MatchaEnabled"] = bool.Parse(words[7]);
-            level["BobaEnables"] = bool.Parse(words[8]);
+            level["BobaEnabled"] = bool.Parse(words[8]);
             level["Picture1Enabled"] = bool.Parse(words[9]);
             level["Plant1Enabled"] = bool.Parse(words[10]);
             level["WallPainted"] = bool.Parse(words[11]);
@@ -76,6 +75,7 @@ public class LevelController: MonoBehaviour
     // Call this once when the game first loads
     public void StartLevels()
     {
+        oldLevel = -1;
         getLevels();
         currentLevelData = levels[currentLevel];
     }
@@ -91,10 +91,11 @@ public class LevelController: MonoBehaviour
 
     public void Update()
     {
-        if(currentLevel > 0 && (!currentLevel.Equals(oldLevel)))
+        if(currentLevel > 0 && currentLevel < 18 && (!currentLevel.Equals(oldLevel)))
         {
-            setLevel(currentLevel);
+            Debug.Log(currentLevel + " != " + oldLevel);
             oldLevel = currentLevel;
+            setLevel(currentLevel);
         }
     }
 
@@ -117,24 +118,28 @@ public class LevelController: MonoBehaviour
     public void loadLevel(int level)
     {
         SceneManager.LoadScene("" + levels[level]["Scene"]);
-        if(coffeeMachine)
-            coffeeMachine.SetActive((bool)levels[level]["CoffeeEnabled"]);
-        if(matchaMachine)
-            matchaMachine.SetActive((bool)levels[level]["MatchaEnabled"]);
-        if (bobaMachine)
-            bobaMachine.SetActive((bool)levels[level]["BobaEnabled"]);
-        if (picture1)
-            picture1.SetActive((bool)levels[level]["Picture1Enabled"]);
-        if (plant1)
-            plant1.SetActive((bool)levels[level]["Plant1Enabled"]);
+        
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
+            o.SetActive((bool)levels[level]["CoffeeEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
+            o.SetActive((bool)levels[level]["MatchaEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("BobaStation"))
+            o.SetActive((bool)levels[level]["BobaEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture1"))
+            o.SetActive((bool)levels[level]["Picture1Enabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant1"))
+            o.SetActive((bool)levels[level]["Plant1Enabled"]);
         //if(levels[level]["WallPainted"])
         //    walls.color = levels[level]["WallColor"];
-        if (picture2)
-            picture2.SetActive((bool)levels[level]["Picture2Enabled"]);
-        if (plant2)
-            plant2.SetActive((bool)levels[level]["Plant2Enabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture2"))
+            o.SetActive((bool)levels[level]["Picture2Enabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
+            o.SetActive((bool)levels[level]["Plant2Enabled"]);
 
-        if (camera)
-            camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+        {
+            o.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
+            o.GetComponent<AudioSource>().Play();
+        }
     }
 }
