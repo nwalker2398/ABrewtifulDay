@@ -11871,10 +11871,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
@@ -11882,7 +11886,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1891635209}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
@@ -11890,11 +11902,23 @@ PrefabInstance:
       value: LoadNextLevel
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: nextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Timer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LevelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384850722422143531, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []

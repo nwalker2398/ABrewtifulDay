@@ -112,7 +112,13 @@ public class LevelController: MonoBehaviour
             o.GetComponent<AudioSource>().Play();
     }
 
-    public void nextLevel()
+    public static void nextLevel()
+    {
+        if (LC != null)
+            LC.instanceNextLevel();
+    }
+
+    public void instanceNextLevel()
     {
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
