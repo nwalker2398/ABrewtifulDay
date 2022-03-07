@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465766, g: 0.49641156, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -879,6 +879,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109535985}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &113917973
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3913786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.87847173
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.3946495
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328528, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328530, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: m_Name
+      value: LevelController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
 --- !u!1 &121485167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,8 +1386,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1001 &179902214
@@ -2470,8 +2527,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &344032947
@@ -2956,8 +3013,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &521869232
@@ -3234,8 +3291,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &670128896
@@ -3827,8 +3884,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &751141912
@@ -9796,8 +9853,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &1639464396
@@ -12509,8 +12566,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &1966159236
@@ -12977,8 +13034,8 @@ MonoBehaviour:
     m_Bits: 8
   pickupRange: 3
   objectCoffee: {fileID: 1666703709}
-  objectMatcha: {fileID: 1666703708}
-  objectBoba: {fileID: 1666703707}
+  objectMatcha: {fileID: 0}
+  objectBoba: {fileID: 0}
   timerIcon: {fileID: 0}
   heartIcon: {fileID: 0}
 --- !u!1 &2019261440
@@ -13841,59 +13898,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &2108526733
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2108526735}
-  - component: {fileID: 2108526734}
-  m_Layer: 0
-  m_Name: Level Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2108526734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108526733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26581ec401f4b34284215fa8da4fb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: -1
-  coffeeMachine: {fileID: 0}
-  matchaMachine: {fileID: 0}
-  bobaMachine: {fileID: 0}
-  picture1: {fileID: 0}
-  plant1: {fileID: 0}
-  walls: {fileID: 0}
-  picture2: {fileID: 0}
-  plant2: {fileID: 0}
-  camera: {fileID: 0}
---- !u!4 &2108526735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108526733}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39383116, y: 4.0650926, z: -19.697998}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113015662
 GameObject:
   m_ObjectHideFlags: 0

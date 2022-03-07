@@ -94,8 +94,6 @@ public class Customer : MonoBehaviour
                 seat.seatedCustomer = false;
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
-            //leaveCafe(); // error, cannot SetDestination
-            Destroy(gameObject);
             leaveCafe(true); 
         }
 
@@ -212,7 +210,7 @@ public class Customer : MonoBehaviour
         }
 
         // Remove customer once they leave the cafe
-        if (Vector3.Distance(transform.position, returnArea) < 1f)
+        if (Vector3.Distance(transform.position, returnArea) < 2f)
         {
             SeatingData.waitingCustomers.Remove(this);
             Destroy(this);

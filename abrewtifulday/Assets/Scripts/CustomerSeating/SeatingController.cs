@@ -7,10 +7,13 @@ public class SeatingController : MonoBehaviour
     [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
     [SerializeField] Material customer_glow, chair_glow, chair_normal;
     [SerializeField] GameObject tutorialChair;
+
     private Customer[] customers;
     private float timePassed;
     private float generateCustomerIn;
     private Camera camera;
+    private float nextWave;
+    private float waveDuration;
 
     void Start()
     {
@@ -25,21 +28,37 @@ public class SeatingController : MonoBehaviour
             customers[i] = customerObjects[i].GetComponent<Customer>();
         }
         timePassed = 5.0f;
+
+        LevelController.LC.printLevel(LevelController.LC.currentLevel);
+        generateCustomerIn = 0f;
+        // UPDATE TO THE LEVEL DURATION
+        float gameDuration = 60f;
+        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"];
+        waveDuration = numWaves > 0 ? (gameDuration / numWaves) : 10000;
+        nextWave = Time.time + waveDuration;
     }
 
     void Update()
     {
         timePassed += Time.deltaTime;
-        //print(SeatingData.waitingCustomers.Count);
+        if (Time.time > nextWave)
+        {
+            timePassed = 0f;
+            nextWave += waveDuration;
+            print(LevelController.LC);
+            int numCustomers = (int)LevelController.LC.currentLevelData["CustomersPerWave"];
+            for (int i = 0; i < numCustomers; i++)
+            {
+                Vector3 location = customerStartLocation + new Vector3(-i*2, 0, i*2);
+                generateCustomer(location);
+            }
+        }
         if (timePassed > generateCustomerIn && SeatingData.waitingCustomers.Count < 5)
         {
             timePassed = 0f;
-            generateCustomerIn = Random.Range(4, 8);
-            generateCustomer();
-        }
-        if (SeatingData.waitingCustomers.Count == 0)
-        {
-            // generateCustomer();
+            float startGeneration = (float)LevelController.LC.currentLevelData["GenerateCustomerIn"];
+            generateCustomerIn = Random.Range(startGeneration, startGeneration + 4);
+            generateCustomer(customerStartLocation);
         }
 
         // Glow customer if selected
@@ -68,7 +87,8 @@ public class SeatingController : MonoBehaviour
                     if (SeatingData.showArrow)
                     {
                         removeArrow(true);
-                        addArrow(tutorialChair.transform.position);
+                        // Can use arrow logic in tutorial scene, commenting out now!
+                        // addArrow(tutorialChair.transform.position);
                     }
                     //renderer.material = customer_glow;
                 }
@@ -134,10 +154,10 @@ public class SeatingController : MonoBehaviour
         }
     }
 
-    void generateCustomer()
+    void generateCustomer(Vector3 location)
     {
         Customer customer = customers[Random.Range(0, customers.Length)];
-        var new_customer = Instantiate(customer, customerStartLocation, Quaternion.identity);
+        var new_customer = Instantiate(customer, location, Quaternion.identity);
         SeatingData.addWaitingCustomer(new_customer);
         new_customer.Generate();
     }
