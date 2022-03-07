@@ -5,7 +5,20 @@ using System.IO;
 public class LevelController : MonoBehaviour
 {
     static LevelController instance;
-    List<Dictionary<string, dynamic>> levels;
+    List<Dictionary<string, object>> levels;
+
+    [SerializeField] int currentLevel;
+    public GameObject coffeeMachine;
+    public GameObject matchaMachine;
+    public GameObject bobaMachine;
+    public GameObject picture1;
+    public GameObject plant1;
+    public GameObject walls;
+    public GameObject picture2;
+    public GameObject plant2;
+    public GameObject camera;
+
+    private int oldLevel;
 
     void Awake()
     {
@@ -14,11 +27,16 @@ public class LevelController : MonoBehaviour
 
     void getLevels()
     {
-        levels = new List<Dictionary<string, dynamic>>();
+        levels = new List<Dictionary<string, object>>();
         int i = 0;
-        foreach (string line in  File.ReadLines("levels.csv"))
+        foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
-            levels.Add(new Dictionary<string, dynamic>());
+            if (i == 0)
+            {
+                i++;
+                continue;
+            }
+            levels.Add(new Dictionary<string, object>());
             string[] words = line.Split(',');
             levels[i]["Scene"] = words[1];
             levels[i]["CustomerSpeed"] = int.Parse(words[2]);
@@ -27,7 +45,7 @@ public class LevelController : MonoBehaviour
             levels[i]["HeartQuota"] = int.Parse(words[5]);
             levels[i]["CoffeeEnabled"] = bool.Parse(words[6]);
             levels[i]["MatchaEnabled"] = bool.Parse(words[7]);
-            levels[i]["BobaEnables"] = bool.Parse(words[8]);
+            levels[i]["BobaEnabled"] = bool.Parse(words[8]);
             levels[i]["Picture1Enabled"] = bool.Parse(words[9]);
             levels[i]["Plant1Enabled"] = bool.Parse(words[10]);
             levels[i]["WallPainted"] = bool.Parse(words[11]);
@@ -37,6 +55,7 @@ public class LevelController : MonoBehaviour
             levels[i]["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
             levels[i]["Plant2Enabled"] = bool.Parse(words[15]);
             levels[i]["Dialog"] = words[16];
+            i++;
         }
     }
 
@@ -44,22 +63,26 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         getLevels();
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    void loadLevel(int level)
+    {
+        coffeeMachine.active = (bool)levels[level]["CoffeeEnabled"];
+        matchaMachine.active = (bool)levels[level]["MatchaEnabled"];
+        bobaMachine.active = (bool)levels[level]["BobaEnabled"];
+        picture1.active = (bool)levels[level]["Picture1Enabled"];
+        plant1.active = (bool)levels[level]["Plant1Enabled"];
+        //if(levels[level]["WallPainted"])
+        //    walls.active = levels[level]["CoffeeEnabled"];
+        picture2.active = (bool)levels[level]["Picture2Enabled"];
+        plant2.active = (bool)levels[level]["Plant2Enabled"];
+
+        camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
     }
 }
