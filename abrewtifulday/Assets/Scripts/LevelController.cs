@@ -103,7 +103,7 @@ public class LevelController: MonoBehaviour
     {
         Debug.Log("Setting level to " + l);
         currentLevel = l;
-        loadLevel(currentLevel);
+        loadLevel();
         oldLevel = currentLevel;
     }
 
@@ -111,12 +111,13 @@ public class LevelController: MonoBehaviour
     {
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
-        loadLevel(currentLevel);
+        loadLevel();
         oldLevel = currentLevel;
     }
 
-    public void loadLevel(int level)
+    public void loadLevel()
     {
+        int level = currentLevel;
         SceneManager.LoadScene("" + levels[level]["Scene"]);
         
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))

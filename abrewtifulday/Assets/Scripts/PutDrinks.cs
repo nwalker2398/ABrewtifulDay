@@ -33,7 +33,6 @@ public class PutDrinks : MonoBehaviour
         objectBoba.SetActive(false);
         heartIcon.SetActive(false);
         tray = GameObject.FindGameObjectWithTag("Tray");
-        Debug.Log(tray);
         trayCoffee = GameObject.FindGameObjectWithTag("TrayCoffee");
     }
 
