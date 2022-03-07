@@ -5,8 +5,9 @@ using System.IO;
 public class LevelController : MonoBehaviour
 {
     static LevelController instance;
-    List<Dictionary<string, dynamic>> levels;
+    List<Dictionary<string, object>> levels;
 
+    [SerializeField] int currentLevel;
     public GameObject coffeeMachine;
     public GameObject matchaMachine;
     public GameObject bobaMachine;
@@ -17,6 +18,8 @@ public class LevelController : MonoBehaviour
     public GameObject plant2;
     public GameObject camera;
 
+    private int oldLevel;
+
     void Awake()
     {
         instance = this;
@@ -24,11 +27,16 @@ public class LevelController : MonoBehaviour
 
     void getLevels()
     {
-        levels = new List<Dictionary<string, dynamic>>();
+        levels = new List<Dictionary<string, object>>();
         int i = 0;
-        foreach (string line in  File.ReadLines("levels.csv"))
+        foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
-            levels.Add(new Dictionary<string, dynamic>());
+            if (i == 0)
+            {
+                i++;
+                continue;
+            }
+            levels.Add(new Dictionary<string, object>());
             string[] words = line.Split(',');
             levels[i]["Scene"] = words[1];
             levels[i]["CustomerSpeed"] = int.Parse(words[2]);
@@ -47,6 +55,7 @@ public class LevelController : MonoBehaviour
             levels[i]["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
             levels[i]["Plant2Enabled"] = bool.Parse(words[15]);
             levels[i]["Dialog"] = words[16];
+            i++;
         }
     }
 
@@ -64,15 +73,15 @@ public class LevelController : MonoBehaviour
 
     void loadLevel(int level)
     {
-        coffeeMachine.active = levels[level]["CoffeeEnabled"];
-        matchaMachine.active = levels[level]["MatchaEnabled"];
-        bobaMachine.active = levels[level]["BobaEnabled"];
-        picture1.active = levels[level]["Picture1Enabled"];
-        plant1.active = levels[level]["Plant1Enabled"];
+        coffeeMachine.active = (bool)levels[level]["CoffeeEnabled"];
+        matchaMachine.active = (bool)levels[level]["MatchaEnabled"];
+        bobaMachine.active = (bool)levels[level]["BobaEnabled"];
+        picture1.active = (bool)levels[level]["Picture1Enabled"];
+        plant1.active = (bool)levels[level]["Plant1Enabled"];
         //if(levels[level]["WallPainted"])
         //    walls.active = levels[level]["CoffeeEnabled"];
-        picture2.active = levels[level]["Picture2Enabled"];
-        plant2.active = levels[level]["Plant2Enabled"];
+        picture2.active = (bool)levels[level]["Picture2Enabled"];
+        plant2.active = (bool)levels[level]["Plant2Enabled"];
 
         camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
     }
