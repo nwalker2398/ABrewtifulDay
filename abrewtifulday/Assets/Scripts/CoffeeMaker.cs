@@ -26,6 +26,7 @@ public class CoffeeMaker : MonoBehaviour
 
     void OnMouseDown() {
         Debug.Log("Clicking Coffee!");
+        Debug.Log(coffeeRange.inCoffeeRange);
         if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
         {
             StartCoroutine(waitToMake());

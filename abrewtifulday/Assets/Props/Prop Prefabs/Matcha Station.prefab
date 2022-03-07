@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4905344019808351890}
   - component: {fileID: 4905344019808351891}
   - component: {fileID: 4905344019808351900}
-  - component: {fileID: 4905344019808351901}
+  - component: {fileID: 5241359669527204393}
   m_Layer: 0
   m_Name: Matcha Range
   m_TagString: CoffeeRange
@@ -129,7 +129,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5210098
   m_Center: {x: 0, y: -3.4347062, z: 0.19274536}
---- !u!114 &4905344019808351901
+--- !u!114 &5241359669527204393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4905344019808351903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8965bb799b0a2417f8c0bbdf3b412b1d, type: 3}
+  m_Script: {fileID: 11500000, guid: d5cf3e6ea63e54ebbb82e1a364d5a77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4905344018726796599
@@ -198,11 +198,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684680dc55c2042a49c99898764428ce, type: 3}
---- !u!1 &9009980317689916777 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4114787274324381790, guid: 684680dc55c2042a49c99898764428ce, type: 3}
-  m_PrefabInstance: {fileID: 4905344018726796599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9009980317689916782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4114787274324381785, guid: 684680dc55c2042a49c99898764428ce, type: 3}
@@ -384,19 +379,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4905344019175773782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5247293575996557915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5ec488f5df2447b91930175f9a0137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thoughtBubble: {fileID: 9009980317689916777}
-  machineDrink: {fileID: 0}
-  bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
-  pour: {fileID: 8300000, guid: 39e065204edae46d2a4a2b3c094c7a85, type: 3}

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858019003143994472}
+  - component: {fileID: 4145297924432171784}
   m_Layer: 0
   m_Name: MatchaMachine
   m_TagString: Untagged
@@ -40,6 +41,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4145297924432171784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46050915808896722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c871082b0624be98f653e918ceb0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thoughtBubble: {fileID: 0}
+  machineDrink: {fileID: 0}
+  bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
+  pour: {fileID: 8300000, guid: 39e065204edae46d2a4a2b3c094c7a85, type: 3}
 --- !u!1 &85245745304678957
 GameObject:
   m_ObjectHideFlags: 0

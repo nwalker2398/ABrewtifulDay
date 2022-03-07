@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657725, g: 0.49641198, b: 0.5748184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6307,6 +6307,11 @@ MonoBehaviour:
   table: {fileID: 0}
   rotation: 0
   seatedCustomer: 0
+--- !u!1 &1197301603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7433150127342221258, guid: 383c109b0340a44d8800b1793ea73865, type: 3}
+  m_PrefabInstance: {fileID: 1444906072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1202240312
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,6 +7767,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1321509213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9009980317689916777, guid: 5f8daee8689394b61a2755dacaab23ba, type: 3}
+  m_PrefabInstance: {fileID: 1432103254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1334059073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8491,6 +8501,14 @@ PrefabInstance:
       propertyPath: machineDrink
       value: 
       objectReference: {fileID: 50160648}
+    - target: {fileID: 8211949823295340417, guid: 5f8daee8689394b61a2755dacaab23ba, type: 3}
+      propertyPath: machineDrink
+      value: 
+      objectReference: {fileID: 50160648}
+    - target: {fileID: 8211949823295340417, guid: 5f8daee8689394b61a2755dacaab23ba, type: 3}
+      propertyPath: thoughtBubble
+      value: 
+      objectReference: {fileID: 1321509213}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f8daee8689394b61a2755dacaab23ba, type: 3}
 --- !u!1001 &1444906072
@@ -8500,6 +8518,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3640715254915336471, guid: 383c109b0340a44d8800b1793ea73865, type: 3}
+      propertyPath: machineDrink
+      value: 
+      objectReference: {fileID: 2095749001}
+    - target: {fileID: 3640715254915336471, guid: 383c109b0340a44d8800b1793ea73865, type: 3}
+      propertyPath: thoughtBubble
+      value: 
+      objectReference: {fileID: 1197301603}
     - target: {fileID: 6790710879824645775, guid: 383c109b0340a44d8800b1793ea73865, type: 3}
       propertyPath: machineDrink
       value: 

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6790710881686500810}
   - component: {fileID: 6790710881686500811}
   - component: {fileID: 6790710881686500812}
-  - component: {fileID: 6790710881686500813}
+  - component: {fileID: 2491991410872822439}
   m_Layer: 0
   m_Name: Boba Range
   m_TagString: CoffeeRange
@@ -129,7 +129,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5210098
   m_Center: {x: 0, y: -3.4347062, z: 0.19274536}
---- !u!114 &6790710881686500813
+--- !u!114 &2491991410872822439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6790710881686500815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8965bb799b0a2417f8c0bbdf3b412b1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 058bee6a6a41640438d6a3271fec1abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &184900934907060571
@@ -317,22 +317,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6790710879824645775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5979683271675832653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5ec488f5df2447b91930175f9a0137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thoughtBubble: {fileID: 7433150127342221258}
-  machineDrink: {fileID: 0}
-  bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
-  pour: {fileID: 8300000, guid: 39e065204edae46d2a4a2b3c094c7a85, type: 3}
 --- !u!1001 &6790710880054470548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390,11 +374,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 765e6225009ce4abc88a6841d3be07b1, type: 3}
---- !u!1 &7433150127342221258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4114787274324381790, guid: 765e6225009ce4abc88a6841d3be07b1, type: 3}
-  m_PrefabInstance: {fileID: 6790710880054470548}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7433150127342221261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4114787274324381785, guid: 765e6225009ce4abc88a6841d3be07b1, type: 3}
