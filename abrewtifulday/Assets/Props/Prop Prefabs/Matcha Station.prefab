@@ -198,11 +198,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684680dc55c2042a49c99898764428ce, type: 3}
---- !u!1 &9009980317689916777 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4114787274324381790, guid: 684680dc55c2042a49c99898764428ce, type: 3}
-  m_PrefabInstance: {fileID: 4905344018726796599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9009980317689916782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4114787274324381785, guid: 684680dc55c2042a49c99898764428ce, type: 3}
@@ -384,19 +379,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4905344019175773782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5247293575996557915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5ec488f5df2447b91930175f9a0137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thoughtBubble: {fileID: 9009980317689916777}
-  machineDrink: {fileID: 0}
-  bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
-  pour: {fileID: 8300000, guid: 39e065204edae46d2a4a2b3c094c7a85, type: 3}
