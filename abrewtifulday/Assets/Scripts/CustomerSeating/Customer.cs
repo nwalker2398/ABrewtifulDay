@@ -89,6 +89,11 @@ public class Customer : MonoBehaviour
                 atWaitingArea = false;
                 SeatingData.waitingCustomers.Remove(this);
             }
+            if (atSeat)
+            {
+                seat.seatedCustomer = false;
+                seat.GetComponent<NavMeshObstacle>().enabled = true;
+            }
             leaveCafe(true); 
         }
 

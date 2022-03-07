@@ -29,13 +29,11 @@ public class SeatingController : MonoBehaviour
         }
         timePassed = 5.0f;
 
-        LevelController.StartLevels();
-
-        LevelController.printLevel(LevelController.currentLevel);
+        LevelController.LC.printLevel(LevelController.LC.currentLevel);
         generateCustomerIn = 0f;
         // UPDATE TO THE LEVEL DURATION
         float gameDuration = 60f;
-        int numWaves = (int)LevelController.currentLevelData["NumWaves"];
+        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"];
         waveDuration = numWaves > 0 ? (gameDuration / numWaves) : 10000;
         nextWave = Time.time + waveDuration;
     }
@@ -47,7 +45,8 @@ public class SeatingController : MonoBehaviour
         {
             timePassed = 0f;
             nextWave += waveDuration;
-            int numCustomers = (int)LevelController.currentLevelData["CustomersPerWave"];
+            print(LevelController.LC);
+            int numCustomers = (int)LevelController.LC.currentLevelData["CustomersPerWave"];
             for (int i = 0; i < numCustomers; i++)
             {
                 Vector3 location = customerStartLocation + new Vector3(-i*2, 0, i*2);
@@ -57,7 +56,7 @@ public class SeatingController : MonoBehaviour
         if (timePassed > generateCustomerIn && SeatingData.waitingCustomers.Count < 5)
         {
             timePassed = 0f;
-            float startGeneration = (float)LevelController.currentLevelData["GenerateCustomerIn"];
+            float startGeneration = (float)LevelController.LC.currentLevelData["GenerateCustomerIn"];
             generateCustomerIn = Random.Range(startGeneration, startGeneration + 4);
             generateCustomer(customerStartLocation);
         }

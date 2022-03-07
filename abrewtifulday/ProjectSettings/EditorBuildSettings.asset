@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CafeScene.unity
+    path: Assets/Scenes/Cafe1.unity
+    guid: 2fdc4603f356742f9a2a3e02adaf2ace
+  - enabled: 1
+    path: Assets/Scenes/Cafe2.unity
+    guid: 2f618d633e88e46529338dc2d4eb5cda
+  - enabled: 1
+    path: Assets/Scenes/Cafe3.unity
     guid: fbacbf76bab234eb5a9bf57a37fb0622
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: c334a642bb36240eeb17a07db53df5be
   - enabled: 1
     path: Assets/Scenes/StartSceneBasic.unity
     guid: 23504fece2e774024806ff08053c7863

@@ -1,14 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
-public static class LevelController
+public class LevelController: MonoBehaviour
 {
-    public static List<Dictionary<string, object>> levels;
-    public static int currentLevel = 0;
-    public static Dictionary<string, object> currentLevelData;
+    public static LevelController LC;
+    public List<Dictionary<string, object>> levels;
+    public int currentLevel = 0;
+    public Dictionary<string, object> currentLevelData;
 
-    static void getLevels()
+    // [SerializeField] int currentLevel = -1;
+    public GameObject coffeeMachine;
+    public GameObject matchaMachine;
+    public GameObject bobaMachine;
+    public GameObject picture1;
+    public GameObject plant1;
+    public GameObject walls;
+    public GameObject picture2;
+    public GameObject plant2;
+    public GameObject camera;
+
+    private int oldLevel = -1;
+
+    void Awake()
+    {
+        if (LC != null)
+        {
+            GameObject.Destroy(this);
+        }
+        else
+        {
+            LC = this;
+        }
+        DontDestroyOnLoad(this);
+        StartLevels();
+    }
+
+    void getLevels()
     {
         levels = new List<Dictionary<string, object>>();
         int i = 0;
@@ -41,21 +70,71 @@ public static class LevelController
 
             levels.Add(level);
         }
+        Debug.Log("Loaded " + levels.Count + " levels.");
     }
 
     // Call this once when the game first loads
-    public static void StartLevels()
+    public void StartLevels()
     {
         getLevels();
         currentLevelData = levels[currentLevel];
     }
 
-    public static void printLevel(int levelNumber)
+    public void printLevel(int levelNumber)
     {
         Dictionary<string, object> level = levels[levelNumber];
         foreach(KeyValuePair<string, object> kvp in level)
         {
             Debug.Log(string.Format("{0}={1}", kvp.Key, kvp.Value));
         }
+    }
+
+    public void Update()
+    {
+        if(currentLevel > 0 && (!currentLevel.Equals(oldLevel)))
+        {
+            setLevel(currentLevel);
+            oldLevel = currentLevel;
+        }
+    }
+
+    public void setLevel(int l)
+    {
+        Debug.Log("Setting level to " + l);
+        currentLevel = l;
+        loadLevel(currentLevel);
+        oldLevel = currentLevel;
+    }
+
+    public void nextLevel()
+    {
+        Debug.Log("Next Level: " + (currentLevel + 1));
+        currentLevel++;
+        loadLevel(currentLevel);
+        oldLevel = currentLevel;
+    }
+
+    public void loadLevel(int level)
+    {
+        SceneManager.LoadScene("" + levels[level]["Scene"]);
+        if(coffeeMachine)
+            coffeeMachine.SetActive((bool)levels[level]["CoffeeEnabled"]);
+        if(matchaMachine)
+            matchaMachine.SetActive((bool)levels[level]["MatchaEnabled"]);
+        if (bobaMachine)
+            bobaMachine.SetActive((bool)levels[level]["BobaEnabled"]);
+        if (picture1)
+            picture1.SetActive((bool)levels[level]["Picture1Enabled"]);
+        if (plant1)
+            plant1.SetActive((bool)levels[level]["Plant1Enabled"]);
+        //if(levels[level]["WallPainted"])
+        //    walls.color = levels[level]["WallColor"];
+        if (picture2)
+            picture2.SetActive((bool)levels[level]["Picture2Enabled"]);
+        if (plant2)
+            plant2.SetActive((bool)levels[level]["Plant2Enabled"]);
+
+        if (camera)
+            camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
     }
 }
