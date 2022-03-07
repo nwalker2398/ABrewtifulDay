@@ -6,19 +6,21 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    public Material defaultMaterial;
+    // public Material defaultMaterial;
+    public float stopDistance = 1.0f;
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
-    [SerializeField] Chair seat;
 
-    private bool toWaitingArea = false;
-    private bool atWaitingArea = false;
+    public bool toWaitingArea = false;
+    public bool atWaitingArea = false;
+
+    private Chair seat;
     private bool toSeat = false;
     private bool atSeat = false;
-    private float stopDistance = 2.5f;
+    private bool leaveIfFull = true;
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
     private float waitingSeatTime = 0f;
@@ -60,21 +62,19 @@ public class Customer : MonoBehaviour
         seat.seatedCustomer = false;
         seat.GetComponent<NavMeshObstacle>().enabled = true;
 
-        destination = returnArea;
-        GetComponent<NavMeshAgent>().enabled = true;
-        GetComponent<NavMeshAgent>().SetDestination(destination);
-        GetComponent<Rigidbody>().useGravity = true;
-        rotate = false;
+        leaveCafe(false);
     }
 
     public void Seat(Chair chair)
     {
+        print("Seating customer");
         destination = chair.transform.position;
         atWaitingArea = false;
         toSeat = true;
         seat = chair;
         controller.removeCustomerGlow(this);
         SeatingData.seatWaitingCustomer(this);
+        GetComponent<NavMeshAgent>().isStopped = false;
         chair.GetComponent<NavMeshObstacle>().enabled = false;
         chair.seatedCustomer = true;
         GetComponent<NavMeshAgent>().SetDestination(destination);
@@ -84,7 +84,6 @@ public class Customer : MonoBehaviour
     {
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
         if (timer.timeHasEnd() && !isServed) {
-            Debug.Log("Customer (" + transform.gameObject.name + ") should leave the cafe");
     
             if (atWaitingArea) {
                 atWaitingArea = false;
@@ -97,6 +96,7 @@ public class Customer : MonoBehaviour
             }
             //leaveCafe(); // error, cannot SetDestination
             Destroy(gameObject);
+            leaveCafe(true); 
         }
 
         // Don't do anything if the character is a default prefab
@@ -121,6 +121,7 @@ public class Customer : MonoBehaviour
         if (toWaitingArea)
         {
             bool waitingRoomFull = false;
+            bool setStopped = false;
             SeatingData.waitingCustomers.ForEach(delegate (Customer c)
             {
                 // Stop moving if another waiting customer is in the way
@@ -129,12 +130,25 @@ public class Customer : MonoBehaviour
                     Vector3.Distance(transform.position, c.transform.position) < stopDistance)
                 {
                     // If the waiting room is full, leave the shop
-                    if (SeatingData.waitingCustomers.Count > 3)
+                    if (leaveIfFull && SeatingData.waitingCustomers.Count > 4)
                     {
                         destination = returnArea;
                     }
+                    // If another customer is between the current customer and the ideal waiting area, stop moving
+                    else if (distanceToDestination() > Vector3.Distance(destination, c.transform.position))
+                    {
+                        GetComponent<NavMeshAgent>().isStopped = true;
+                        setStopped = true;
+                        leaveIfFull = false;
+                    }
                 }
             });
+
+
+            if (setStopped == false)
+            {
+                GetComponent<NavMeshAgent>().isStopped = false;
+            }
 
             // Enter waiting room
             if (!waitingRoomFull && distanceToDestination() < 0.1)
@@ -142,7 +156,6 @@ public class Customer : MonoBehaviour
                 toWaitingArea = false;
                 atWaitingArea = true;
                 controller.addArrow(transform.position);
-
                 timer.startTimer(); // start the customer timer
             }
         }
@@ -194,7 +207,7 @@ public class Customer : MonoBehaviour
             waitingRoomTime += Time.deltaTime;
             if (waitingRoomTime > 20f)
             {
-                leaveCafe();
+                leaveCafe(false);
             }
         }
 
@@ -222,18 +235,22 @@ public class Customer : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, toRot, 1 * Time.deltaTime * 10f);
     }
 
-    void leaveCafe()
+    void leaveCafe(bool decreaseScore)
     {
-        //print("Waiting time exceeded");
         atWaitingArea = false;
+
         destination = returnArea;
+        GetComponent<NavMeshAgent>().enabled = true;
         GetComponent<NavMeshAgent>().SetDestination(destination);
+        GetComponent<Rigidbody>().useGravity = true;
+        rotate = false;
+
         if (SeatingData.showArrow)
         {
             controller.removeArrow(true);
         }
 
-        if (ScoreSystem.getCurrentScore() > 0) {
+        if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
             ScoreSystem.decrementScore(1);
         }
     }

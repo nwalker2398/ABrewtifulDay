@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    [SerializeField] Transform camera;
+    private Transform camera;
+
+    private void Start()
+    {
+        camera = Camera.main.transform;
+    }
 
     void LateUpdate()
     {

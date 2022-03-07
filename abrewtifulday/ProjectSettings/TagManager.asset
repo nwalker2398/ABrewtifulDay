@@ -11,6 +11,8 @@ TagManager:
   - Arrow
   - CoffeeMaker
   - CoffeeReadyBubble
+  - Tray
+  - TrayCoffee
   layers:
   - Default
   - TransparentFX
