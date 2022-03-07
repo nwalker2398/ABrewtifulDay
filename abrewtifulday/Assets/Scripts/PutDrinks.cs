@@ -16,8 +16,10 @@ public class PutDrinks : MonoBehaviour
     [SerializeField] private GameObject hand; // in this case the hand is the coffee tray.
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private float pickupRange;
-    [SerializeField] private GameObject trayCoffee; 
     [SerializeField] private GameObject objectCoffee;
+    [SerializeField] private GameObject objectMatcha;
+    [SerializeField] private GameObject objectBoba;
+
 
     [SerializeField] GameObject timerIcon;
     [SerializeField] GameObject heartIcon;
@@ -25,6 +27,8 @@ public class PutDrinks : MonoBehaviour
     void Start()
     {
         objectCoffee.active = false;
+        objectMatcha.active = false;
+        objectBoba.active = false;
         heartIcon.active = false;
     }
 
@@ -32,17 +36,35 @@ public class PutDrinks : MonoBehaviour
         Debug.Log("Table clicked.");
         // cast a ray from the coffee tray.
         Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
-
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
-            // if we have coffee to serve, put the coffee onto the object
-            if (trayCoffee.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
+            // if we have a drink to serve, put the drink onto the object
+            if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
-                trayCoffee.active = false;
-                objectCoffee.active = true;
+                Tray.instance.curDrink.active = false;
+                GameObject drink = null;
+
+                if(Tray.instance.curDrink == Tray.instance.trayCoffee)
+                {
+                    objectCoffee.active = true;
+                    drink = objectCoffee;
+                }
+                else if (Tray.instance.curDrink == Tray.instance.trayMatcha)
+                {
+                    objectMatcha.active = true;
+                    drink = objectMatcha;
+                }
+                else if (Tray.instance.curDrink == Tray.instance.trayBoba)
+                {
+                    objectBoba.active = true;
+                    drink = objectBoba;
+                }
                 timerIcon.active = false;
                 heartIcon.active = true;
+
+                //TODO: check if Tray.instance.curDrink == the ordered drink to see if score should be higher than 1
+
                 ScoreSystem.incrementScore(1);
-                hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
+                hitInfo.transform.gameObject.GetComponent<Customer>().Drink(drink.transform.position, drink);
             }
             
             // pick the coffee from the object

@@ -7,6 +7,16 @@ public class LevelController : MonoBehaviour
     static LevelController instance;
     List<Dictionary<string, dynamic>> levels;
 
+    public GameObject coffeeMachine;
+    public GameObject matchaMachine;
+    public GameObject bobaMachine;
+    public GameObject picture1;
+    public GameObject plant1;
+    public GameObject walls;
+    public GameObject picture2;
+    public GameObject plant2;
+    public GameObject camera;
+
     void Awake()
     {
         instance = this;
@@ -27,7 +37,7 @@ public class LevelController : MonoBehaviour
             levels[i]["HeartQuota"] = int.Parse(words[5]);
             levels[i]["CoffeeEnabled"] = bool.Parse(words[6]);
             levels[i]["MatchaEnabled"] = bool.Parse(words[7]);
-            levels[i]["BobaEnables"] = bool.Parse(words[8]);
+            levels[i]["BobaEnabled"] = bool.Parse(words[8]);
             levels[i]["Picture1Enabled"] = bool.Parse(words[9]);
             levels[i]["Plant1Enabled"] = bool.Parse(words[10]);
             levels[i]["WallPainted"] = bool.Parse(words[11]);
@@ -44,22 +54,26 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         getLevels();
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
-        Debug.Log("asdfadsgasdhha");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    void loadLevel(int level)
+    {
+        coffeeMachine.active = levels[level]["CoffeeEnabled"];
+        matchaMachine.active = levels[level]["MatchaEnabled"];
+        bobaMachine.active = levels[level]["BobaEnabled"];
+        picture1.active = levels[level]["Picture1Enabled"];
+        plant1.active = levels[level]["Plant1Enabled"];
+        //if(levels[level]["WallPainted"])
+        //    walls.active = levels[level]["CoffeeEnabled"];
+        picture2.active = levels[level]["Picture2Enabled"];
+        plant2.active = levels[level]["Plant2Enabled"];
+
+        camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
     }
 }
