@@ -13,34 +13,37 @@ Work done to serve coffee to customers:
 
 public class PutDrinks : MonoBehaviour
 {
-    [SerializeField] private GameObject hand; // in this case the hand is the coffee tray.
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private float pickupRange;
-    [SerializeField] private GameObject trayCoffee; 
     [SerializeField] private GameObject objectCoffee;
 
     [SerializeField] GameObject timerIcon;
     [SerializeField] GameObject heartIcon;
 
+    private GameObject tray; 
+    private GameObject trayCoffee;
+
     void Start()
     {
-        objectCoffee.active = false;
-        heartIcon.active = false;
+        objectCoffee.SetActive(false);
+        heartIcon.SetActive(false);
+        tray = GameObject.FindGameObjectWithTag("Tray");
+        trayCoffee = GameObject.FindGameObjectWithTag("TrayCoffee");
     }
 
     void OnMouseDown() {
         Debug.Log("Table clicked.");
         // cast a ray from the coffee tray.
-        Ray putRay = new Ray(hand.transform.position, hand.transform.forward);
+        Ray putRay = new Ray(tray.transform.position, tray.transform.forward);
 
         if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
             // if we have coffee to serve, put the coffee onto the object
             if (trayCoffee.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
-                trayCoffee.active = false;
-                objectCoffee.active = true;
-                timerIcon.active = false;
-                heartIcon.active = true;
+                trayCoffee.SetActive(false);
+                objectCoffee.SetActive(true);
+                timerIcon.SetActive(false);
+                heartIcon.SetActive(true);
                 ScoreSystem.incrementScore(1);
                 hitInfo.transform.gameObject.GetComponent<Customer>().Drink(objectCoffee.transform.position, objectCoffee);
             }

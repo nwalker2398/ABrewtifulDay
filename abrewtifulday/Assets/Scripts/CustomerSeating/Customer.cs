@@ -6,18 +6,18 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    public Material defaultMaterial;
+    // public Material defaultMaterial;
     public float stopDistance = 1.0f;
 
     [SerializeField] GameObject order;
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
-    [SerializeField] Chair seat;
 
     public bool toWaitingArea = false;
     public bool atWaitingArea = false;
 
+    private Chair seat;
     private bool toSeat = false;
     private bool atSeat = false;
     private bool leaveIfFull = true;

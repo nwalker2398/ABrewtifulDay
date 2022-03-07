@@ -7,16 +7,17 @@ public class SeatingController : MonoBehaviour
     [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
     [SerializeField] Material customer_glow, chair_glow, chair_normal;
     [SerializeField] GameObject tutorialChair;
-    [SerializeField] Camera camera;
     private Customer[] customers;
     private float timePassed;
     private float generateCustomerIn;
+    private Camera camera;
 
     void Start()
     {
         SeatingData.waitingCustomers = new List<Customer>();
         SeatingData.seatedCustomers = new List<Customer>();
         GameObject[] customerObjects = GameObject.FindGameObjectsWithTag("Customer");
+        camera = Camera.main;
         customers = new Customer[customerObjects.Length];
 
         for (int i = 0; i < customerObjects.Length; i++)
