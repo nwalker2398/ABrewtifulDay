@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4905344019808351890}
   - component: {fileID: 4905344019808351891}
   - component: {fileID: 4905344019808351900}
-  - component: {fileID: 4905344019808351901}
+  - component: {fileID: 5241359669527204393}
   m_Layer: 0
   m_Name: Matcha Range
   m_TagString: CoffeeRange
@@ -129,7 +129,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5210098
   m_Center: {x: 0, y: -3.4347062, z: 0.19274536}
---- !u!114 &4905344019808351901
+--- !u!114 &5241359669527204393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4905344019808351903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8965bb799b0a2417f8c0bbdf3b412b1d, type: 3}
+  m_Script: {fileID: 11500000, guid: d5cf3e6ea63e54ebbb82e1a364d5a77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4905344018726796599

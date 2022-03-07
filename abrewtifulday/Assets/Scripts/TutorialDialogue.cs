@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialDialogue : MonoBehaviour
+
+public class TutorialDialogue
 {
+    public string[] sentences;
     string SeatingDialog = "Click the customer and then click a chair to seat them!";
     string makingCoffeeDialog = "Walk to the coffee machine and click it to make a coffee, and once it is done brewing click again to pick it up.";
     string serveCoffeeDialog = "Walk to the customer and click on them to give them their coffee.";

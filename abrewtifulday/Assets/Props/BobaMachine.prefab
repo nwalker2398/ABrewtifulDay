@@ -690,6 +690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6568267543245542060}
+  - component: {fileID: 3465112370363689036}
   m_Layer: 0
   m_Name: BobaMachine
   m_TagString: Untagged
@@ -713,6 +714,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3465112370363689036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5795284083513788438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46522f4286e646aeb8102ec6944a2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thoughtBubble: {fileID: 0}
+  machineDrink: {fileID: 0}
+  bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
+  pour: {fileID: 8300000, guid: aabc6e4507c4e4255bd7fd590daddf38, type: 3}
 --- !u!1 &6030423509203858667
 GameObject:
   m_ObjectHideFlags: 0

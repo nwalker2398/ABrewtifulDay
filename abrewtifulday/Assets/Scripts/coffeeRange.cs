@@ -12,12 +12,6 @@ public class coffeeRange : MonoBehaviour
         coffeeArea = GetComponent<SphereCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         //Check to see if the tag on the collider is equal to Enemy
