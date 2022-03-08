@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Customer : MonoBehaviour
 {
@@ -66,31 +67,43 @@ public class Customer : MonoBehaviour
     }
 
     private int randomizeOrder() {
-        // Randomize order
-        int n = (int)Random.Range(0,4);
+        Scene scene = SceneManager.GetActiveScene();
+        int n;
+        if (scene.name == "Tutorial" || scene.name == "Cafe1") {
+            n = 1;
 
-        if (n == 1) {
             spriteRenderer.sprite = coffeeSprite;
             float scale = 0.3f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
             coffeePrefab.SetActive(true);
         }
-        else if (n == 2) {
-            spriteRenderer.sprite = bobaSprite;
-            float scale = 0.2f;
-            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
-
-            bobaPrefab.SetActive(true);
-        }
         else {
-            spriteRenderer.sprite = matchaSprite;
-            float scale = 0.2f;
-            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+            // Randomize order
+            n = (int)Random.Range(0,4);
 
-            matchaPrefab.SetActive(true);
+            if (n == 1) {
+                spriteRenderer.sprite = coffeeSprite;
+                float scale = 0.3f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                coffeePrefab.SetActive(true);
+            }
+            else if (n == 2) {
+                spriteRenderer.sprite = bobaSprite;
+                float scale = 0.2f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                bobaPrefab.SetActive(true);
+            }
+            else {
+                spriteRenderer.sprite = matchaSprite;
+                float scale = 0.2f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                matchaPrefab.SetActive(true);
+            }
         }
-
         return n;
     }
 
