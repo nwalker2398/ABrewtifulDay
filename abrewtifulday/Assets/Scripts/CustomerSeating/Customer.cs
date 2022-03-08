@@ -19,7 +19,7 @@ public class Customer : MonoBehaviour
 
     private Chair seat;
     private bool toSeat = false;
-    private bool atSeat = false;
+    public bool atSeat = false;
     private bool leaveIfFull = true;
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
@@ -243,10 +243,10 @@ public class Customer : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = true;
         rotate = false;
 
-        if (SeatingData.showArrow)
+        /*if (SeatingData.showArrow)
         {
             controller.removeArrow(true);
-        }
+        }*/
 
         if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
             ScoreSystem.decrementScore(1);
