@@ -8,7 +8,7 @@ public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] ProgressBar heartBar;
     [SerializeField] int maxScore;
-    private int score = 0;
+    private float score = 0;
     static ScoreSystem instance;
     public TextMeshProUGUI finalScoreText;
 
@@ -17,19 +17,19 @@ public class ScoreSystem : MonoBehaviour
         instance = this;
     }
 
-    public static int getMaxScore() {
+    public static float getMaxScore() {
         return instance.maxScore;
     }
 
-    public static void setScore(int score) {
+    public static void setScore(float score) {
         instance.score = score;
     }
 
-    public static int completionPercentage() {
+    public static float completionPercentage() {
         return instance.score / instance.maxScore;
     }
 
-    public static void incrementScore(int points)
+    public static void incrementScore(float points)
     {
         if (!instance.heartBar.IsDone())
         {
@@ -41,7 +41,7 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public static void decrementScore(int points)
+    public static void decrementScore(float points)
     {
         if (!instance.heartBar.IsDone())
         {
@@ -53,7 +53,7 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public static int getCurrentScore() {
+    public static float getCurrentScore() {
         return instance.score;
     }
 

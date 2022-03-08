@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,27 +19,7 @@ public class CustomerTimer : MonoBehaviour
     void Start()
     {
         timeRemaining = waitDuration;
-        //Being(waitDuration);
     }
-
-    // private void Being(int second) {
-    //     timeRemaining = second;
-    //     StartCoroutine(UpdateTimer());
-    // }
-
-    // private IEnumerator UpdateTimer() {
-    //     while (timeRemaining >= 0) {
-    //         if (!isPaused) {
-    //             if (timeRemaining > 0) {
-    //         timeText.SetText(timeRemaining.ToString());
-    //         fill.fillAmount = Mathf.InverseLerp(0, waitDuration, timeRemaining);
-    //         timeRemaining --;
-    //         yield return new WaitForSeconds(1f);
-    //     }
-    //     OnEnd();
-    //         }
-    //     }
-    // }
 
     // Update is called once per frame
     void Update()
@@ -68,4 +49,7 @@ public class CustomerTimer : MonoBehaviour
         return false;
     }
 
+    public float getRemainingTimeRatio() {
+        return timeRemaining/waitDuration;
+    }
 }

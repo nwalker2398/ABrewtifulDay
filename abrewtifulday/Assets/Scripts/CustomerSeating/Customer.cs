@@ -48,6 +48,8 @@ public class Customer : MonoBehaviour
     public void Drink(Vector3 pos, GameObject tableCoffee)
     {
         isServed = true;
+        float scoreBasedOnServeTime = timer.getRemainingTimeRatio() * 3;
+        ScoreSystem.incrementScore(scoreBasedOnServeTime);
 
         Debug.Log("Drinking");
         order.SetActive(false);
