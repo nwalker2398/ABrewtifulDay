@@ -166,21 +166,16 @@ public class PlaceButton : MonoBehaviour
                 placed = true;
                 if (version == 1 || version == 2 || version == 4)
                 {
-                    if (version == 1 || version == 2)
-                    {
-                        partSys.Play();
-                    }
+                    partSys.Play();
                     Invoke("newVoid", 3);
                 }
             }
         }
     }
-
     void newVoid()
     {
         endPanel.SetActive(true);
     }
-
     void wallpapervoid()
     {
         print("gets here");
