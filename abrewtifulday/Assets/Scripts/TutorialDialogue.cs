@@ -39,10 +39,22 @@ public class TutorialDialogue : MonoBehaviour
         if (dialogIndex == SEATING_CUSTOMER){
             SeatCustomer();
         }
+        if (dialogIndex == PREPARING_DRINK){
+            PrepareDrink();
+        }
 
     }
     
     public void SeatCustomer(){
+        // if first customer stops walking and is in waiting room
+            // add arrow over customer
+            // DialogBox.SetActive
+        // if customer is clicked
+            // remove arrow
+            // add arrow over chair
+        // if chair is clicked
+            // remove arrow
+            // dialogIndex++
         Vector3 targetPos = new Vector3(-12.0f, .3f, -6.8f);
         //if mouse down on tag chair, index++
         Text.text = sentences[SEATING_CUSTOMER];
@@ -57,6 +69,19 @@ public class TutorialDialogue : MonoBehaviour
             
         }
         
+    }
+    public void PrepareDrink(){
+        Text.text = sentences[PREPARING_DRINK];
+        //get coffee maker game object
+            //add arrow over it 
+        //if coffee maker clicked
+            //remove arrow
+        //when though bubble active
+            //add arrow
+        // if though bubble inactiv3e
+            //remove arrow
+        //dialogIndex++
+
     }
 
     public void addArrow(Vector3 pos)
