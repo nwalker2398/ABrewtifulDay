@@ -55,15 +55,21 @@ public class Customer : MonoBehaviour
     private int randomizeOrder() {
         // Randomize order
         int n = (int)Random.Range(0,4);
-        
+
         if (n == 1) {
             spriteRenderer.sprite = coffeeSprite;
+            float scale = 0.3f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
         }
         else if (n == 2) {
             spriteRenderer.sprite = bobaSprite;
+            float scale = 0.2f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
         }
         else {
             spriteRenderer.sprite = matchaSprite;
+            float scale = 0.2f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
         }
 
         return n;
@@ -84,8 +90,9 @@ public class Customer : MonoBehaviour
         else {
             rawScore = 1;
         }
-
-        return timer.getRemainingTimeRatio() * rawScore;
+        
+        float finalScore = timer.getRemainingTimeRatio() * rawScore;
+        return finalScore;
     }
 
     public void Drink(Vector3 pos, GameObject drink)
@@ -93,7 +100,7 @@ public class Customer : MonoBehaviour
         isServed = true;
 
         ScoreSystem.incrementScore(calculateScore(drink));
-
+        
         Debug.Log("Drinking");
         order.SetActive(false);
         StartCoroutine(RemoveDrinkDelayed(drink));

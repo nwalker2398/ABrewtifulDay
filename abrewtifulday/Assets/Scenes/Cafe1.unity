@@ -13289,10 +13289,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: objectCoffee
       objectReference: {fileID: 0}
+    - target: {fileID: 5469383879277028033, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879277028033, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879277028033, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879527319032, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 867772274}
+    - target: {fileID: 5469383879674111513, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879674111513, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879674111513, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879828411905, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
@@ -13389,10 +13413,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5469383879991655321, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879991655321, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383879991655321, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879991655322, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 867772277}
+    - target: {fileID: 5469383880437963300, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383880437963300, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383880437963300, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383880437963301, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
@@ -13421,10 +13469,34 @@ PrefabInstance:
       propertyPath: trayCoffee
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5469383880989838685, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383880989838685, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383880989838685, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383880989838686, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 867772277}
+    - target: {fileID: 5469383881003265159, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383881003265159, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469383881003265159, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383881068280633, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: bobaSprite
       value: 
