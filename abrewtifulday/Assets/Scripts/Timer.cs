@@ -67,13 +67,13 @@ public class Timer : MonoBehaviour
         return false;
     }
 
-    public void LoadNextLevel()
-    {
-        // need to change to next level once we have multiple
-        // currently just reloads the scene
-        // attach to Next Day button on Daily Recap Panel
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
-    }
+    //public void LoadNextLevel()
+    //{
+    //    // need to change to next level once we have multiple
+    //    // currently just reloads the scene
+    //    // attach to Next Day button on Daily Recap Panel
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+    //}
 
     public void LoadStartMenu()
     {
