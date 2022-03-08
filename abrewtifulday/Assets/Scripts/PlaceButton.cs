@@ -19,7 +19,7 @@ public class PlaceButton : MonoBehaviour
 
     void Start()
     {
-        version = 2; // development mode -- need to change
+        // version = 2; // development mode -- need to change
         if (version == 2)
         {
             gift.SetActive(false);
@@ -28,7 +28,7 @@ public class PlaceButton : MonoBehaviour
             gift.SetActive(false);
 
             giftPic.SetActive(false);
-            giftPic = GameObject.Find("Totoro");
+            giftPic = GameObject.Find("Cagliostro");
         }
         else
         {
@@ -37,9 +37,9 @@ public class PlaceButton : MonoBehaviour
             gift = GameObject.Find("Paint_01");
             gift.SetActive(false);
 
-            giftPic = GameObject.Find("Totoro");
-            giftPic.SetActive(false);
             giftPic = GameObject.Find("Cagliostro");
+            giftPic.SetActive(false);
+            giftPic = GameObject.Find("Howls");
         }
     }
     public void Place()

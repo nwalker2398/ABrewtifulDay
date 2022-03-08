@@ -12904,7 +12904,7 @@ GameObject:
   - component: {fileID: 484777230}
   - component: {fileID: 484777229}
   m_Layer: 5
-  m_Name: Totoro
+  m_Name: Howls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12927,7 +12927,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -23.175507}
-  m_SizeDelta: {x: 157.86, y: 190.35}
+  m_SizeDelta: {x: 157.86, y: 212.3027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &484777229
 MonoBehaviour:
@@ -12949,7 +12949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 239ac396dfd3348c69e07508f61f3465, type: 3}
+  m_Texture: {fileID: 2800000, guid: c7bf11472264140cb9c1a06547f3b116, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -23068,7 +23068,7 @@ MonoBehaviour:
   camera: {fileID: 1686699513}
   partSys: {fileID: 354766567}
   partSys2: {fileID: 431570349}
-  giftPic: {fileID: 1800437007}
+  giftPic: {fileID: 484777227}
 --- !u!1001 &1930011667
 PrefabInstance:
   m_ObjectHideFlags: 0
