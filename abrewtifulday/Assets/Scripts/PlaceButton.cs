@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaceButton : MonoBehaviour
 {
@@ -9,10 +10,38 @@ public class PlaceButton : MonoBehaviour
     public GameObject gift;
     public Camera camera;
     public ParticleSystem partSys;
+    public ParticleSystem partSys2;
+    public GameObject giftPic;
 
     private bool startedPlacement = false;
     private bool placed = false;
-    private int layerMask = 7; //walls
+    private int version = 1;
+
+    void Start()
+    {
+        version = 2; // development mode -- need to change
+        if (version == 2)
+        {
+            gift.SetActive(false);
+            gift = GameObject.Find("Paint_02");
+            partSys = partSys2;
+            gift.SetActive(false);
+
+            giftPic.SetActive(false);
+            giftPic = GameObject.Find("Totoro");
+        }
+        else
+        {
+            gift = GameObject.Find("Paint_02");
+            gift.SetActive(false);
+            gift = GameObject.Find("Paint_01");
+            gift.SetActive(false);
+
+            giftPic = GameObject.Find("Totoro");
+            giftPic.SetActive(false);
+            giftPic = GameObject.Find("Cagliostro");
+        }
+    }
     public void Place()
     {
         startPanel.SetActive(false);
