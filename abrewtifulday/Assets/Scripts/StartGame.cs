@@ -7,6 +7,6 @@ public class StartGame : MonoBehaviour
 {
     public void StartFirstLevel()
     {
-        SceneManager.LoadScene("CafeScene");
+        SceneManager.LoadScene("Cafe1");
     }
 }

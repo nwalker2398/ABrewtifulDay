@@ -59,10 +59,10 @@ public class BobaMaker : MonoBehaviour
         Debug.Log(GetComponent<Tray>());
 
 
-        Tray.instance.trayCoffee.active = false;
-        Tray.instance.trayMatcha.active = false;
-        Tray.instance.trayBoba.active = false;
+        Tray.instance.trayCoffee.SetActive(false);
+        Tray.instance.trayMatcha.SetActive(false);
+        Tray.instance.trayBoba.SetActive(false);
         Tray.instance.curDrink = machineDrink;
-        Tray.instance.curDrink.active = true;
+        Tray.instance.curDrink.SetActive(true);
     }
 }

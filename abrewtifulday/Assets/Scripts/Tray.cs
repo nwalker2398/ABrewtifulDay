@@ -14,9 +14,9 @@ public class Tray : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trayCoffee.active = false;
-        trayMatcha.active = false;
-        trayBoba.active = false;
+        trayCoffee.SetActive(false);
+        trayMatcha.SetActive(false);
+        trayBoba.SetActive(false);
         curDrink = null;
         instance = this;
     }
