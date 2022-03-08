@@ -33,6 +33,7 @@ public class Customer : MonoBehaviour
     private bool isServed = false;
 
     // For Ordering Drinks
+    [SerializeField] GameObject customerCanvas;
     // Option 1: Using 2d sprites
     public SpriteRenderer spriteRenderer;
     public Sprite coffeeSprite;
@@ -55,6 +56,8 @@ public class Customer : MonoBehaviour
         matchaPrefab.SetActive(false);
 
         randomOrder = randomizeOrder();
+
+        //customerCanvas.SetActive(false);
     }
 
     public void Generate()
@@ -63,7 +66,7 @@ public class Customer : MonoBehaviour
         destination = waitingArea;
         shouldMove = true;
         toWaitingArea = true;
-        order.SetActive(true);
+        // order.SetActive(true);
     }
 
     private int randomizeOrder() {
@@ -238,7 +241,7 @@ public class Customer : MonoBehaviour
                 toWaitingArea = false;
                 atWaitingArea = true;
                 controller.addArrow(transform.position);
-                timer.startTimer(); // start the customer timer
+                //timer.startTimer(); // start the customer timer
             }
         }
 
@@ -264,6 +267,9 @@ public class Customer : MonoBehaviour
                     shouldDisplayOrder = true;
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
+                    
+                    //customerCanvas.SetActive(false);
+                    timer.startTimer(); // start the customer timer
                 }
             }
             else

@@ -546,6 +546,7 @@ MonoBehaviour:
   toWaitingArea: 0
   atWaitingArea: 0
   timer: {fileID: 2696867848704893933}
+  customerCanvas: {fileID: 2696867848853042420}
   spriteRenderer: {fileID: 2696867850565786474}
   coffeeSprite: {fileID: 21300000, guid: 3691d9dbfc6c2274c8f274a63002351e, type: 3}
   bobaSprite: {fileID: 21300000, guid: 346dc692aecbac94e945e93a3c1a870b, type: 3}
@@ -1177,7 +1178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fill: {fileID: 1357521743750291891}
   timeText: {fileID: 1357521743335297949}
-  waitDuration: 15
 --- !u!1001 &6030158725900788747
 PrefabInstance:
   m_ObjectHideFlags: 0
