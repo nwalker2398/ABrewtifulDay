@@ -31,15 +31,28 @@ public class Customer : MonoBehaviour
     [SerializeField] CustomerTimer timer;
     private bool isServed = false;
 
+    // For Ordering Drinks
+    // Option 1: Using 2d sprites
     public SpriteRenderer spriteRenderer;
     public Sprite coffeeSprite;
     public Sprite bobaSprite;
     public Sprite matchaSprite;
+    // Option 2: Using 3d prefabs
+    public GameObject coffeePrefab;
+    public GameObject bobaPrefab;
+    public GameObject matchaPrefab;
+
     private int randomOrder;
+    //
 
     void Start()
     {
         order.SetActive(false);
+
+        coffeePrefab.SetActive(false);
+        bobaPrefab.SetActive(false);
+        matchaPrefab.SetActive(false);
+
         randomOrder = randomizeOrder();
     }
 
@@ -60,16 +73,22 @@ public class Customer : MonoBehaviour
             spriteRenderer.sprite = coffeeSprite;
             float scale = 0.3f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            coffeePrefab.SetActive(true);
         }
         else if (n == 2) {
             spriteRenderer.sprite = bobaSprite;
             float scale = 0.2f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            bobaPrefab.SetActive(true);
         }
         else {
             spriteRenderer.sprite = matchaSprite;
             float scale = 0.2f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            matchaPrefab.SetActive(true);
         }
 
         return n;
