@@ -11,6 +11,7 @@ public class PlaceButton : MonoBehaviour
     public Camera camera;
     public ParticleSystem partSys;
     public ParticleSystem partSys2;
+    public ParticleSystem partSys3;
     public GameObject giftPic;
     public Material newWallPaper1;
     public Material newWallPaper2;
@@ -29,9 +30,12 @@ public class PlaceButton : MonoBehaviour
     void Start()
     {
         // versions: 1 = howls picture, 2 = cagliostro picture, 3 = wallpaper
-        version = 3; // development mode -- need to change
+        // 4 = plant (fiddle leaf)
+        version = 4; // development mode -- need to change
         if (version == 2)
         {
+            gift.SetActive(false);
+            gift = GameObject.Find("FiddleLeaf");
             gift.SetActive(false);
             gift = GameObject.Find("Paint_02");
             partSys = partSys2;
@@ -42,11 +46,15 @@ public class PlaceButton : MonoBehaviour
 
             startPanel = GameObject.Find("WallpaperStartPanel");
             startPanel.SetActive(false);
+            startPanel = GameObject.Find("PlantStartPanel");
+            startPanel.SetActive(false);
             startPanel = GameObject.Find("StartPanel");
         }
         else if (version == 1)
         {
             gift = GameObject.Find("Paint_02");
+            gift.SetActive(false);
+            gift = GameObject.Find("FiddleLeaf");
             gift.SetActive(false);
             gift = GameObject.Find("Paint_01");
             gift.SetActive(false);
@@ -57,21 +65,42 @@ public class PlaceButton : MonoBehaviour
 
             startPanel = GameObject.Find("WallpaperStartPanel");
             startPanel.SetActive(false);
+            startPanel = GameObject.Find("PlantStartPanel");
+            startPanel.SetActive(false);
             startPanel = GameObject.Find("StartPanel");
         }
         else if (version == 3)
         {
             gift.SetActive(false);
+            gift = GameObject.Find("FiddleLeaf");
+            gift.SetActive(false);
             gift = GameObject.Find("Paint_02");
             gift.SetActive(false);
 
             startPanel.SetActive(false);
+            startPanel = GameObject.Find("PlantStartPanel");
+            startPanel.SetActive(false);
             startPanel = GameObject.Find("WallpaperStartPanel");
+        }
+        else if (version == 4)
+        {
+            gift.SetActive(false);
+            gift = GameObject.Find("Paint_02");
+            gift.SetActive(false);
+            gift = GameObject.Find("FiddleLeaf");
+            partSys = partSys3;
+            gift.SetActive(false);
+
+            startPanel.SetActive(false);
+            startPanel = GameObject.Find("WallpaperStartPanel");
+            startPanel.SetActive(false);
+            startPanel = GameObject.Find("PlantStartPanel");
+            //todo: add partsys for plant
         }
     }
     public void Place()
     {
-        if (version == 1 || version == 2)
+        if (version == 1 || version == 2 || version == 4)
         {
             startPanel.SetActive(false);
             gift.SetActive(true);
@@ -109,6 +138,23 @@ public class PlaceButton : MonoBehaviour
                 }
             }
         }
+        else if (version == 4)
+        {
+            RaycastHit hit;
+            Ray origin = camera.ScreenPointToRay(Input.mousePosition);
+            LayerMask mask = LayerMask.GetMask("Floor");
+            if (!placed)
+            {
+                if (Physics.Raycast(origin, out hit, mask))
+                {
+                    if (hit.transform.tag == "floor")
+                    {
+                        gift.transform.position = hit.point;
+                        PlaceGift();
+                    }
+                }
+            }
+        }
 
     }
     void PlaceGift()
@@ -118,9 +164,12 @@ public class PlaceButton : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 placed = true;
-                if (version == 1 || version == 2)
+                if (version == 1 || version == 2 || version == 4)
                 {
-                    partSys.Play();
+                    if (version == 1 || version == 2)
+                    {
+                        partSys.Play();
+                    }
                     Invoke("newVoid", 3);
                 }
             }
@@ -145,7 +194,7 @@ public class PlaceButton : MonoBehaviour
 
     public void ReplacePicture()
     {
-        if (version == 1 || version == 2)
+        if (version == 1 || version == 2 || version == 4)
         {
             placed = false;
             endPanel.SetActive(false);
