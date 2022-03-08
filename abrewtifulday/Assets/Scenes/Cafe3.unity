@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465766, g: 0.49641156, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465767, g: 0.49641162, b: 0.57481784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4319,6 +4319,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5126871505627175348, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_Name
+      value: objectCoffee
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126871505839225654, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_Name
+      value: objectCoffee
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126871506225997291, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
+      propertyPath: m_Name
+      value: objectCoffee
+      objectReference: {fileID: 0}
     - target: {fileID: 5469383879980217707, guid: 71149104e1084ff458f28ee00d7632b4, type: 3}
       propertyPath: m_Name
       value: Customers
@@ -14223,8 +14235,8 @@ Transform:
   - {fileID: 137362179}
   - {fileID: 1456739340}
   - {fileID: 160259133}
-  - {fileID: 1372759860}
   - {fileID: 211133072}
+  - {fileID: 1372759860}
   - {fileID: 346228916}
   - {fileID: 1635698189}
   - {fileID: 483055177}
