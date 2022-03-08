@@ -14,6 +14,7 @@ public class TutorialDialogue : MonoBehaviour
 
     // Coffee Stuff
     bool coffeeArrow = false; 
+    bool pickupCoffeeArrow = false;
 
     // Dialog stuff
     public TextMeshProUGUI Text;
@@ -49,12 +50,14 @@ public class TutorialDialogue : MonoBehaviour
         if (dialogIndex == PREPARING_DRINK){
             PrepareDrink();
         }
+        if (dialogIndex == SERVING_DRINK){
+            ServeDrink();
+        }
     }
     
+    /* -------------------- S E A T   C U S T O M E R -------------------- */
     public void SeatCustomer()
     {
-        Text.text = sentences[SEATING_CUSTOMER];
-
         if (SeatingData.waitingCustomers.Count > 0)
         {
             firstCustomer = SeatingData.waitingCustomers[0];
@@ -63,7 +66,7 @@ public class TutorialDialogue : MonoBehaviour
                 Debug.Log("adding customer arrow");
                 addArrow(firstCustomer.transform.position);
                 customerArrowAdded = true;
-                DialogBox.SetActive(true);
+                nextDialog(SEATING_CUSTOMER);
             }
             // add an arrow over a chair once the character is clicked
             if (Input.GetMouseButtonDown(0) && customerArrowAdded)
@@ -92,7 +95,6 @@ public class TutorialDialogue : MonoBehaviour
                     }
                 }
             }
-            
         }
         // once the customer is seated you can move to next tutorial
         if (SeatingData.seatedCustomers.Count > 0)
@@ -105,9 +107,11 @@ public class TutorialDialogue : MonoBehaviour
             }
         }
     }
-    public void PrepareDrink(){
-        Text.text = sentences[PREPARING_DRINK];
-        DialogBox.SetActive(true);
+    /* -------------------- P R E P A R E   D R I N K -------------------- */
+    /* points to coffee machine until its clicked. */
+    public void PrepareDrink()
+    {
+        nextDialog(PREPARING_DRINK);
         if (!coffeeArrow){
             Vector3 coffeePosition = CoffeeMaker.coffeeMakerCollider.transform.position;
             Debug.Log(coffeePosition);
@@ -118,19 +122,44 @@ public class TutorialDialogue : MonoBehaviour
             coffeeArrow = true;
         }
         if (CoffeeMaker.coffeeClicked && coffeeArrow){
+            Debug.Log("Removing Arrow!");
             removeArrow(coffeeArrow);
         }
+        if (CoffeeMaker.coffeePickedUp){
+            DialogBox.SetActive(false);
+            dialogIndex++;
+        }
+    }
 
-        //get coffee maker game object
-            //add arrow over it 
-        //if coffee maker clicked
+    /* -------------------- S E R V E   D R I N K -------------------- */
+    public void ServeDrink()
+    {
+        nextDialog(SERVING_DRINK);
+        if (SeatingData.seatedCustomers.Count > 0)
+        {
+            firstCustomer = SeatingData.seatedCustomers[0];
+            if (firstCustomer.atSeat && !customerArrowAdded)
+            {
+                addArrow(firstCustomer.transform.position);
+                customerArrowAdded = true;
+            }
+            //if customer gets drink
             //remove arrow
-        //when though bubble active
-            //add arrow
-        // if though bubble inactiv3e
-            //remove arrow
-        //dialogIndex++
+            if (firstCustomer.isServed)
+            {
+                removeArrow(customerArrowAdded);
+                customerArrowAdded = false;
+                DialogBox.SetActive(false);
+                dialogIndex++;
+            }
+        }
+    }
 
+
+    public void nextDialog(int index)
+    {
+        Text.text = sentences[index];
+        DialogBox.SetActive(true);
     }
 
     public void addArrow(Vector3 pos)

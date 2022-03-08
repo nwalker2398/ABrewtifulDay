@@ -2507,7 +2507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_Name
-      value: DialogBoxScreen
+      value: Tutorial Dialog Manager
       objectReference: {fileID: 0}
     - target: {fileID: 742802882406707771, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_IsActive
@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstCustomer: {fileID: 0}
-  tutorialChair: {fileID: 1206131814}
+  tutorialChair: {fileID: 1882282537}
   Text: {fileID: 1261528981}
   DialogBox: {fileID: 228421138}
   sentences: []

@@ -29,7 +29,7 @@ public class Customer : MonoBehaviour
     private float drinkTime = 6f;
 
     [SerializeField] CustomerTimer timer;
-    private bool isServed = false;
+    public bool isServed = false;
 
     void Start()
     {

@@ -14,7 +14,6 @@ public class CoffeeMaker : MonoBehaviour
     public static bool coffeeClicked = false;
     public static bool coffeePickedUp = false;
 
-
     void Start()
     {
         thoughtBubble.active = false;
@@ -27,14 +26,13 @@ public class CoffeeMaker : MonoBehaviour
         Debug.Log(coffeeRange.inCoffeeRange);
         if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
         {
-
             coffeeClicked = true;
             StartCoroutine(waitToMake());
-            coffeeClicked = false;
             coffeePickedUp = false;
         }
         else if (coffeeRange.inCoffeeRange && thoughtBubble.active)
         {
+            coffeeClicked = false;
             pickUpCoffee();
             coffeePickedUp = true;
         }        
