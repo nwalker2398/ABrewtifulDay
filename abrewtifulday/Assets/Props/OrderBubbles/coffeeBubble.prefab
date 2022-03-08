@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4114787274324381787}
   - component: {fileID: 4114787274324381784}
   m_Layer: 0
-  m_Name: thoughtBubble
+  m_Name: coffeeBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 4114787274324381790}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.2857143, y: 0.28571427, z: 0.2857143}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4508121114446477196}
   - {fileID: 4114787274257448439}
