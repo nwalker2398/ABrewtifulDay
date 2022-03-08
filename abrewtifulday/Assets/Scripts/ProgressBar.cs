@@ -14,17 +14,17 @@ public class ProgressBar : MonoBehaviour
         maxProgress = slider.maxValue;
     }
 
-    public void SetMaxProgress(int progress) {
+    public void SetMaxProgress(float progress) {
         slider.maxValue = progress;
         slider.value = progress;
     }
 
-    public void SetInitialProgress(int progress) {
+    public void SetInitialProgress(float progress) {
         slider.minValue = progress;
         slider.value = progress;
     }
 
-    public void SetProgress(int progress) {
+    public void SetProgress(float progress) {
         slider.value = progress;
     }
 

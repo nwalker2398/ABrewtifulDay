@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 2696867849399337729}
   - component: {fileID: 2696867849399337728}
   m_Layer: 3
-  m_Name: Heart1
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2696867849507382709}
   m_Layer: 3
-  m_Name: Timer1
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,6 +543,10 @@ MonoBehaviour:
   toWaitingArea: 0
   atWaitingArea: 0
   timer: {fileID: 2696867848704893933}
+  spriteRenderer: {fileID: 2696867850565786474}
+  coffeeSprite: {fileID: 21300000, guid: 3691d9dbfc6c2274c8f274a63002351e, type: 3}
+  bobaSprite: {fileID: 21300000, guid: 346dc692aecbac94e945e93a3c1a870b, type: 3}
+  matchaSprite: {fileID: 21300000, guid: 41c5bd7c009d52e42aeda6001d2f42c0, type: 3}
 --- !u!195 &2696867849876251692
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -911,7 +915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
       propertyPath: m_Name
-      value: objectCoffee1
+      value: objectCoffee
       objectReference: {fileID: 0}
     - target: {fileID: 7136060801434843705, guid: f86e37912288443f5b0ef0d6d390f694, type: 3}
       propertyPath: m_Materials.Array.data[0]
