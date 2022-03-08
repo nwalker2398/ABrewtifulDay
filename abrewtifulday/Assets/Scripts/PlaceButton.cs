@@ -12,14 +12,24 @@ public class PlaceButton : MonoBehaviour
     public ParticleSystem partSys;
     public ParticleSystem partSys2;
     public GameObject giftPic;
+    public Material newWallPaper1;
+    public Material newWallPaper2;
+    public Material newWallPaper3;
+    public GameObject leftWall;
+    public GameObject rightWall1;
+    public GameObject rightWall2;
+    public GameObject rightWall3;
+    public GameObject backWall;
 
     private bool startedPlacement = false;
     private bool placed = false;
     private int version = 1;
+    private Material wallpaperChoice;
 
     void Start()
     {
-        // version = 2; // development mode -- need to change
+        // versions: 1 = howls picture, 2 = cagliostro picture, 3 = wallpaper
+        version = 3; // development mode -- need to change
         if (version == 2)
         {
             gift.SetActive(false);
@@ -29,8 +39,12 @@ public class PlaceButton : MonoBehaviour
 
             giftPic.SetActive(false);
             giftPic = GameObject.Find("Cagliostro");
+
+            startPanel = GameObject.Find("WallpaperStartPanel");
+            startPanel.SetActive(false);
+            startPanel = GameObject.Find("StartPanel");
         }
-        else
+        else if (version == 1)
         {
             gift = GameObject.Find("Paint_02");
             gift.SetActive(false);
@@ -40,34 +54,62 @@ public class PlaceButton : MonoBehaviour
             giftPic = GameObject.Find("Cagliostro");
             giftPic.SetActive(false);
             giftPic = GameObject.Find("Howls");
+
+            startPanel = GameObject.Find("WallpaperStartPanel");
+            startPanel.SetActive(false);
+            startPanel = GameObject.Find("StartPanel");
+        }
+        else if (version == 3)
+        {
+            gift.SetActive(false);
+            gift = GameObject.Find("Paint_02");
+            gift.SetActive(false);
+
+            startPanel.SetActive(false);
+            startPanel = GameObject.Find("WallpaperStartPanel");
         }
     }
     public void Place()
     {
-        startPanel.SetActive(false);
-        gift.SetActive(true);
-        startedPlacement = true;
+        if (version == 1 || version == 2)
+        {
+            startPanel.SetActive(false);
+            gift.SetActive(true);
+            startedPlacement = true;
+        }
     }
 
     void Update()
     {
-        RaycastHit hit;
-        Ray origin = camera.ScreenPointToRay(Input.mousePosition);
-        // var normal = other.contacts[0].normal;
-        LayerMask mask = LayerMask.GetMask("Walls");
-
-        if (!placed)
+        if (version == 3)
         {
-            if (Physics.Raycast(origin, out hit, mask))
+            //paint walls
+            if (startedPlacement == true)
             {
-                if (hit.transform.tag == "backwall")
-                {
-                    gift.transform.position = hit.point;
-                    PlaceGift();
-                }
-
+                Invoke("wallpapervoid", 2); // maybe play an animation here instead
             }
         }
+        else if (version == 1 || version == 2)
+        {
+            RaycastHit hit;
+            Ray origin = camera.ScreenPointToRay(Input.mousePosition);
+            // var normal = other.contacts[0].normal;
+            LayerMask mask = LayerMask.GetMask("Walls");
+
+            if (!placed)
+            {
+                if (Physics.Raycast(origin, out hit, mask))
+                {
+                    if (hit.transform.tag == "backwall")
+                    {
+                        gift.transform.position = hit.point;
+                        PlaceGift();
+                    }
+
+                }
+            }
+        }
+
     }
     void PlaceGift()
     {
@@ -76,8 +118,11 @@ public class PlaceButton : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 placed = true;
-                partSys.Play();
-                Invoke("newVoid", 3);
+                if (version == 1 || version == 2)
+                {
+                    partSys.Play();
+                    Invoke("newVoid", 3);
+                }
             }
         }
     }
@@ -87,9 +132,48 @@ public class PlaceButton : MonoBehaviour
         endPanel.SetActive(true);
     }
 
+    void wallpapervoid()
+    {
+        print("gets here");
+        rightWall1.GetComponent<MeshRenderer>().material = wallpaperChoice;
+        rightWall2.GetComponent<MeshRenderer>().material = wallpaperChoice;
+        rightWall3.GetComponent<MeshRenderer>().material = wallpaperChoice;
+        leftWall.GetComponent<MeshRenderer>().material = wallpaperChoice;
+        backWall.GetComponent<MeshRenderer>().material = wallpaperChoice;
+        Invoke("newVoid", 3);
+    }
+
     public void ReplacePicture()
     {
-        placed = false;
-        endPanel.SetActive(false);
+        if (version == 1 || version == 2)
+        {
+            placed = false;
+            endPanel.SetActive(false);
+        }
+        else if (version == 3)
+        {
+            startedPlacement = false;
+            endPanel.SetActive(false);
+            startPanel.SetActive(true);
+        }
+    }
+
+    public void PickWallpaper1()
+    {
+        wallpaperChoice = newWallPaper1;
+        startPanel.SetActive(false);
+        startedPlacement = true;
+    }
+    public void PickWallpaper2()
+    {
+        wallpaperChoice = newWallPaper2;
+        startPanel.SetActive(false);
+        startedPlacement = true;
+    }
+    public void PickWallpaper3()
+    {
+        wallpaperChoice = newWallPaper3;
+        startPanel.SetActive(false);
+        startedPlacement = true;
     }
 }
