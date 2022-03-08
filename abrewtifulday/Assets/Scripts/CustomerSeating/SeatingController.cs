@@ -138,6 +138,7 @@ public class SeatingController : MonoBehaviour
         if (SeatingData.showArrow)
         {
             var arrow = GameObject.FindGameObjectWithTag("Arrow");
+            //make new arrow in area 
             pos.y = arrow.GetComponent<ArrowController>().calcY();
             var new_arrow = Instantiate(arrow, pos, Quaternion.identity);
             SeatingData.customerArrow = new_arrow;

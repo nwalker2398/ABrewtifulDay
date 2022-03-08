@@ -153,7 +153,7 @@ public class Customer : MonoBehaviour
             {
                 toWaitingArea = false;
                 atWaitingArea = true;
-                controller.addArrow(transform.position);
+                //controller.addArrow(transform.position);
                 timer.startTimer(); // start the customer timer
             }
         }
