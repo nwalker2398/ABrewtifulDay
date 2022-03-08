@@ -18,6 +18,7 @@ public class LevelController: MonoBehaviour
         if (LC != null)
         {
             GameObject.Destroy(this);
+            this.enabled = false;
         }
         else
         {
@@ -70,7 +71,7 @@ public class LevelController: MonoBehaviour
         for(int i = 1; i < levels.Count + 1; i++)
         {
             songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
-            Debug.Log(songs[i]);
+            Debug.Log(songs[i].name);
         }
     }
 
@@ -81,6 +82,7 @@ public class LevelController: MonoBehaviour
         getLevels();
         getSongs();
         currentLevelData = levels[currentLevel];
+        loadLevel();
     }
 
     public void printLevel(int levelNumber)
@@ -94,27 +96,33 @@ public class LevelController: MonoBehaviour
 
     public void Update()
     {
-        if(currentLevel > 0 && currentLevel < 18 && (!currentLevel.Equals(oldLevel)))
-        {
-            setLevel(currentLevel);
-        }
-        loadLevel();
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+            if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
+            {
+                loadLevel();
+                o.GetComponent<AudioSource>().Play();
+            }
     }
 
-    public void setLevel(int l)
+
+    void setLevel(int l)
     {
         Debug.Log("Setting level to " + l);
         currentLevel = l;
-        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
         oldLevel = currentLevel;
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
-            o.GetComponent<AudioSource>().Play();
+    }
+
+    public static void level1()
+    {
+        if (LC != null)
+            LC.setLevel(1);
     }
 
     public static void nextLevel()
     {
         if (LC != null)
+
             LC.instanceNextLevel();
     }
 
@@ -122,11 +130,9 @@ public class LevelController: MonoBehaviour
     {
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
+        oldLevel = currentLevel;
         SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
-        oldLevel = currentLevel;
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
-            o.GetComponent<AudioSource>().Play();
     }
 
     public void loadLevel()
@@ -135,7 +141,11 @@ public class LevelController: MonoBehaviour
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
+            if(o.scene.name != "" + levels[currentLevel]["Scene"])
+                SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+
             o.GetComponent<AudioSource>().clip = songs[level];
+            o.GetComponent<AudioSource>().Play();
         }
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
