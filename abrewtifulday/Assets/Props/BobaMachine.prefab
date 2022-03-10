@@ -729,7 +729,7 @@ MonoBehaviour:
   thoughtBubble: {fileID: 0}
   machineDrink: {fileID: 0}
   bell: {fileID: 8300000, guid: 989bae8c81b164c8c83a3784cda15cf4, type: 3}
-  pour: {fileID: 8300000, guid: aabc6e4507c4e4255bd7fd590daddf38, type: 3}
+  pour: {fileID: 8300000, guid: ce26eafc8bfeb439aaf332a969d10be4, type: 3}
 --- !u!1 &6030423509203858667
 GameObject:
   m_ObjectHideFlags: 0
