@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HighlightPlus;
 
 public class SeatingController : MonoBehaviour
 {
@@ -75,14 +76,19 @@ public class SeatingController : MonoBehaviour
                 {
                     if (SeatingData.selectedCustomer != null)
                     {
+                        // switching customer selected, remove the glow on currently selected customer
+                        SeatingData.selectedCustomer.GetComponent<HighlightEffect>().SetHighlighted(false);
                         removeCustomerGlow(SeatingData.selectedCustomer);
                     }
 
+                    //selected a customer from the waiting area
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     Customer c = objectHit.gameObject.GetComponent<Customer>();
                     SeatingData.selectedCustomer = c;
                     c.toWaitingArea = false;
                     c.atWaitingArea = true;
+                    // make customer glow after selection
+                    c.GetComponent<HighlightEffect>().SetHighlighted(true);
 
                     if (SeatingData.showArrow)
                     {
@@ -118,6 +124,8 @@ public class SeatingController : MonoBehaviour
         Chair chair = SeatingData.selectedChair;
         Customer customer = SeatingData.selectedCustomer;
         customer.Seat(chair);
+        // remove glow from customer
+        customer.GetComponent<HighlightEffect>().SetHighlighted(false);
         SeatingData.selectedChair = null;
         SeatingData.selectedCustomer = null;
     }
