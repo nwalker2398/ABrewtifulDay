@@ -28,6 +28,7 @@ public class Customer : MonoBehaviour
     private float waitingRoomTime = 0f;
     private bool rotate = false;
     private float drinkTime = 6f;
+    private bool moveUp = false;
 
     [SerializeField] CustomerTimer timer;
     [SerializeField] GameObject angryUI;
@@ -259,13 +260,16 @@ public class Customer : MonoBehaviour
 
                 GetComponent<NavMeshAgent>().enabled = false;
                 rotate = true;
-                if (transform.position.y < 0.5)
+                if (transform.position.y <= 0.66)
                 {
-                    transform.Translate(Vector3.up * 1.5f * Time.deltaTime);
+                    transform.Translate(Vector3.up * 0.11f);
                 }
                 else
                 {
                     //Debug.Log("At seat!");
+                    Vector3 pos = transform.position;
+                    transform.position = new Vector3(pos.x, 0.66f, pos.z);
+                    transform.position = new Vector3(pos.x, 0.66f, pos.z);
                     toSeat = false;
                     atSeat = true;
                     shouldDisplayOrder = true;
