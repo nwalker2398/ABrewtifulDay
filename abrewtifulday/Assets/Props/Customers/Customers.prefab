@@ -698,6 +698,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2696867849876251693, guid: 3a98f429e3e30974d858eaf41d9ffb8f, type: 3}
+      propertyPath: angryUI
+      value: 
+      objectReference: {fileID: 6664726123459860960}
+    - target: {fileID: 2696867849876251693, guid: 3a98f429e3e30974d858eaf41d9ffb8f, type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 5469383879828411905}
@@ -723,6 +727,11 @@ GameObject:
 --- !u!4 &5469383879966104962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2696867849876251690, guid: 3a98f429e3e30974d858eaf41d9ffb8f, type: 3}
+  m_PrefabInstance: {fileID: 7965201622067001768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6664726123459860960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3672625802077036616, guid: 3a98f429e3e30974d858eaf41d9ffb8f, type: 3}
   m_PrefabInstance: {fileID: 7965201622067001768}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3682617179773663368

@@ -30,6 +30,7 @@ public class Customer : MonoBehaviour
     private float drinkTime = 6f;
 
     [SerializeField] CustomerTimer timer;
+    [SerializeField] GameObject angryUI;
     private bool isServed = false;
 
     // For Ordering Drinks
@@ -54,6 +55,7 @@ public class Customer : MonoBehaviour
         coffeePrefab.SetActive(false);
         bobaPrefab.SetActive(false);
         matchaPrefab.SetActive(false);
+        angryUI.SetActive(false);
 
         randomOrder = randomizeOrder();
 
@@ -181,6 +183,8 @@ public class Customer : MonoBehaviour
                 seat.seatedCustomer = false;
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
+            angryUI.SetActive(true);
+            order.SetActive(false);
             leaveCafe(true); 
         }
 
@@ -296,6 +300,7 @@ public class Customer : MonoBehaviour
             if (waitingRoomTime > 20f)
             {
                 leaveCafe(false);
+                angryUI.SetActive(true);
             }
         }
 
@@ -325,6 +330,8 @@ public class Customer : MonoBehaviour
 
     void leaveCafe(bool decreaseScore)
     {
+        hideOrder();
+
         atWaitingArea = false;
 
         destination = returnArea;
@@ -341,5 +348,14 @@ public class Customer : MonoBehaviour
         if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
             ScoreSystem.decrementScore(1);
         }
+    }
+
+    void hideOrder()
+    {
+        order.SetActive(false);
+        coffeePrefab.SetActive(false);
+        bobaPrefab.SetActive(false);
+        matchaPrefab.SetActive(false);
+        timer.gameObject.SetActive(false);
     }
 }
