@@ -9,4 +9,8 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene("Cafe1");
     }
+    public void StartTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }

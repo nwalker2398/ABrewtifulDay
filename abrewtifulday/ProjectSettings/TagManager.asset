@@ -14,6 +14,14 @@ TagManager:
   - Tray
   - TrayCoffee
   - LevelController
+  - CoffeeStation
+  - MatchaStation
+  - BobaStation
+  - Picture1
+  - Plant1
+  - Picture2
+  - Plant2
+  - backwall
   layers:
   - Default
   - TransparentFX
@@ -22,7 +30,7 @@ TagManager:
   - Water
   - UI
   - PostProcessing
-  - 
+  - Walls
   - 
   - 
   - 

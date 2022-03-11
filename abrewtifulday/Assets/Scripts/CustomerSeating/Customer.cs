@@ -31,9 +31,29 @@ public class Customer : MonoBehaviour
     [SerializeField] CustomerTimer timer;
     public bool isServed = false;
 
+    // For Ordering Drinks
+    // Option 1: Using 2d sprites
+    public SpriteRenderer spriteRenderer;
+    public Sprite coffeeSprite;
+    public Sprite bobaSprite;
+    public Sprite matchaSprite;
+    // Option 2: Using 3d prefabs
+    public GameObject coffeePrefab;
+    public GameObject bobaPrefab;
+    public GameObject matchaPrefab;
+
+    private int randomOrder;
+    //
+
     void Start()
     {
         order.SetActive(false);
+
+        coffeePrefab.SetActive(false);
+        bobaPrefab.SetActive(false);
+        matchaPrefab.SetActive(false);
+
+        randomOrder = randomizeOrder();
     }
 
     public void Generate()
@@ -45,19 +65,70 @@ public class Customer : MonoBehaviour
         order.SetActive(true);
     }
 
-    public void Drink(Vector3 pos, GameObject tableCoffee)
+    private int randomizeOrder() {
+        // Randomize order
+        int n = (int)Random.Range(0,4);
+
+        if (n == 1) {
+            spriteRenderer.sprite = coffeeSprite;
+            float scale = 0.3f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            coffeePrefab.SetActive(true);
+        }
+        else if (n == 2) {
+            spriteRenderer.sprite = bobaSprite;
+            float scale = 0.2f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            bobaPrefab.SetActive(true);
+        }
+        else {
+            spriteRenderer.sprite = matchaSprite;
+            float scale = 0.2f;
+            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+            matchaPrefab.SetActive(true);
+        }
+
+        return n;
+    }
+
+    private float calculateScore(GameObject drink) {
+        // check if the order match the given drink
+        float rawScore;
+        if (randomOrder == 1 && drink.transform.name == "objectCoffee") {
+            rawScore = 3;
+        }
+        else if (randomOrder == 2 && drink.transform.name == "objectBoba") {
+            rawScore = 3;
+        }
+        else if (randomOrder == 3 && drink.transform.name == "objectMatcha") {
+            rawScore = 3;
+        }
+        else {
+            rawScore = 1;
+        }
+        
+        float finalScore = timer.getRemainingTimeRatio() * rawScore;
+        return finalScore;
+    }
+
+    public void Drink(Vector3 pos, GameObject drink)
     {
         isServed = true;
 
+        ScoreSystem.incrementScore(calculateScore(drink));
+        
         Debug.Log("Drinking");
         order.SetActive(false);
-        StartCoroutine(RemoveDrinkDelayed(tableCoffee));
+        StartCoroutine(RemoveDrinkDelayed(drink));
     }
 
-    IEnumerator RemoveDrinkDelayed(GameObject tableCoffee)
+    IEnumerator RemoveDrinkDelayed(GameObject drink)
     {
         yield return new WaitForSeconds(drinkTime);
-        tableCoffee.SetActive(false);
+        drink.SetActive(false);
 
         seat.seatedCustomer = false;
         seat.GetComponent<NavMeshObstacle>().enabled = true;

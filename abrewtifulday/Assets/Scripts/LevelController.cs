@@ -9,25 +9,16 @@ public class LevelController: MonoBehaviour
     public List<Dictionary<string, object>> levels;
     public int currentLevel = 0;
     public Dictionary<string, object> currentLevelData;
+    public List<AudioClip> songs;
 
-    // [SerializeField] int currentLevel = -1;
-    public GameObject coffeeMachine;
-    public GameObject matchaMachine;
-    public GameObject bobaMachine;
-    public GameObject picture1;
-    public GameObject plant1;
-    public GameObject walls;
-    public GameObject picture2;
-    public GameObject plant2;
-    public GameObject camera;
-
-    private int oldLevel = -1;
+    private int oldLevel;
 
     void Awake()
     {
         if (LC != null)
         {
             GameObject.Destroy(this);
+            this.enabled = false;
         }
         else
         {
@@ -41,6 +32,7 @@ public class LevelController: MonoBehaviour
     {
         levels = new List<Dictionary<string, object>>();
         int i = 0;
+        levels.Add(new Dictionary<string, object>());
         foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
             if (i == 0)
@@ -48,7 +40,7 @@ public class LevelController: MonoBehaviour
                 i++;
                 continue;
             }
-            Dictionary<string, dynamic> level = new Dictionary<string, dynamic>();
+            Dictionary<string, object> level = new Dictionary<string, object>();
             string[] words = line.Split(',');
             level["Scene"] = words[1];
             level["GenerateCustomerIn"] = float.Parse(words[2]);
@@ -57,7 +49,7 @@ public class LevelController: MonoBehaviour
             level["HeartQuota"] = int.Parse(words[5]);
             level["CoffeeEnabled"] = bool.Parse(words[6]);
             level["MatchaEnabled"] = bool.Parse(words[7]);
-            level["BobaEnables"] = bool.Parse(words[8]);
+            level["BobaEnabled"] = bool.Parse(words[8]);
             level["Picture1Enabled"] = bool.Parse(words[9]);
             level["Plant1Enabled"] = bool.Parse(words[10]);
             level["WallPainted"] = bool.Parse(words[11]);
@@ -66,18 +58,34 @@ public class LevelController: MonoBehaviour
             string[] locations = words[14].Split('|');
             level["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
             level["Plant2Enabled"] = bool.Parse(words[15]);
-            level["Dialog"] = words.Length > 16 ? words[16] : "";
+            level["Dialog"] = words.Length > 16 ? words[16].Replace("^", ",") : "";
 
             levels.Add(level);
         }
         Debug.Log("Loaded " + levels.Count + " levels.");
     }
 
+    public void getSongs()
+    {
+        songs = new List<AudioClip>();
+        songs.Add(null);
+        for(int i = 1; i < levels.Count ; i++)
+        {
+            songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
+            Debug.Log(songs[i].name);
+        }
+    }
+
     // Call this once when the game first loads
     public void StartLevels()
     {
+        oldLevel = -1;
         getLevels();
+        getSongs();
         currentLevelData = levels[currentLevel];
+        loadLevel();
+        Debug.Log("Loading level!");
+        Debug.Log(currentLevel);
     }
 
     public void printLevel(int levelNumber)
@@ -91,50 +99,82 @@ public class LevelController: MonoBehaviour
 
     public void Update()
     {
-        if(currentLevel > 0 && (!currentLevel.Equals(oldLevel)))
-        {
-            setLevel(currentLevel);
-            oldLevel = currentLevel;
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera")){
+            Debug.Log(o.GetComponent<AudioSource>().clip.name);
+            if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
+            {
+                loadLevel();
+                o.GetComponent<AudioSource>().Play();
+            }
         }
+        
     }
 
-    public void setLevel(int l)
+
+    void setLevel(int l)
     {
         Debug.Log("Setting level to " + l);
         currentLevel = l;
-        loadLevel(currentLevel);
+        loadLevel();
         oldLevel = currentLevel;
     }
 
-    public void nextLevel()
+    public static void level1()
+    {
+        if (LC != null)
+            LC.setLevel(1);
+    }
+    public static void level2()
+    {
+        if (LC != null)
+            LC.setLevel(2);
+    }
+
+    public static void nextLevel()
+    {
+        if (LC != null)
+
+            LC.instanceNextLevel();
+    }
+
+    public void instanceNextLevel()
     {
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
-        loadLevel(currentLevel);
         oldLevel = currentLevel;
+        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+        loadLevel();
     }
 
-    public void loadLevel(int level)
+    public void loadLevel()
     {
-        SceneManager.LoadScene("" + levels[level]["Scene"]);
-        if(coffeeMachine)
-            coffeeMachine.SetActive((bool)levels[level]["CoffeeEnabled"]);
-        if(matchaMachine)
-            matchaMachine.SetActive((bool)levels[level]["MatchaEnabled"]);
-        if (bobaMachine)
-            bobaMachine.SetActive((bool)levels[level]["BobaEnabled"]);
-        if (picture1)
-            picture1.SetActive((bool)levels[level]["Picture1Enabled"]);
-        if (plant1)
-            plant1.SetActive((bool)levels[level]["Plant1Enabled"]);
+        int level = currentLevel;
+
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+        {
+            if(o.scene.name != "" + levels[currentLevel]["Scene"]){
+                SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+            }
+
+            o.GetComponent<AudioSource>().clip = songs[level];
+            o.GetComponent<AudioSource>().Play();
+        }
+
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
+            o.SetActive((bool)levels[level]["CoffeeEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
+            o.SetActive((bool)levels[level]["MatchaEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("BobaStation"))
+            o.SetActive((bool)levels[level]["BobaEnabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture1"))
+            o.SetActive((bool)levels[level]["Picture1Enabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant1"))
+            o.SetActive((bool)levels[level]["Plant1Enabled"]);
         //if(levels[level]["WallPainted"])
         //    walls.color = levels[level]["WallColor"];
-        if (picture2)
-            picture2.SetActive((bool)levels[level]["Picture2Enabled"]);
-        if (plant2)
-            plant2.SetActive((bool)levels[level]["Plant2Enabled"]);
-
-        if (camera)
-            camera.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Assets/Audio/Song" + level + ".wav");
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture2"))
+            o.SetActive((bool)levels[level]["Picture2Enabled"]);
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
+            o.SetActive((bool)levels[level]["Plant2Enabled"]);
     }
 }

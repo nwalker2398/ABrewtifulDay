@@ -33,7 +33,6 @@ public class PutDrinks : MonoBehaviour
         objectBoba.SetActive(false);
         heartIcon.SetActive(false);
         tray = GameObject.FindGameObjectWithTag("Tray");
-        Debug.Log(tray);
         trayCoffee = GameObject.FindGameObjectWithTag("TrayCoffee");
     }
 
@@ -69,8 +68,7 @@ public class PutDrinks : MonoBehaviour
                 heartIcon.SetActive(true);
 
                 //TODO: check if Tray.instance.curDrink == the ordered drink to see if score should be higher than 1
-
-                ScoreSystem.incrementScore(1);
+                
                 hitInfo.transform.gameObject.GetComponent<Customer>().Drink(drink.transform.position, drink);
             }
             

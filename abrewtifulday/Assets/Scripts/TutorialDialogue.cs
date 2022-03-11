@@ -95,6 +95,7 @@ public class TutorialDialogue : MonoBehaviour
             // add an arrow over a chair once the character is clicked
             if (Input.GetMouseButtonDown(0) && customerArrowAdded)
             {
+                Debug.Log("MOUSE DOWN");
                 RaycastHit hit;
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -110,9 +111,14 @@ public class TutorialDialogue : MonoBehaviour
                         addArrow(tutorialChair.transform.position);
                         seatArrow = true;
                     }
+                    Debug.Log("hit Chair:");
+                    Debug.Log(objectHit.tag);
+                    Debug.Log("selectedCustomer: ");
+                    Debug.Log(SeatingData.selectedCustomer != null);
                     // remove arrow from chair once the chair has been selected 
                     if (objectHit.tag == "Chair" && SeatingData.selectedCustomer != null)
                     {
+                        Debug.Log("Removing Chair Arrow");
                         removeArrow();
                         seatArrow = false;
                         DialogBox.SetActive(false);
@@ -124,9 +130,31 @@ public class TutorialDialogue : MonoBehaviour
         if (SeatingData.seatedCustomers.Count > 0)
         {
             firstCustomer = SeatingData.seatedCustomers[0];
+            if (Input.GetMouseButtonDown(0) && customerArrowAdded)
+            {
+                Debug.Log("MOUSE DOWN");
+                RaycastHit hit;
+                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Transform objectHit = hit.transform;
+                    Debug.Log(objectHit.tag);
+                    Debug.Log(SeatingData.selectedCustomer);
+                    // remove arrow from chair once the chair has been selected 
+                    if (objectHit.tag == "Chair" && seatArrow)
+                    {
+                        Debug.Log("Removing Chair Arrow");
+                        removeArrow();
+                        seatArrow = false;
+                        DialogBox.SetActive(false);
+                    }
+                }
+            }
             if (firstCustomer.atSeat)
             {
                 customerArrowAdded = false;
+                Debug.Log("Moving to Prepare Drinks");
                 dialogIndex++;
             }
         }
@@ -147,7 +175,6 @@ public class TutorialDialogue : MonoBehaviour
         }
         if (CoffeeMaker.coffeeClicked && coffeeArrow)
         {
-            Debug.Log("Removing Arrow!");
             removeArrow();
         }
         if (CoffeeMaker.coffeePickedUp)
@@ -170,8 +197,6 @@ public class TutorialDialogue : MonoBehaviour
                 addArrow(firstCustomer.transform.position);
                 customerArrowAdded = true;
             }
-            //if customer gets drink
-            //remove arrow
             if (firstCustomer.isServed)
             {
                 removeArrow();
@@ -212,8 +237,6 @@ public class TutorialDialogue : MonoBehaviour
     public void addArrow(Vector3 pos)
     {
         ArrowController arrow = GameObject.FindGameObjectWithTag("Arrow").GetComponent<ArrowController>();
-        //make new arrow in area 
-        //pos.y += arrow.GetComponent<ArrowController>().calcY();
         Debug.Log(pos);
         var new_arrow = Instantiate(arrow, pos, Quaternion.identity);
         new_arrow.set_y(pos.y + 1.4f);
@@ -227,8 +250,6 @@ public class TutorialDialogue : MonoBehaviour
         Debug.Log("removing arrow");
         Debug.Log(tutorialArrow);
         Destroy(tutorialArrow);
-        tutorialArrow = null;
-        //SeatingData.showArrow = showAgain;
-        
+        tutorialArrow = null;        
     }
 }
