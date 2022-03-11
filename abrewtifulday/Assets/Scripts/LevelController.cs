@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelController: MonoBehaviour
 {
@@ -139,6 +140,9 @@ public class LevelController: MonoBehaviour
     public void loadLevel()
     {
         int level = currentLevel;
+
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
+            o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {

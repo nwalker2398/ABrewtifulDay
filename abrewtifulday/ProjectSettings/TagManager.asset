@@ -23,6 +23,7 @@ TagManager:
   - Plant2
   - backwall
   - floor
+  - UI
   layers:
   - Default
   - TransparentFX
