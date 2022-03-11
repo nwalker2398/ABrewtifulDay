@@ -25,6 +25,7 @@ public class PutDrinks : MonoBehaviour
 
     private GameObject tray; 
     private GameObject trayCoffee;
+    private Camera camera;
 
     void Start()
     {
@@ -34,14 +35,29 @@ public class PutDrinks : MonoBehaviour
         heartIcon.SetActive(false);
         tray = GameObject.FindGameObjectWithTag("Tray");
         trayCoffee = GameObject.FindGameObjectWithTag("TrayCoffee");
+        camera = Camera.main;
     }
 
     void OnMouseDown() {
         Debug.Log("Table clicked.");
         // cast a ray from the coffee tray.
         Ray putRay = new Ray(tray.transform.position, tray.transform.forward);
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(putRay, out RaycastHit hitInfo, pickupRange, pickupLayer)) {
+        if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
+            // Only deliver drinks to customers
+            if (hitInfo.transform.tag != "Customer")
+            {
+                return;
+            }
+
+            // Only deliver drinks if barista is close to the customer
+            GameObject barista = trayCoffee = GameObject.FindGameObjectWithTag("Barista");
+            if (Vector3.Distance(barista.transform.position, hitInfo.transform.gameObject.transform.position) > 1f)
+            {
+                return;
+            }
+
             // if we have a drink to serve, put the drink onto the object
             if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);

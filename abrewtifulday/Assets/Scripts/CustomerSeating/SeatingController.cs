@@ -46,7 +46,7 @@ public class SeatingController : MonoBehaviour
         {
             timePassed = 0f;
             nextWave += waveDuration;
-            print(LevelController.LC);
+            // print(LevelController.LC);
             int numCustomers = (int)LevelController.LC.currentLevelData["CustomersPerWave"];
             for (int i = 0; i < numCustomers; i++)
             {
