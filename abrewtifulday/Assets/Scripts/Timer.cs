@@ -62,6 +62,7 @@ public class Timer : MonoBehaviour
         {
             Debug.Log("Time is up.");
             dailyRecapPanel.SetActive(true);
+            GameController.GC.StopGame();
             return true;
         }
         return false;

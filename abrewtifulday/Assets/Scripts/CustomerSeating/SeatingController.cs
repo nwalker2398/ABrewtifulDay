@@ -6,8 +6,7 @@ using HighlightPlus;
 public class SeatingController : MonoBehaviour
 {
     [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
-    [SerializeField] Material customer_glow, chair_glow, chair_normal;
-    [SerializeField] GameObject tutorialChair;
+    [SerializeField] Material chair_glow, chair_normal;
 
     private Customer[] customers;
     private float timePassed;
@@ -41,6 +40,13 @@ public class SeatingController : MonoBehaviour
 
     void Update()
     {
+        if (GameController.GC.paused || GameController.GC.stopped)
+        {
+            timePassed = 0f;
+            nextWave += Time.deltaTime;
+            return;
+        }
+
         timePassed += Time.deltaTime;
         if (Time.time > nextWave)
         {

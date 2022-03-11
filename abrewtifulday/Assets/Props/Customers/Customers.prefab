@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5469383879828411905}
   m_Layer: 0
   m_Name: CustomerGenerator
-  m_TagString: Untagged
+  m_TagString: CustomerGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerStartLocation: {x: -7, y: 0, z: -4}
-  customer_glow: {fileID: 0}
   chair_glow: {fileID: 2100000, guid: e7555413305da594cb39017249fb3f1a, type: 2}
   chair_normal: {fileID: 2100000, guid: 40baef27330ff456785f666f7fe11abf, type: 2}
-  tutorialChair: {fileID: 0}
+  paused: 0
 --- !u!1 &5469383879853470869
 GameObject:
   m_ObjectHideFlags: 0

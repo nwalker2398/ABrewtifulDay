@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    // public Material defaultMaterial;
     public float stopDistance = 1.0f;
 
     [SerializeField] GameObject order;
@@ -28,7 +27,6 @@ public class Customer : MonoBehaviour
     private float waitingRoomTime = 0f;
     private bool rotate = false;
     private float drinkTime = 6f;
-    private bool moveUp = false;
 
     [SerializeField] CustomerTimer timer;
     [SerializeField] GameObject angryUI;
@@ -47,7 +45,6 @@ public class Customer : MonoBehaviour
     public GameObject matchaPrefab;
 
     private int randomOrder;
-    //
 
     void Start()
     {
@@ -161,6 +158,7 @@ public class Customer : MonoBehaviour
         destination = chair.transform.position;
         atWaitingArea = false;
         toSeat = true;
+        angryUI.SetActive(false);
         seat = chair;
         controller.removeCustomerGlow(this);
         SeatingData.seatWaitingCustomer(this);
@@ -172,6 +170,12 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        if (GameController.GC.paused || GameController.GC.stopped)
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
+            return;
+        }
+
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
         if (timer.timeHasEnd() && !isServed) {
     

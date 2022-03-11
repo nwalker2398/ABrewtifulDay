@@ -25,6 +25,7 @@ TagManager:
   - floor
   - UI
   - angry
+  - CustomerGenerator
   layers:
   - Default
   - TransparentFX
