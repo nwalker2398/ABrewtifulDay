@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelController: MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelController: MonoBehaviour
     public int currentLevel = 0;
     public Dictionary<string, object> currentLevelData;
     public List<AudioClip> songs;
+    public GameObject spillPrefab;
 
     private int oldLevel;
 
@@ -57,7 +59,7 @@ public class LevelController: MonoBehaviour
             level["WallChoices"] = bool.Parse(words[12]);
             level["Picture2Enabled"] = bool.Parse(words[13]);
             string[] locations = words[14].Split('|');
-            level["CoffeeSpillLocation"] = new Vector3(int.Parse(locations[0]), int.Parse(locations[1]), int.Parse(locations[2]));
+            level["CoffeeSpillLocation"] = new Vector3(float.Parse(locations[0]), float.Parse(locations[1]), float.Parse(locations[2])); ;
             level["Plant2Enabled"] = bool.Parse(words[15]);
             level["Dialog"] = words.Length > 16 ? words[16].Replace("^", ",") : "";
 
@@ -151,6 +153,9 @@ public class LevelController: MonoBehaviour
     {
         int level = currentLevel;
 
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
+            o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
+
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
             if(o.scene.name != "" + levels[currentLevel]["Scene"]){
@@ -177,5 +182,8 @@ public class LevelController: MonoBehaviour
             o.SetActive((bool)levels[level]["Picture2Enabled"]);
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
             o.SetActive((bool)levels[level]["Plant2Enabled"]);
+        Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
+        if(!spillPos.Equals(new Vector3(0,0,0)))
+            Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
     }
 }

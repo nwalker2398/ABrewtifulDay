@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameController.GC.paused || GameController.GC.stopped)
+        {
+            return;
+        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(-horizontal, 0f, -vertical).normalized;

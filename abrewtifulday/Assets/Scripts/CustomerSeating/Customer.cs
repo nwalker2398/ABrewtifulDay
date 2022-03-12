@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Customer : MonoBehaviour
 {
     public Vector3 destination;
-    // public Material defaultMaterial;
     public float stopDistance = 1.0f;
 
     [SerializeField] GameObject order;
@@ -30,8 +30,10 @@ public class Customer : MonoBehaviour
 
     [SerializeField] CustomerTimer timer;
     public bool isServed = false;
+    [SerializeField] GameObject angryUI;
 
     // For Ordering Drinks
+    [SerializeField] GameObject customerCanvas;
     // Option 1: Using 2d sprites
     public SpriteRenderer spriteRenderer;
     public Sprite coffeeSprite;
@@ -43,7 +45,6 @@ public class Customer : MonoBehaviour
     public GameObject matchaPrefab;
 
     private int randomOrder;
-    //
 
     void Start()
     {
@@ -52,8 +53,11 @@ public class Customer : MonoBehaviour
         coffeePrefab.SetActive(false);
         bobaPrefab.SetActive(false);
         matchaPrefab.SetActive(false);
+        angryUI.SetActive(false);
 
         randomOrder = randomizeOrder();
+
+        //customerCanvas.SetActive(false);
     }
 
     public void Generate()
@@ -62,35 +66,47 @@ public class Customer : MonoBehaviour
         destination = waitingArea;
         shouldMove = true;
         toWaitingArea = true;
-        order.SetActive(true);
+        // order.SetActive(true);
     }
 
     private int randomizeOrder() {
-        // Randomize order
-        int n = (int)Random.Range(0,4);
+        Scene scene = SceneManager.GetActiveScene();
+        int n;
+        if (scene.name == "Tutorial" || scene.name == "Cafe1") {
+            n = 1;
 
-        if (n == 1) {
             spriteRenderer.sprite = coffeeSprite;
             float scale = 0.3f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
             coffeePrefab.SetActive(true);
         }
-        else if (n == 2) {
-            spriteRenderer.sprite = bobaSprite;
-            float scale = 0.2f;
-            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
-
-            bobaPrefab.SetActive(true);
-        }
         else {
-            spriteRenderer.sprite = matchaSprite;
-            float scale = 0.2f;
-            spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+            // Randomize order
+            n = (int)Random.Range(0,4);
 
-            matchaPrefab.SetActive(true);
+            if (n == 1) {
+                spriteRenderer.sprite = coffeeSprite;
+                float scale = 0.3f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                coffeePrefab.SetActive(true);
+            }
+            else if (n == 2) {
+                spriteRenderer.sprite = bobaSprite;
+                float scale = 0.2f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                bobaPrefab.SetActive(true);
+            }
+            else {
+                spriteRenderer.sprite = matchaSprite;
+                float scale = 0.2f;
+                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                matchaPrefab.SetActive(true);
+            }
         }
-
         return n;
     }
 
@@ -142,6 +158,7 @@ public class Customer : MonoBehaviour
         destination = chair.transform.position;
         atWaitingArea = false;
         toSeat = true;
+        angryUI.SetActive(false);
         seat = chair;
         controller.removeCustomerGlow(this);
         SeatingData.seatWaitingCustomer(this);
@@ -153,6 +170,12 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        if (GameController.GC.paused || GameController.GC.stopped)
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
+            return;
+        }
+
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
         if (timer.timeHasEnd() && !isServed) {
     
@@ -165,6 +188,8 @@ public class Customer : MonoBehaviour
                 seat.seatedCustomer = false;
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
+            angryUI.SetActive(true);
+            order.SetActive(false);
             leaveCafe(true); 
         }
 
@@ -224,8 +249,7 @@ public class Customer : MonoBehaviour
             {
                 toWaitingArea = false;
                 atWaitingArea = true;
-                //controller.addArrow(transform.position);
-                timer.startTimer(); // start the customer timer
+                //timer.startTimer(); // start the customer timer
             }
         }
 
@@ -239,18 +263,24 @@ public class Customer : MonoBehaviour
 
                 GetComponent<NavMeshAgent>().enabled = false;
                 rotate = true;
-                if (transform.position.y < 0.5)
+                if (transform.position.y <= 0.66)
                 {
-                    transform.Translate(Vector3.up * 1.5f * Time.deltaTime);
+                    transform.Translate(Vector3.up * 0.11f);
                 }
                 else
                 {
                     //Debug.Log("At seat!");
+                    Vector3 pos = transform.position;
+                    transform.position = new Vector3(pos.x, 0.66f, pos.z);
+                    transform.position = new Vector3(pos.x, 0.66f, pos.z);
                     toSeat = false;
                     atSeat = true;
                     shouldDisplayOrder = true;
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
+                    
+                    //customerCanvas.SetActive(false);
+                    timer.startTimer(); // start the customer timer
                 }
             }
             else
@@ -277,6 +307,7 @@ public class Customer : MonoBehaviour
             if (waitingRoomTime > 20f)
             {
                 leaveCafe(false);
+                angryUI.SetActive(true);
             }
         }
 
@@ -306,6 +337,8 @@ public class Customer : MonoBehaviour
 
     void leaveCafe(bool decreaseScore)
     {
+        hideOrder();
+
         atWaitingArea = false;
 
         destination = returnArea;
@@ -322,5 +355,14 @@ public class Customer : MonoBehaviour
         if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
             ScoreSystem.decrementScore(1);
         }
+    }
+
+    void hideOrder()
+    {
+        order.SetActive(false);
+        coffeePrefab.SetActive(false);
+        bobaPrefab.SetActive(false);
+        matchaPrefab.SetActive(false);
+        timer.gameObject.SetActive(false);
     }
 }

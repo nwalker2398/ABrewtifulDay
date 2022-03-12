@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HighlightPlus;
 
 public class SeatingController : MonoBehaviour
 {
     [SerializeField] Vector3 customerStartLocation = new Vector3(-7f, 0.25f, -4f);
-    [SerializeField] Material customer_glow, chair_glow, chair_normal;
-    [SerializeField] GameObject tutorialChair;
+    [SerializeField] Material chair_glow, chair_normal;
 
     private Customer[] customers;
     private float timePassed;
@@ -32,7 +32,7 @@ public class SeatingController : MonoBehaviour
         LevelController.LC.printLevel(LevelController.LC.currentLevel);
         generateCustomerIn = 0f;
         // UPDATE TO THE LEVEL DURATION
-        float gameDuration = 60f;
+        float gameDuration = 120f;
         int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"];
         waveDuration = numWaves > 0 ? (gameDuration / numWaves) : 10000;
         nextWave = Time.time + waveDuration;
@@ -40,12 +40,19 @@ public class SeatingController : MonoBehaviour
 
     void Update()
     {
+        if (GameController.GC.paused || GameController.GC.stopped)
+        {
+            timePassed = 0f;
+            nextWave += Time.deltaTime;
+            return;
+        }
+
         timePassed += Time.deltaTime;
         if (Time.time > nextWave)
         {
             timePassed = 0f;
             nextWave += waveDuration;
-            print(LevelController.LC);
+            // print(LevelController.LC);
             int numCustomers = (int)LevelController.LC.currentLevelData["CustomersPerWave"];
             for (int i = 0; i < numCustomers; i++)
             {
@@ -75,14 +82,19 @@ public class SeatingController : MonoBehaviour
                 {
                     if (SeatingData.selectedCustomer != null)
                     {
+                        // switching customer selected, remove the glow on currently selected customer
+                        SeatingData.selectedCustomer.GetComponent<HighlightEffect>().SetHighlighted(false);
                         removeCustomerGlow(SeatingData.selectedCustomer);
                     }
 
+                    //selected a customer from the waiting area
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     Customer c = objectHit.gameObject.GetComponent<Customer>();
                     SeatingData.selectedCustomer = c;
                     c.toWaitingArea = false;
                     c.atWaitingArea = true;
+                    // make customer glow after selection
+                    c.GetComponent<HighlightEffect>().SetHighlighted(true);
 
                     /*if (SeatingData.showArrow)
                     {
@@ -118,6 +130,8 @@ public class SeatingController : MonoBehaviour
         Chair chair = SeatingData.selectedChair;
         Customer customer = SeatingData.selectedCustomer;
         customer.Seat(chair);
+        // remove glow from customer
+        customer.GetComponent<HighlightEffect>().SetHighlighted(false);
         SeatingData.selectedChair = null;
         SeatingData.selectedCustomer = null;
     }

@@ -22,6 +22,10 @@ TagManager:
   - Picture2
   - Plant2
   - backwall
+  - floor
+  - UI
+  - angry
+  - CustomerGenerator
   layers:
   - Default
   - TransparentFX
@@ -31,7 +35,7 @@ TagManager:
   - UI
   - PostProcessing
   - Walls
-  - 
+  - Floor
   - 
   - 
   - 

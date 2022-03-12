@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private Image fill;
     [SerializeField] TMP_Text timeText;
-    [SerializeField] float gameDuration;
+    private float gameDuration = 120f;
     private float timeRemaining;
     private bool isPaused = false;
 
@@ -62,6 +62,7 @@ public class Timer : MonoBehaviour
         {
             Debug.Log("Time is up.");
             dailyRecapPanel.SetActive(true);
+            GameController.GC.StopGame();
             return true;
         }
         return false;
