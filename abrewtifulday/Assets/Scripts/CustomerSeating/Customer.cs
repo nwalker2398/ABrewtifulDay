@@ -58,8 +58,8 @@ public class Customer : MonoBehaviour
 
         randomOrder = randomizeOrder();
 
-        // waitingRoomTimer.gameObject.SetActive(false);
-        // seatTimer.gameObject.SetActive(false);
+        waitingRoomTimer.gameObject.SetActive(false);
+        //seatTimer.gameObject.SetActive(false);
 
         //customerCanvas.SetActive(false);
     }
@@ -198,7 +198,6 @@ public class Customer : MonoBehaviour
 
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
         if (seatTimer.timeHasEnd() && !isServed) {
-    
             if (atWaitingArea) {
                 atWaitingArea = false;
                 SeatingData.waitingCustomers.Remove(this);
@@ -220,15 +219,15 @@ public class Customer : MonoBehaviour
         }
 
         // Display order after customer is seated
-        if (shouldDisplayOrder && atSeat)
-        {
-            waitingSeatTime += Time.deltaTime;
-            if (waitingSeatTime > 3f)
-            {
-                //order.SetActive(true);
-                shouldDisplayOrder = false;
-            }
-        }
+        // if (shouldDisplayOrder && atSeat)
+        // {
+        //     waitingSeatTime += Time.deltaTime;
+        //     if (waitingSeatTime > 3f)
+        //     {
+        //         //order.SetActive(true);
+        //         shouldDisplayOrder = false;
+        //     }
+        // }
 
         // If waiting
         // Walk into the store and leave if the waiting room is full
@@ -328,7 +327,8 @@ public class Customer : MonoBehaviour
         {
             waitingRoomTimer.gameObject.SetActive(true);
             waitingRoomTimer.startTimer();
-            waitingRoomTime += Time.deltaTime;
+            //waitingRoomTime += Time.deltaTime;
+
             if (waitingRoomTimer.timeHasEnd())
             {
                 leaveCafe(false);
@@ -336,6 +336,8 @@ public class Customer : MonoBehaviour
                 waitingRoomTimer.gameObject.SetActive(false);
             }
         }
+
+     
 
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 2f)
