@@ -19,6 +19,7 @@ public class LevelController: MonoBehaviour
         {
             GameObject.Destroy(this);
             this.enabled = false;
+            return;
         }
         else
         {
