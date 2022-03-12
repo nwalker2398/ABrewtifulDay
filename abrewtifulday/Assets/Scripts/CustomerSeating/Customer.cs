@@ -28,7 +28,8 @@ public class Customer : MonoBehaviour
     private bool rotate = false;
     private float drinkTime = 6f;
 
-    [SerializeField] CustomerTimer timer;
+    [SerializeField] CustomerTimer seatTimer;
+    [SerializeField] CustomerTimer waitingRoomTimer;
     [SerializeField] GameObject angryUI;
     private bool isServed = false;
 
@@ -126,7 +127,7 @@ public class Customer : MonoBehaviour
             rawScore = 1;
         }
         
-        float finalScore = timer.getRemainingTimeRatio() * rawScore;
+        float finalScore = seatTimer.getRemainingTimeRatio() * rawScore;
         return finalScore;
     }
 
@@ -177,7 +178,7 @@ public class Customer : MonoBehaviour
         }
 
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
-        if (timer.timeHasEnd() && !isServed) {
+        if (seatTimer.timeHasEnd() && !isServed) {
     
             if (atWaitingArea) {
                 atWaitingArea = false;
@@ -281,7 +282,7 @@ public class Customer : MonoBehaviour
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
                     
                     //customerCanvas.SetActive(false);
-                    timer.startTimer(); // start the customer timer
+                    seatTimer.startTimer(); // start the customer timer
                 }
             }
             else
@@ -304,8 +305,9 @@ public class Customer : MonoBehaviour
         // Leave cafe if waiting for more than 20 seconds in the waiting area
         if (atWaitingArea)
         {
+            waitingRoomTimer.startTimer();
             waitingRoomTime += Time.deltaTime;
-            if (waitingRoomTime > 20f)
+            if (waitingRoomTimer.timeHasEnd())
             {
                 leaveCafe(false);
                 angryUI.SetActive(true);
@@ -364,6 +366,6 @@ public class Customer : MonoBehaviour
         coffeePrefab.SetActive(false);
         bobaPrefab.SetActive(false);
         matchaPrefab.SetActive(false);
-        timer.gameObject.SetActive(false);
+        seatTimer.gameObject.SetActive(false);
     }
 }

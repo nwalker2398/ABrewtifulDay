@@ -10,7 +10,7 @@ public class CustomerTimer : MonoBehaviour
 {
     [SerializeField] private Image fill;
     [SerializeField] TMP_Text timeText;
-    private float waitDuration = 40f;
+    public float waitDuration = 40f;
     private float timeRemaining;
     private bool isPaused = true;
     private bool hasStarted = false;
