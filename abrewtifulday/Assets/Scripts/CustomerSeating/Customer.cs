@@ -154,6 +154,7 @@ public class Customer : MonoBehaviour
         isServed = true;
 
         ScoreSystem.incrementScore(calculateScore(drink));
+        ScoreSystem.incrementCustomer();
         
         Debug.Log("Drinking");
         order.SetActive(false);
