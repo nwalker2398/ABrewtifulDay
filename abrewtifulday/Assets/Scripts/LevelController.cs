@@ -21,6 +21,7 @@ public class LevelController: MonoBehaviour
         {
             GameObject.Destroy(this);
             this.enabled = false;
+            return;
         }
         else
         {
@@ -34,6 +35,7 @@ public class LevelController: MonoBehaviour
     {
         levels = new List<Dictionary<string, object>>();
         int i = 0;
+        levels.Add(new Dictionary<string, object>());
         foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
         {
             if (i == 0)
@@ -41,7 +43,7 @@ public class LevelController: MonoBehaviour
                 i++;
                 continue;
             }
-            Dictionary<string, dynamic> level = new Dictionary<string, dynamic>();
+            Dictionary<string, object> level = new Dictionary<string, object>();
             string[] words = line.Split(',');
             level["Scene"] = words[1];
             level["GenerateCustomerIn"] = float.Parse(words[2]);
@@ -70,7 +72,7 @@ public class LevelController: MonoBehaviour
     {
         songs = new List<AudioClip>();
         songs.Add(null);
-        for(int i = 1; i < levels.Count + 1; i++)
+        for(int i = 1; i < levels.Count ; i++)
         {
             songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
             Debug.Log(songs[i].name);
@@ -85,6 +87,8 @@ public class LevelController: MonoBehaviour
         getSongs();
         currentLevelData = levels[currentLevel];
         loadLevel();
+        Debug.Log("Loading level!");
+        Debug.Log(currentLevel);
     }
 
     public void printLevel(int levelNumber)
@@ -98,12 +102,15 @@ public class LevelController: MonoBehaviour
 
     public void Update()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera")){
+            Debug.Log(o.GetComponent<AudioSource>().clip.name);
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
                 loadLevel();
                 o.GetComponent<AudioSource>().Play();
             }
+        }
+        
     }
 
 
@@ -119,6 +126,11 @@ public class LevelController: MonoBehaviour
     {
         if (LC != null)
             LC.setLevel(1);
+    }
+    public static void level2()
+    {
+        if (LC != null)
+            LC.setLevel(2);
     }
 
     public static void nextLevel()
@@ -146,8 +158,10 @@ public class LevelController: MonoBehaviour
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
-            if(o.scene.name != "" + levels[currentLevel]["Scene"])
+            if(o.scene.name != "" + levels[currentLevel]["Scene"]){
                 SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+            }
+
             o.GetComponent<AudioSource>().clip = songs[level];
             o.GetComponent<AudioSource>().Play();
         }

@@ -7,8 +7,7 @@ public static class SeatingData
     public static Chair selectedChair { get; set; }
     public static Customer selectedCustomer { get; set; }
     public static GameObject customerArrow { get; set; }
-
-    public static bool showArrow = true;
+    public static bool showArrow = false;
 
     public static void addWaitingCustomer(Customer c)
     {
