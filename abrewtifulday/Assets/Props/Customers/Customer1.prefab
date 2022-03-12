@@ -547,7 +547,8 @@ MonoBehaviour:
   returnArea: {x: -10, y: 0, z: -10}
   toWaitingArea: 0
   atWaitingArea: 0
-  timer: {fileID: 2696867848704893933}
+  seatTimer: {fileID: 2696867848704893933}
+  waitingRoomTimer: {fileID: 5297075774965267488}
   angryUI: {fileID: 3672625802077036616}
   customerCanvas: {fileID: 2696867848853042420}
   spriteRenderer: {fileID: 2696867850565786474}

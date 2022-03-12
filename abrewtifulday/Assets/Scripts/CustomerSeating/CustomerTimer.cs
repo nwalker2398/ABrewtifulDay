@@ -40,6 +40,10 @@ public class CustomerTimer : MonoBehaviour
         isPaused = false;
     }
 
+    public void pauseTimer() {
+        isPaused = true;
+    }
+
     public bool timeHasEnd()
     {
         if (timeRemaining <= 0)
