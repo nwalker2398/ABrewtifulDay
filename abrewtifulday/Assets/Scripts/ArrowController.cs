@@ -19,4 +19,8 @@ public class ArrowController : MonoBehaviour
     {
         return Mathf.PingPong(Time.time * speed, 1) * y_range + y_start;
     } 
+    public void set_y(float f)
+    {
+        y_start = f;
+    }
 }

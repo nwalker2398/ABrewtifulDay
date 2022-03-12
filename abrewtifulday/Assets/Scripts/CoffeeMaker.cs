@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class CoffeeMaker : MonoBehaviour
 {
-    private BoxCollider coffeeMakerCollider;
+    public static BoxCollider coffeeMakerCollider;
     private const int COFFEE_WAIT_TIME = 5;
     public GameObject thoughtBubble;
     public GameObject machineDrink;
     private AudioSource audioSource;
     public AudioClip bell;
     public AudioClip pour;
+    public static bool coffeeClicked = false;
+    public static bool coffeePickedUp = false;
 
-    /** Hevin! You will probably want to have a boolean like this added so you 
-     * cant pickup another coffee until the previous one is served in the 
-     * pickUpCoffee() logic!
-
-    private bool coffeeServed = false;*/
     void Start()
     {
         thoughtBubble.active = false;
@@ -29,11 +26,15 @@ public class CoffeeMaker : MonoBehaviour
         Debug.Log(coffeeRange.inCoffeeRange);
         if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
         {
+            coffeeClicked = true;
             StartCoroutine(waitToMake());
+            coffeePickedUp = false;
         }
         else if (coffeeRange.inCoffeeRange && thoughtBubble.active)
         {
+            coffeeClicked = false;
             pickUpCoffee();
+            coffeePickedUp = true;
         }        
     }
 
@@ -55,14 +56,10 @@ public class CoffeeMaker : MonoBehaviour
     void pickUpCoffee()
     {
         Debug.Log("Coffee being picked up!");
-        //must be within x dist of machine to pick up
-        //if gameobject with tag barrista colliding with coffee area
-
         thoughtBubble.active = false;
 
         Debug.Log(GetComponentInParent<Tray>());
         Debug.Log(GetComponent<Tray>());
-
 
         Tray.instance.trayCoffee.active = false;
         Tray.instance.trayMatcha.active = false;
