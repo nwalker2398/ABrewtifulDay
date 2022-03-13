@@ -682,6 +682,8 @@ MonoBehaviour:
   returnArea: {x: -10, y: 0, z: -10}
   toWaitingArea: 0
   atWaitingArea: 0
+  toWaitingLine: 0
+  atWaitingLine: 0
   atSeat: 0
   waitingSeatTime: 60
   waitingRoomTime: 20
@@ -938,15 +940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4016034185697114397, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: m_Color.b
-      value: 0.61960787
+      value: 0.34509805
       objectReference: {fileID: 0}
     - target: {fileID: 4016034185697114397, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: m_Color.g
-      value: 0.8745098
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4016034185697114397, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: m_Color.r
-      value: 0.81960785
+      value: 0.9843137
       objectReference: {fileID: 0}
     - target: {fileID: 4016034185697114402, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: m_Name

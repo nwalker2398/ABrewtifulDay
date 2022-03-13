@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -316,7 +317,9 @@ public class Customer : MonoBehaviour
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
                     
                     //timerRenderer.enabled = true;
-                    timer.startTimer(waitingSeatTime); // start the customer timer
+                    timer.startTimer(waitingSeatTime);
+                    timer.GetComponent<Image>().color = new Color32(181, 190, 148, 255);
+                    timer.transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(60, 179, 113, 160);
                 }
             }
             else
