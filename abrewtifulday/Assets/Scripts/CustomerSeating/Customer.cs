@@ -17,6 +17,9 @@ public class Customer : MonoBehaviour
     public bool toWaitingArea = false;
     public bool atWaitingArea = false;
 
+    public bool toWaitingLine = false;
+    public bool atWaitingLine = false;
+
     private Chair seat;
     private bool toSeat = false;
     public bool atSeat = false;
@@ -74,6 +77,9 @@ public class Customer : MonoBehaviour
         shouldMove = true;
         toWaitingArea = true;
         // order.SetActive(true);
+
+        timer.startTimer(waitingRoomTime);
+        print("HELLO");
     }
 
     private int randomizeOrder() {
@@ -258,6 +264,12 @@ public class Customer : MonoBehaviour
                         leaveIfFull = false;
                     }
                 }
+
+                if (timer.timeHasEnd())
+                {
+                    leaveCafe(false);
+                    angryUI.SetActive(true);
+                }
             });
 
 
@@ -271,7 +283,8 @@ public class Customer : MonoBehaviour
             {
                 toWaitingArea = false;
                 atWaitingArea = true;
-                timer.startTimer(waitingRoomTime);
+
+                // timer.startTimer(waitingRoomTime);
             }
         }
 
@@ -279,6 +292,7 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
+            timer.pauseTimer();
             // Check if customer reached destination
             if (distanceToDestination() < 0.1)
             {
@@ -326,11 +340,9 @@ public class Customer : MonoBehaviour
         if (atWaitingArea)
         {
             //waitingRoomTime += Time.deltaTime;
-            print("WAIT DUR:");
-            print(timer.getWaitingDuration());
+
             if (timer.timeHasEnd())
             {
-                print("TIME IS UP AT WAITING ROOM");
                 leaveCafe(false);
                 angryUI.SetActive(true);
             }
