@@ -10,8 +10,8 @@ public class CustomerTimer : MonoBehaviour
 {
     [SerializeField] private Image fill;
     [SerializeField] TMP_Text timeText;
-    private float waitDuration = 40f;
-    private float timeRemaining;
+    public float waitDuration = 40f;
+    private float timeRemaining = 99f;
     private bool isPaused = true;
     private bool hasStarted = false;
 
@@ -40,6 +40,10 @@ public class CustomerTimer : MonoBehaviour
         isPaused = false;
     }
 
+    public void pauseTimer() {
+        isPaused = true;
+    }
+
     public bool timeHasEnd()
     {
         if (timeRemaining <= 0)
@@ -51,5 +55,9 @@ public class CustomerTimer : MonoBehaviour
 
     public float getRemainingTimeRatio() {
         return timeRemaining/waitDuration;
+    }
+
+    public float getTimeRemaining() {
+        return timeRemaining;
     }
 }

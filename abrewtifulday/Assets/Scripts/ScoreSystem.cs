@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
     private float score = 0;
     static ScoreSystem instance;
     public TextMeshProUGUI finalScoreText;
+    private int customerCount;
 
     void Awake()
     {
@@ -76,5 +77,13 @@ public class ScoreSystem : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public static void incrementCustomer() {
+        instance.customerCount += 1;
+    }
+
+    public static int getCustomerServedCount() {
+        return instance.customerCount;
     }
 }

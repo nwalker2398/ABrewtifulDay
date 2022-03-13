@@ -14,7 +14,7 @@ public class MatchaMaker : MonoBehaviour
 
     void Start()
     {
-        thoughtBubble.active = false;
+        thoughtBubble.SetActive(false);
         audioSource = GetComponent<AudioSource>();
         matchaMakerCollider = GetComponent<BoxCollider>();
     }
@@ -42,7 +42,7 @@ public class MatchaMaker : MonoBehaviour
         Debug.Log("Finished Matcha at timestamp : " + Time.time);
         Debug.Log("Matcha is ready!");
         audioSource.PlayOneShot(bell);
-        thoughtBubble.active = true;
+        thoughtBubble.SetActive(true);
     }
 
     /** Adds a coffee to the barista's tray and removes the bubble from above 
@@ -53,16 +53,16 @@ public class MatchaMaker : MonoBehaviour
         //must be within x dist of machine to pick up
         //if gameobject with tag barrista colliding with coffee area
 
-        thoughtBubble.active = false;
+        thoughtBubble.SetActive(false);
 
         Debug.Log(GetComponentInParent<Tray>());
         Debug.Log(GetComponent<Tray>());
 
 
-        Tray.instance.trayCoffee.active = false;
-        Tray.instance.trayMatcha.active = false;
-        Tray.instance.trayBoba.active = false;
+        Tray.instance.trayCoffee.SetActive(false);
+        Tray.instance.trayMatcha.SetActive(false);
+        Tray.instance.trayBoba.SetActive(false);
         Tray.instance.curDrink = machineDrink;
-        Tray.instance.curDrink.active = true;
+        Tray.instance.curDrink.SetActive(true);
     }
 }

@@ -61,7 +61,7 @@ public class PutDrinks : MonoBehaviour
             // if we have a drink to serve, put the drink onto the object
             if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
-                Tray.instance.curDrink.active = false;
+                Tray.instance.curDrink.SetActive(false);
                 //trayCoffee.SetActive(false);
                 GameObject drink = null;
 

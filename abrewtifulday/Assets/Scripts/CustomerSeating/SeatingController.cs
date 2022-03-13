@@ -96,12 +96,12 @@ public class SeatingController : MonoBehaviour
                     // make customer glow after selection
                     c.GetComponent<HighlightEffect>().SetHighlighted(true);
 
-                    if (SeatingData.showArrow)
+                    /*if (SeatingData.showArrow)
                     {
                         removeArrow(true);
                         // Can use arrow logic in tutorial scene, commenting out now!
                         // addArrow(tutorialChair.transform.position);
-                    }
+                    }*/
                     //renderer.material = customer_glow;
                 }
 
@@ -115,7 +115,7 @@ public class SeatingController : MonoBehaviour
                         SeatingData.selectedChair = chair;
                         renderer.material = chair_glow;
 
-                        removeArrow(false);
+                        //removeArrow(false);
                         print("Seating customer");
                         seatCustomer();
                     }
@@ -147,11 +147,12 @@ public class SeatingController : MonoBehaviour
         oldRenderer.material = chair_normal;
     }
 
-    public void addArrow(Vector3 pos)
+    /*public void addArrow(Vector3 pos)
     {
         if (SeatingData.showArrow)
         {
             var arrow = GameObject.FindGameObjectWithTag("Arrow");
+            //make new arrow in area 
             pos.y = arrow.GetComponent<ArrowController>().calcY();
             var new_arrow = Instantiate(arrow, pos, Quaternion.identity);
             SeatingData.customerArrow = new_arrow;
@@ -166,7 +167,7 @@ public class SeatingController : MonoBehaviour
             SeatingData.customerArrow = null;
             SeatingData.showArrow = showAgain;
         }
-    }
+    }*/
 
     void generateCustomer(Vector3 location)
     {
