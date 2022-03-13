@@ -23,13 +23,12 @@ public class Customer : MonoBehaviour
     private bool leaveIfFull = true;
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
-    private float waitingSeatTime = 0f;
-    private float waitingRoomTime = 0f;
+    [SerializeField] float waitingSeatTime = 60f;
+    [SerializeField] float waitingRoomTime = 20f;
     private bool rotate = false;
     private float drinkTime = 6f;
 
-    [SerializeField] CustomerTimer seatTimer;
-    [SerializeField] CustomerTimer waitingRoomTimer;
+    [SerializeField] CustomerTimer timer;
     public bool isServed = false;
     [SerializeField] GameObject angryUI;
 
@@ -47,8 +46,12 @@ public class Customer : MonoBehaviour
 
     private int randomOrder;
 
+    CanvasRenderer timerRenderer;
+
     void Start()
     {
+        timerRenderer = timer.GetComponent<CanvasRenderer>();
+
         order.SetActive(false);
 
         coffeePrefab.SetActive(false);
@@ -58,8 +61,8 @@ public class Customer : MonoBehaviour
 
         randomOrder = randomizeOrder();
 
-        waitingRoomTimer.gameObject.SetActive(false);
-        //seatTimer.gameObject.SetActive(false);
+        // timerRenderer.enabled = false;
+        // waitingRoomTimerRenderer.enabled = false;
 
         //customerCanvas.SetActive(false);
     }
@@ -131,7 +134,7 @@ public class Customer : MonoBehaviour
             rawScore = 1;
         }
         
-        float ratio = seatTimer.getRemainingTimeRatio();
+        float ratio = timer.getRemainingTimeRatio();
 
         if (ratio < 0.34) {
             finalScore = rawScore - 2;
@@ -197,11 +200,11 @@ public class Customer : MonoBehaviour
         }
 
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
-        if (seatTimer.timeHasEnd() && !isServed) {
-            if (atWaitingArea) {
-                atWaitingArea = false;
-                SeatingData.waitingCustomers.Remove(this);
-            }
+        if (timer.timeHasEnd() && !isServed) {
+            // if (atWaitingArea) {
+            //     atWaitingArea = false;
+            //     SeatingData.waitingCustomers.Remove(this);
+            // }
             if (atSeat)
             {
                 seat.seatedCustomer = false;
@@ -268,7 +271,7 @@ public class Customer : MonoBehaviour
             {
                 toWaitingArea = false;
                 atWaitingArea = true;
-                //timer.startTimer(); // start the customer timer
+                timer.startTimer(waitingRoomTime);
             }
         }
 
@@ -276,8 +279,6 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
-            waitingRoomTimer.pauseTimer();
-
             // Check if customer reached destination
             if (distanceToDestination() < 0.1)
             {
@@ -300,9 +301,8 @@ public class Customer : MonoBehaviour
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
                     
-                    //customerCanvas.SetActive(false);
-                    seatTimer.gameObject.SetActive(true);
-                    seatTimer.startTimer(); // start the customer timer
+                    //timerRenderer.enabled = true;
+                    timer.startTimer(waitingSeatTime); // start the customer timer
                 }
             }
             else
@@ -325,19 +325,16 @@ public class Customer : MonoBehaviour
         // Leave cafe if waiting for more than 20 seconds in the waiting area
         if (atWaitingArea)
         {
-            waitingRoomTimer.gameObject.SetActive(true);
-            waitingRoomTimer.startTimer();
             //waitingRoomTime += Time.deltaTime;
-
-            if (waitingRoomTimer.timeHasEnd())
+            print("WAIT DUR:");
+            print(timer.getWaitingDuration());
+            if (timer.timeHasEnd())
             {
+                print("TIME IS UP AT WAITING ROOM");
                 leaveCafe(false);
                 angryUI.SetActive(true);
-                waitingRoomTimer.gameObject.SetActive(false);
             }
         }
-
-     
 
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 2f)
@@ -391,6 +388,6 @@ public class Customer : MonoBehaviour
         coffeePrefab.SetActive(false);
         bobaPrefab.SetActive(false);
         matchaPrefab.SetActive(false);
-        seatTimer.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
     }
 }
