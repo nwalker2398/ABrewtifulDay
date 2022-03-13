@@ -22,6 +22,8 @@ public class PlaceButton : MonoBehaviour
     public GameObject rightWall3;
     public GameObject backWall;
 
+    public GameObject tables;
+
     private bool startedPlacement = false;
     private bool placed = false;
     private int version = 1;
@@ -29,9 +31,10 @@ public class PlaceButton : MonoBehaviour
 
     void Start()
     {
+        tables = GameObject.Find("Tables");
         // versions: 1 = howls picture, 2 = cagliostro picture, 3 = wallpaper
         // 4 = plant (fiddle leaf)
-        version = 4; // development mode -- need to change
+        version = 3; // development mode -- need to change
         if (version == 2)
         {
             gift.SetActive(false);
@@ -49,6 +52,7 @@ public class PlaceButton : MonoBehaviour
             startPanel = GameObject.Find("PlantStartPanel");
             startPanel.SetActive(false);
             startPanel = GameObject.Find("StartPanel");
+            tables.SetActive(false);
         }
         else if (version == 1)
         {
@@ -68,6 +72,7 @@ public class PlaceButton : MonoBehaviour
             startPanel = GameObject.Find("PlantStartPanel");
             startPanel.SetActive(false);
             startPanel = GameObject.Find("StartPanel");
+            tables.SetActive(false);
         }
         else if (version == 3)
         {
@@ -81,6 +86,7 @@ public class PlaceButton : MonoBehaviour
             startPanel = GameObject.Find("PlantStartPanel");
             startPanel.SetActive(false);
             startPanel = GameObject.Find("WallpaperStartPanel");
+            tables.SetActive(false);
         }
         else if (version == 4)
         {
