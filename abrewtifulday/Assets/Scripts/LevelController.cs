@@ -133,6 +133,8 @@ public class LevelController: MonoBehaviour
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
         oldLevel = currentLevel;
+        // check for if we need to go to editing scene
+        // else call these next two lines
         SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
     }
