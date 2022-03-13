@@ -103,7 +103,6 @@ public class LevelController: MonoBehaviour
     public void Update()
     {
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera")){
-            Debug.Log(o.GetComponent<AudioSource>().clip.name);
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
                 loadLevel();
