@@ -20,4 +20,17 @@ public class PauseScreen : MonoBehaviour
             mainScreen.SetActive(!mainScreen.active);
         }
     }
+
+    public void showHaungsScreen()
+    {
+        mainScreen.SetActive(false);
+        haungsScreen.SetActive(true);
+    }
+
+    public void showMainScreen()
+    {
+        Debug.Log("main screen");
+        haungsScreen.SetActive(false);
+        mainScreen.SetActive(false);
+    }
 }
