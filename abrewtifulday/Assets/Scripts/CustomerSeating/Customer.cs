@@ -80,7 +80,7 @@ public class Customer : MonoBehaviour
         // order.SetActive(true);
 
         timer.startTimer(waitingRoomTime);
-        print("HELLO");
+        hideOrder();
     }
 
     private int randomizeOrder() {
@@ -93,7 +93,8 @@ public class Customer : MonoBehaviour
             float scale = 0.3f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-            coffeePrefab.SetActive(true);
+            //coffeePrefab.SetActive(true);
+            order = coffeePrefab;
         }
         else {
             // Randomize order
@@ -104,21 +105,24 @@ public class Customer : MonoBehaviour
                 float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                coffeePrefab.SetActive(true);
+                //coffeePrefab.SetActive(true);
+                order = coffeePrefab;
             }
             else if (n == 2) {
                 spriteRenderer.sprite = bobaSprite;
                 float scale = 0.2f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                bobaPrefab.SetActive(true);
+                //bobaPrefab.SetActive(true);
+                order = bobaPrefab;
             }
             else {
                 spriteRenderer.sprite = matchaSprite;
                 float scale = 0.2f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                matchaPrefab.SetActive(true);
+                //matchaPrefab.SetActive(true);
+                order = matchaPrefab;
             }
         }
         return n;
@@ -320,6 +324,8 @@ public class Customer : MonoBehaviour
                     timer.startTimer(waitingSeatTime);
                     timer.GetComponent<Image>().color = new Color32(181, 190, 148, 255);
                     timer.transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(60, 179, 113, 160);
+
+                    showOrder();
                 }
             }
             else
@@ -357,6 +363,8 @@ public class Customer : MonoBehaviour
             SeatingData.waitingCustomers.Remove(this);
             Destroy(this);
         }
+
+        //hideImage(customerCanvas);
     }
 
     float distanceToDestination()
@@ -397,12 +405,25 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void hideOrder()
+    private void hideOrder()
     {
         order.SetActive(false);
-        coffeePrefab.SetActive(false);
-        bobaPrefab.SetActive(false);
-        matchaPrefab.SetActive(false);
-        timer.gameObject.SetActive(false);
+        // coffeePrefab.SetActive(false);
+        // bobaPrefab.SetActive(false);
+        // matchaPrefab.SetActive(false);
+    }
+
+    private void showOrder() {
+        order.SetActive(true);
+    }
+
+    private void hideImage(GameObject gameObject) {
+        //gameObject.GetComponent<Image>().enabled = false;
+        //timer.transform.GetChild(0).gameObject.active = false;
+
+        Image[] childrenImages = gameObject.GetComponentsInChildren<Image>();
+        foreach(Image img in childrenImages) {
+            img.enabled = false;
+        }
     }
 }
