@@ -221,7 +221,6 @@ public class Customer : MonoBehaviour
                 seat.seatedCustomer = false;
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
-            angryUI.SetActive(true);
             order.SetActive(false);
             leaveCafe(true); 
         }
@@ -387,6 +386,10 @@ public class Customer : MonoBehaviour
     {
         hideOrder();
 
+        hideTimer();
+
+        angryUI.SetActive(true);
+
         atWaitingArea = false;
 
         destination = returnArea;
@@ -425,5 +428,10 @@ public class Customer : MonoBehaviour
         foreach(Image img in childrenImages) {
             img.enabled = false;
         }
+    }
+
+    private void hideTimer() {
+        timer.GetComponent<Image>().enabled = false;
+        timer.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
     }
 }
