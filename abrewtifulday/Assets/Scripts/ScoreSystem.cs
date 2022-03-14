@@ -24,6 +24,8 @@ public class ScoreSystem : MonoBehaviour
 
     public static void setScore(float score) {
         instance.score = score;
+        instance.heartBar.SetProgress(instance.score);
+        instance.SetFinalScoreText();
     }
 
     public static float completionPercentage() {

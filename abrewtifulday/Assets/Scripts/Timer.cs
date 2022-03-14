@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused)
+        if (!GameController.GC.isPaused() && !isPaused)
         {
             timeHasEnd(timeRemaining);
             if (timeRemaining >= 0)

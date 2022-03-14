@@ -26,6 +26,7 @@ TagManager:
   - UI
   - angry
   - CustomerGenerator
+  - PauseScreen
   layers:
   - Default
   - TransparentFX
