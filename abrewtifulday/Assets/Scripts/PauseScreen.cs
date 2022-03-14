@@ -66,6 +66,8 @@ public class PauseScreen : MonoBehaviour
 
     public void restartLevel()
     {
+        Debug.Log("Restart");
+        GameController.GC.resumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
     }
 

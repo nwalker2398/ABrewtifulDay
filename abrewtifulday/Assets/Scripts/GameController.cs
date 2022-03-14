@@ -59,6 +59,11 @@ public class GameController : MonoBehaviour
         stopBarista();
     }
 
+    public bool isPaused()
+    {
+        return paused;
+    }
+
     void stopBarista()
     {
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
