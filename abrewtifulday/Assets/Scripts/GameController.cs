@@ -32,6 +32,13 @@ public class GameController : MonoBehaviour
                 StopGame();
             }
         }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            foreach(GameObject o in GameObject.FindGameObjectsWithTag("PauseScreen"))
+            {
+                o.GetComponent<PauseScreen>().escPressed();
+            }
+        }
     }
 
     public void StopGame()
@@ -39,7 +46,12 @@ public class GameController : MonoBehaviour
         paused = true;
         stopBarista();
     }
-    
+
+    public void resumeGame() {
+        paused = false;
+        resumeBarista();
+    }
+
     // Make sure to save state for unpausing later
     public void PauseGame()
     {
@@ -52,5 +64,12 @@ public class GameController : MonoBehaviour
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
         barista.GetComponent<CharacterController>().enabled = false;
         barista.GetComponent<Animator>().enabled = false;
+    }
+
+    void resumeBarista()
+    {
+        GameObject barista = GameObject.FindGameObjectWithTag("Barista");
+        barista.GetComponent<CharacterController>().enabled = true;
+        barista.GetComponent<Animator>().enabled = true;
     }
 }
