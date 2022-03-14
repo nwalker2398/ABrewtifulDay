@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 8285262954923604124}
   - component: {fileID: 8285262954923604125}
   - component: {fileID: 8285262954923604126}
-  - component: {fileID: 3851454821399540256}
   m_Layer: 5
   m_Name: HaungsScreen
   m_TagString: Untagged
@@ -197,20 +196,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &3851454821399540256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8285262954923604115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c821b66ac0f4d63993016a7e013930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainScreen: {fileID: 8285262954923604115}
-  haungsScreen: {fileID: 0}
 --- !u!1 &8285262955928786050
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +280,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1621657889235472050, guid: ec5e8faef4b9246fd9cb4749b14276fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1621657889235472050, guid: ec5e8faef4b9246fd9cb4749b14276fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

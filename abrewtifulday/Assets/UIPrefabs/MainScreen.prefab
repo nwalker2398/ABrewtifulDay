@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 3883402534110728832}
   - component: {fileID: 3883402534110728833}
   - component: {fileID: 3883402534110728834}
-  - component: {fileID: 8245150853100804156}
   m_Layer: 5
   m_Name: MainScreen
   m_TagString: Untagged
@@ -259,20 +258,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &8245150853100804156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3883402534110728847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c821b66ac0f4d63993016a7e013930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainScreen: {fileID: 0}
-  haungsScreen: {fileID: 0}
 --- !u!1 &3883402534369308283
 GameObject:
   m_ObjectHideFlags: 0

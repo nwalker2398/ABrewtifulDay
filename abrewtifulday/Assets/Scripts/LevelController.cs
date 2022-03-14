@@ -12,6 +12,7 @@ public class LevelController: MonoBehaviour
     public Dictionary<string, object> currentLevelData;
     public List<AudioClip> songs;
     public GameObject spillPrefab;
+    public bool unlimitedHearts = false;
 
     private int oldLevel;
 
@@ -112,6 +113,11 @@ public class LevelController: MonoBehaviour
         
     }
 
+    public static void toggleUnlimitedHearts()
+    {
+        LC.unlimitedHearts = !LC.unlimitedHearts;
+        Debug.Log("Unlimited hearts = " + LC.unlimitedHearts);
+    }
 
     void setLevel(int l)
     {
@@ -135,7 +141,6 @@ public class LevelController: MonoBehaviour
     public static void nextLevel()
     {
         if (LC != null)
-
             LC.instanceNextLevel();
     }
 
@@ -146,6 +151,20 @@ public class LevelController: MonoBehaviour
         oldLevel = currentLevel;
         SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
+    }
+
+    public static void mainMenu()
+    {
+        Debug.Log("Main Menu");
+        SceneManager.LoadScene("StartSceneBasic");
+        LC.die();
+    }
+
+    public void die()
+    {
+        GameObject.Destroy(this);
+        this.enabled = false;
+        return;
     }
 
     public void loadLevel()

@@ -8853,6 +8853,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416454564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1427554603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7242490734148098789, guid: 28716d960030c4368b16c652bcfb436d, type: 3}
+  m_PrefabInstance: {fileID: 212860645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1448442077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12218,6 +12223,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910829156}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1913772327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5421608764383449855, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+  m_PrefabInstance: {fileID: 915738642962568225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1954425896
 GameObject:
   m_ObjectHideFlags: 0
@@ -13840,6 +13850,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 915738643054203289, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915738643054203291, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: o
+      value: 
+      objectReference: {fileID: 1427554603}
+    - target: {fileID: 915738643054203291, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: mainScreen
+      value: 
+      objectReference: {fileID: 1913772327}
+    - target: {fileID: 933764723142402119, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1238515026813158938, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -13847,6 +13873,10 @@ PrefabInstance:
     - target: {fileID: 1475162973524564180, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226982725719147539, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2999401215254998861, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
       propertyPath: m_Layer
@@ -13919,6 +13949,18 @@ PrefabInstance:
     - target: {fileID: 6030385966521619416, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105478505314276836, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+    - target: {fileID: 6105478505314276836, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: mainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105478505314276836, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6267038313427143958, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
       propertyPath: m_Layer
@@ -14036,7 +14078,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8712673346455585685, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712673346455585685, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 901082939}
+    - target: {fileID: 8712673346455585685, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712673346455585685, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7937652068826515951, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+    - {fileID: 915738644208736332, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
+    - {fileID: 933764723142402119, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f4fba0d597c4a4408aadb7fa4e03c3c0, type: 3}
 --- !u!1001 &5469383880697615056
 PrefabInstance:
