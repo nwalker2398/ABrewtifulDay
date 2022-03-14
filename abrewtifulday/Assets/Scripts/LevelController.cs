@@ -117,6 +117,8 @@ public class LevelController: MonoBehaviour
     {
         LC.unlimitedHearts = !LC.unlimitedHearts;
         Debug.Log("Unlimited hearts = " + LC.unlimitedHearts);
+        if (LC.unlimitedHearts)
+            ScoreSystem.setScore(ScoreSystem.getMaxScore());
     }
 
     void setLevel(int l)
@@ -171,6 +173,8 @@ public class LevelController: MonoBehaviour
     {
         int level = currentLevel;
 
+
+
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
 
@@ -203,5 +207,7 @@ public class LevelController: MonoBehaviour
         Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
         if(!spillPos.Equals(new Vector3(0,0,0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
+        if (unlimitedHearts)
+            ScoreSystem.setScore(ScoreSystem.getMaxScore());
     }
 }

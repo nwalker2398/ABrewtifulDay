@@ -125,10 +125,14 @@ PrefabInstance:
     - target: {fileID: 7240208756187296598, guid: b3ce9b0be013c4e17b7d1eebb6fdccca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      objectReference: {fileID: 915738643054203291}
     - target: {fileID: 7240208756187296598, guid: b3ce9b0be013c4e17b7d1eebb6fdccca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: nextLevel
+      value: skiplLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240208756187296598, guid: b3ce9b0be013c4e17b7d1eebb6fdccca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7604826725946590099, guid: b3ce9b0be013c4e17b7d1eebb6fdccca, type: 3}
       propertyPath: m_Layer

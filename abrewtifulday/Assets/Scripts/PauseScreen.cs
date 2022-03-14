@@ -15,6 +15,12 @@ public class PauseScreen : MonoBehaviour
     {
     }
 
+    public void skiplLevel()
+    {
+        GameController.GC.resumeGame();
+        LevelController.nextLevel();
+    }
+
     public void escPressed()
     {
         if (mainScreen.activeInHierarchy || haungsScreen.activeInHierarchy)
