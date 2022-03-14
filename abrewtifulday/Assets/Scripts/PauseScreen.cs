@@ -53,6 +53,11 @@ public class PauseScreen : MonoBehaviour
         }
     }
 
+    public void restartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+    }
+
     public void resume()
     {
         Debug.Log("Resume");
