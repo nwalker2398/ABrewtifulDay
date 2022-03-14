@@ -173,8 +173,8 @@ MonoBehaviour:
   stopDistance: 1.7
   order: {fileID: 1241875462406688334}
   controller: {fileID: 0}
-  waitingArea: {x: -3, y: 0, z: -3.5}
-  returnArea: {x: -10, y: 0, z: -10}
+  waitingArea: {x: -4, y: 0, z: -3.5}
+  returnArea: {x: -10, y: 0, z: -5}
   toWaitingArea: 0
   atWaitingArea: 0
   toWaitingLine: 0

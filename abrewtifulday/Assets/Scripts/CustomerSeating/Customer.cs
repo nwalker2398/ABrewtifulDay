@@ -206,7 +206,10 @@ public class Customer : MonoBehaviour
     {
         if (GameController.GC.paused || GameController.GC.stopped)
         {
-            GetComponent<NavMeshAgent>().isStopped = true;
+            if (GetComponent<NavMeshAgent>().isActiveAndEnabled)
+            {
+                GetComponent<NavMeshAgent>().isStopped = true;
+            }
             return;
         }
 
@@ -362,6 +365,7 @@ public class Customer : MonoBehaviour
         if (Vector3.Distance(transform.position, returnArea) < 2f)
         {
             SeatingData.waitingCustomers.Remove(this);
+            gameObject.SetActive(false);
             Destroy(this);
         }
 

@@ -33,8 +33,8 @@ public class SeatingController : MonoBehaviour
         generateCustomerIn = 0f;
         // UPDATE TO THE LEVEL DURATION
         float gameDuration = 120f;
-        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"];
-        waveDuration = numWaves > 0 ? (gameDuration / numWaves) : 10000;
+        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"] + 1;
+        waveDuration = (gameDuration / numWaves) + 1;
         nextWave = Time.time + waveDuration;
     }
 

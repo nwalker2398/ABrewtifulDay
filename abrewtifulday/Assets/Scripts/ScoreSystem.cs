@@ -22,6 +22,11 @@ public class ScoreSystem : MonoBehaviour
         return instance.maxScore;
     }
 
+    public static void setMaxScore(int maxScore)
+    {
+         instance.maxScore = maxScore;
+    }
+
     public static void setScore(float score) {
         instance.score = score;
         instance.heartBar.SetProgress(instance.score);

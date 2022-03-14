@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour
 
     public void resumeGame() {
         paused = false;
+        resumeCustomers();
         resumeBarista();
     }
 
@@ -76,5 +78,18 @@ public class GameController : MonoBehaviour
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
         barista.GetComponent<CharacterController>().enabled = true;
         barista.GetComponent<Animator>().enabled = true;
+    }
+
+    void resumeCustomers()
+    {
+        GameObject[] customerObjects = GameObject.FindGameObjectsWithTag("Customer");
+        for (int i = 0; i < customerObjects.Length; i++)
+        {
+            NavMeshAgent n = customerObjects[i].GetComponent<NavMeshAgent>();
+            if (n.isActiveAndEnabled)
+            {
+                n.isStopped = false;
+            }
+        }
     }
 }

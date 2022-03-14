@@ -76,7 +76,7 @@ public class LevelController: MonoBehaviour
         for(int i = 1; i < levels.Count ; i++)
         {
             songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
-            Debug.Log(songs[i].name);
+            // Debug.Log(songs[i].name);
         }
     }
 
@@ -207,7 +207,14 @@ public class LevelController: MonoBehaviour
         Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
         if(!spillPos.Equals(new Vector3(0,0,0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
+        ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
+        GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
+        ProgressBar pb = progressBar.GetComponent<ProgressBar>();
+        print(pb);
+        pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
         if (unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
+
+        GameController.GC.resumeGame();
     }
 }
