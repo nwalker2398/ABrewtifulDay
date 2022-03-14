@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseScreen : MonoBehaviour
 {
     public GameObject mainScreen;
     public GameObject haungsScreen;
+    public TextMeshProUGUI heartRatio;
+    public TextMeshProUGUI customersServed;
+
 
     void Start()
     {
@@ -28,10 +32,17 @@ public class PauseScreen : MonoBehaviour
         else
         {
             Debug.Log("Pause");
-            mainScreen.SetActive(true);
+            loadMainScreen();
             GameController.GC.PauseGame();
             haungsScreen.SetActive(false);
         }
+    }
+
+    private void loadMainScreen()
+    {
+        mainScreen.SetActive(true);
+        heartRatio.text = "Hearts Earned: " + ScoreSystem.getCurrentScore() + "/" + ScoreSystem.getMaxScore();
+        customersServed.text = "Customers Served: " + ScoreSystem.getCustomerServedCount();
     }
 
     public void showHaungsScreen()
