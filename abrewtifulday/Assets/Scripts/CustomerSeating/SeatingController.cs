@@ -90,11 +90,16 @@ public class SeatingController : MonoBehaviour
                     //selected a customer from the waiting area
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     Customer c = objectHit.gameObject.GetComponent<Customer>();
-                    SeatingData.selectedCustomer = c;
-                    c.toWaitingArea = false;
-                    c.atWaitingArea = true;
-                    // make customer glow after selection
-                    c.GetComponent<HighlightEffect>().SetHighlighted(true);
+
+                    // make customer glow after selection if they're in the waiting area
+                    if (c.toWaitingArea || c.atWaitingArea)
+                    {
+                        print("Glowing customer");
+                        SeatingData.selectedCustomer = c;
+                        c.toWaitingArea = false;
+                        c.atWaitingArea = true;
+                        c.GetComponent<HighlightEffect>().SetHighlighted(true);
+                    }
 
                     /*if (SeatingData.showArrow)
                     {

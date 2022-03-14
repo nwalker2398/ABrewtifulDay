@@ -2541,7 +2541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2553,7 +2553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6140,7 +6140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6653,6 +6653,11 @@ PrefabInstance:
 --- !u!4 &1349785631 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6616459193321962073, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
+  m_PrefabInstance: {fileID: 1349785630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1349785632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6639944485703389333, guid: 6eb56b26a52618f4f9f2aa94285ec3a9, type: 3}
   m_PrefabInstance: {fileID: 1349785630}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1361658473
@@ -8564,7 +8569,7 @@ MonoBehaviour:
   HeartArrow: {fileID: 1265836036}
   TimerArrow: {fileID: 1297261889}
   firstCustomer: {fileID: 0}
-  tutorialChair: {fileID: 0}
+  tutorialChair: {fileID: 1349785632}
   Text: {fileID: 1261528981}
   DialogBox: {fileID: 228421138}
   StartButton: {fileID: 1318407604}

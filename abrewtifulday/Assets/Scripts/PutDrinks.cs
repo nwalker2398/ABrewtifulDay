@@ -53,7 +53,7 @@ public class PutDrinks : MonoBehaviour
 
             // Only deliver drinks if barista is close to the customer
             GameObject barista = trayCoffee = GameObject.FindGameObjectWithTag("Barista");
-            if (Vector3.Distance(barista.transform.position, hitInfo.transform.gameObject.transform.position) > 1f)
+            if (Vector3.Distance(barista.transform.position, hitInfo.transform.gameObject.transform.position) > 1.5f)
             {
                 return;
             }

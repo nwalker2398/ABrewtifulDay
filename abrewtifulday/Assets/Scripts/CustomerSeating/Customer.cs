@@ -222,6 +222,8 @@ public class Customer : MonoBehaviour
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
             order.SetActive(false);
+
+            angryUI.SetActive(true);
             leaveCafe(true); 
         }
 
@@ -387,8 +389,6 @@ public class Customer : MonoBehaviour
         hideOrder();
 
         hideTimer();
-
-        angryUI.SetActive(true);
 
         atWaitingArea = false;
 
