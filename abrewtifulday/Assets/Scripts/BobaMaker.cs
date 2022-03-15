@@ -20,6 +20,13 @@ public class BobaMaker : MonoBehaviour
         bobaMakerCollider = GetComponent<BoxCollider>();
     }
 
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Boba!");
         Debug.Log(BobaRange.inBobaRange);

@@ -22,23 +22,25 @@ public class CoffeeMaker : MonoBehaviour
         coffeeMakerCollider = GetComponent<BoxCollider>();
     }
 
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Coffee!");
         Debug.Log(coffeeRange.inCoffeeRange);
-        if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
+        if (coffeeRange.inCoffeeRange && !thoughtBubble.active && !brewing)
         {
-            if (coffeeClicked == false)
-            {
-                coffeeClicked = true;
-                StartCoroutine(waitToMake());
-                coffeePickedUp = false;
-            }
+            brewing = true;
+            StartCoroutine(waitToMake());
         }
         else if (coffeeRange.inCoffeeRange && thoughtBubble.active)
         {
-            coffeeClicked = false;
+            brewing = false;
             pickUpCoffee();
-            coffeePickedUp = true;
         }        
     }
 

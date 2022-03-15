@@ -45,11 +45,13 @@ public class GameController : MonoBehaviour
     public void StopGame()
     {
         paused = true;
+        stopped = true;
         stopBarista();
     }
 
     public void resumeGame() {
         paused = false;
+        stopped = false;
         resumeCustomers();
         resumeBarista();
     }

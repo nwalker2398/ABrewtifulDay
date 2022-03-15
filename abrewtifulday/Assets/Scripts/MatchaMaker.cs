@@ -19,6 +19,13 @@ public class MatchaMaker : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         matchaMakerCollider = GetComponent<BoxCollider>();
     }
+    
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
 
     void OnMouseDown() {
         Debug.Log("Clicking Matcha!");

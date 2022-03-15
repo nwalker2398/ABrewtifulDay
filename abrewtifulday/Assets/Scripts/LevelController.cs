@@ -208,10 +208,12 @@ public class LevelController: MonoBehaviour
         if(!spillPos.Equals(new Vector3(0,0,0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
         ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
+        ScoreSystem.setScore(0);
         GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
         ProgressBar pb = progressBar.GetComponent<ProgressBar>();
         print(pb);
         pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
+        pb.SetInitialProgress(0);
         if (unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
 
