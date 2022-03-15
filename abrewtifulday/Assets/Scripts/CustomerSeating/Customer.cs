@@ -14,12 +14,17 @@ public class Customer : MonoBehaviour
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
+    private Vector3 insideCafe = new Vector3(-5f, 0f, 0f); // x position of the door of the cafe
 
     public bool toWaitingArea = false;
     public bool atWaitingArea = false;
 
     public bool toWaitingLine = false;
     public bool atWaitingLine = false;
+
+    private bool hasLeft = false;
+    private float selfDestructTime = 5f;
+    private bool timerIsOn = false;
 
     private Chair seat;
     private bool toSeat = false;
@@ -79,7 +84,7 @@ public class Customer : MonoBehaviour
         toWaitingArea = true;
         // order.SetActive(true);
 
-        timer.startTimer(waitingRoomTime);
+        // timer.startTimer(waitingRoomTime);
         hideOrder();
     }
 
@@ -295,6 +300,12 @@ public class Customer : MonoBehaviour
 
                 // timer.startTimer(waitingRoomTime);
             }
+
+            // Start timer only when customer pass the cafe door
+            if (!timerIsOn && transform.position.x > insideCafe.x) {
+                timer.startTimer(waitingRoomTime);
+                timerIsOn = true;
+            }
         }
 
         // If walking to seat
@@ -369,7 +380,14 @@ public class Customer : MonoBehaviour
             Destroy(this);
         }
 
-        //hideImage(customerCanvas);
+        // Self destruct customer when they stuck
+        if (hasLeft) {
+            selfDestructTime -= Time.deltaTime;
+            if (selfDestructTime <= 0) {
+                SeatingData.waitingCustomers.Remove(this);
+                Destroy(gameObject);
+            }
+        }
     }
 
     float distanceToDestination()
@@ -410,6 +428,8 @@ public class Customer : MonoBehaviour
         if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
             ScoreSystem.decrementScore(1);
         }
+
+        hasLeft = true;
     }
 
     private void hideOrder()
