@@ -14,7 +14,7 @@ public class Customer : MonoBehaviour
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
-    private Vector3 insideCafe = new Vector3(-5f, 0f, 0f); // x position of the door of the cafe
+    private Vector3 insideCafe = new Vector3(-5.5f, 0f, 0f); // x position of the door of the cafe
 
     public bool toWaitingArea = false;
     public bool atWaitingArea = false;
@@ -426,7 +426,7 @@ public class Customer : MonoBehaviour
         }*/
 
         if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
-            ScoreSystem.decrementScore(1);
+            //ScoreSystem.decrementScore(1);
         }
 
         hasLeft = true;

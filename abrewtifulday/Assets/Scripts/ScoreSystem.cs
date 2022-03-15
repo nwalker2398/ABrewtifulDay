@@ -46,6 +46,7 @@ public class ScoreSystem : MonoBehaviour
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
             instance.SetFinalScoreText();
+            Debug.Log($"Current Score: {instance.score}");
         }
     }
 
