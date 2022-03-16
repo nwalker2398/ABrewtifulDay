@@ -76,7 +76,7 @@ public class ScoreSystem : MonoBehaviour
     public static void SetFinalScoreText()
     {
         Debug.Log($"LEVEL END: {LevelController.LC.currentLevel}");
-        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{instance.playerScores[LevelController.LC.currentLevel]} Hearts Collected";
+        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{instance.playerScores[LevelController.LC.currentLevel]}/{instance.maxScore} Hearts Collected";
     }
 
     // public static bool gameIsRunning() {
