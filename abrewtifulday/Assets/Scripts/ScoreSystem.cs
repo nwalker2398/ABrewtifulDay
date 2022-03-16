@@ -75,8 +75,11 @@ public class ScoreSystem : MonoBehaviour
 
     public static void SetFinalScoreText()
     {
-        Debug.Log($"LEVEL END: {LevelController.LC.currentLevel}");
-        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{instance.playerScores[LevelController.LC.currentLevel]}/{instance.maxScore} Hearts Collected";
+        int custServed = instance.playerScores[LevelController.LC.currentLevel];
+        if (custServed > instance.maxScore) {
+            custServed = instance.maxScore;
+        }
+        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{custServed}/{instance.maxScore} Hearts Collected";
     }
 
     // public static bool gameIsRunning() {
