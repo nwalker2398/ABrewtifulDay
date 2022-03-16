@@ -49,9 +49,7 @@ public class ScoreSystem : MonoBehaviour
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
             //instance.SetFinalScoreText();
-            Debug.Log($"LEVEL: {LevelController.LC.currentLevel}");
             instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
-            Debug.Log($"SCORE: {instance.playerScores[LevelController.LC.currentLevel]}");
         }
     }
 
@@ -100,7 +98,6 @@ public class ScoreSystem : MonoBehaviour
 
     public static void incrementCustomer() {
         instance.customerServed[LevelController.LC.currentLevel] = instance.customerServed[LevelController.LC.currentLevel] + 1;
-        Debug.Log($"CUSTOMER: {instance.customerServed[LevelController.LC.currentLevel]}");
     }
 
     public static int getCurrentLevelCustomerServedCount() {

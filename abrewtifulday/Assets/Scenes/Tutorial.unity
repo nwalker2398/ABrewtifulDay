@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657725, g: 0.49641198, b: 0.5748184, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465767, g: 0.49641162, b: 0.57481784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1761,6 +1761,10 @@ PrefabInstance:
       propertyPath: heartBar
       value: 
       objectReference: {fileID: 2013650900}
+    - target: {fileID: 7242490734148132228, guid: 28716d960030c4368b16c652bcfb436d, type: 3}
+      propertyPath: maxScore
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7242490734148132228, guid: 28716d960030c4368b16c652bcfb436d, type: 3}
       propertyPath: finalScoreText
       value: 
