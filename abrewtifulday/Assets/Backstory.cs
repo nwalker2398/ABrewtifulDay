@@ -10,7 +10,7 @@ public class Backstory : MonoBehaviour
         public TextMeshProUGUI Text;
         public GameObject DialogBox;
         public GameObject continueButton;
-        string[] dialog = {"Wow, welcome back!",
+        string[] dialog = {"Wow, welcome back to town!",
                             "I heard from your dad that you are starting your own cafe!",
                             "I remember when you were little you used to always make me imaginary coffees (chuckles)",
                             "Well let me know when it opens, and good luck with your shop"};
