@@ -163,6 +163,7 @@ public class TutorialDialogue : MonoBehaviour
     /* points to coffee machine until its clicked. */
     public void PrepareDrink()
     {
+        Debug.Log("in prepare drink!");
         nextDialog(PREPARING_DRINK);
         if (!coffeeArrow)
         {
@@ -173,6 +174,8 @@ public class TutorialDialogue : MonoBehaviour
             addArrow(coffeePosition);
             coffeeArrow = true;
         }
+        Debug.Log("Coffee clicked: " + CoffeeMaker.coffeeClicked );
+        Debug.Log("Coffee arrow: ß" + coffeeArrow );
         if (CoffeeMaker.coffeeClicked && coffeeArrow)
         {
             removeArrow();

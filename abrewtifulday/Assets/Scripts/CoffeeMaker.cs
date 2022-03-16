@@ -31,9 +31,12 @@ public class CoffeeMaker : MonoBehaviour
 
     void OnMouseDown() {
         Debug.Log("Clicking Coffee!");
+
         Debug.Log(coffeeRange.inCoffeeRange);
         if (coffeeRange.inCoffeeRange && !thoughtBubble.active && !brewing)
         {
+            coffeePickedUp = false;
+            coffeeClicked = true;
             brewing = true;
             StartCoroutine(waitToMake());
         }
@@ -41,6 +44,8 @@ public class CoffeeMaker : MonoBehaviour
         {
             brewing = false;
             pickUpCoffee();
+            coffeePickedUp = true;
+            coffeeClicked = false;
         }        
     }
 

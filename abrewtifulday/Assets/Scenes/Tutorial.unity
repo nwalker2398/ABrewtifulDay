@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657725, g: 0.49641198, b: 0.5748184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2280,9 +2280,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial Dialog Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 742802882406707771, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802883343951646, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802883569500606, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8436942972447757831, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_IsActive
@@ -8772,6 +8784,10 @@ PrefabInstance:
     - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_Name
       value: DialogBoxScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 742802882406707771, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
       propertyPath: m_IsActive
