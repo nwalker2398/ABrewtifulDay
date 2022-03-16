@@ -33,8 +33,8 @@ public class SeatingController : MonoBehaviour
         generateCustomerIn = 0f;
         // UPDATE TO THE LEVEL DURATION
         float gameDuration = 120f;
-        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"];
-        waveDuration = numWaves > 0 ? (gameDuration / numWaves) : 10000;
+        int numWaves = (int)LevelController.LC.currentLevelData["NumWaves"] + 1;
+        waveDuration = (gameDuration / numWaves) + 1;
         nextWave = Time.time + waveDuration;
     }
 
@@ -90,11 +90,16 @@ public class SeatingController : MonoBehaviour
                     //selected a customer from the waiting area
                     //Renderer renderer = objectHit.gameObject.GetComponent<Renderer>();
                     Customer c = objectHit.gameObject.GetComponent<Customer>();
-                    SeatingData.selectedCustomer = c;
-                    c.toWaitingArea = false;
-                    c.atWaitingArea = true;
-                    // make customer glow after selection
-                    c.GetComponent<HighlightEffect>().SetHighlighted(true);
+
+                    // make customer glow after selection if they're in the waiting area
+                    if (c.toWaitingArea || c.atWaitingArea)
+                    {
+                        print("Glowing customer");
+                        SeatingData.selectedCustomer = c;
+                        c.toWaitingArea = false;
+                        c.atWaitingArea = true;
+                        c.GetComponent<HighlightEffect>().SetHighlighted(true);
+                    }
 
                     /*if (SeatingData.showArrow)
                     {

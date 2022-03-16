@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
     private float score = 0;
     static ScoreSystem instance;
     public TextMeshProUGUI finalScoreText;
+    private int customerCount;
 
     void Awake()
     {
@@ -21,8 +22,15 @@ public class ScoreSystem : MonoBehaviour
         return instance.maxScore;
     }
 
+    public static void setMaxScore(int maxScore)
+    {
+         instance.maxScore = maxScore;
+    }
+
     public static void setScore(float score) {
         instance.score = score;
+        instance.heartBar.SetProgress(instance.score);
+        instance.SetFinalScoreText();
     }
 
     public static float completionPercentage() {
@@ -38,6 +46,7 @@ public class ScoreSystem : MonoBehaviour
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
             instance.SetFinalScoreText();
+            Debug.Log($"Current Score: {instance.score}");
         }
     }
 
@@ -76,5 +85,13 @@ public class ScoreSystem : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public static void incrementCustomer() {
+        instance.customerCount += 1;
+    }
+
+    public static int getCustomerServedCount() {
+        return instance.customerCount;
     }
 }

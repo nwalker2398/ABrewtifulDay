@@ -11,6 +11,7 @@ public class MatchaMaker : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip bell;
     public AudioClip pour;
+    private bool brewing = false;
 
     void Start()
     {
@@ -18,16 +19,26 @@ public class MatchaMaker : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         matchaMakerCollider = GetComponent<BoxCollider>();
     }
+    
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
 
     void OnMouseDown() {
         Debug.Log("Clicking Matcha!");
         Debug.Log(matchaRange.inMatchaRange);
-        if (matchaRange.inMatchaRange && !thoughtBubble.active)
+        if (matchaRange.inMatchaRange && !thoughtBubble.active && !brewing)
         {
+            print("Startng brew");
+            brewing = true;
             StartCoroutine(waitToMake());
         }
         else if (matchaRange.inMatchaRange && thoughtBubble.active)
         {
+            brewing = false;
             pickUpMatcha();
         }        
     }
