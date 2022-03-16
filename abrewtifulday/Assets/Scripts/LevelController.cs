@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class LevelController: MonoBehaviour
+public class LevelController : MonoBehaviour
 {
     public static LevelController LC;
     public List<Dictionary<string, object>> levels;
@@ -36,7 +36,7 @@ public class LevelController: MonoBehaviour
         levels = new List<Dictionary<string, object>>();
         int i = 0;
         levels.Add(new Dictionary<string, object>());
-        foreach (string line in  File.ReadLines("Assets/Scripts/levels.csv"))
+        foreach (string line in File.ReadLines("Assets/Scripts/levels.csv"))
         {
             if (i == 0)
             {
@@ -62,6 +62,7 @@ public class LevelController: MonoBehaviour
             level["CoffeeSpillLocation"] = new Vector3(float.Parse(locations[0]), float.Parse(locations[1]), float.Parse(locations[2])); ;
             level["Plant2Enabled"] = bool.Parse(words[15]);
             level["Dialog"] = words.Length > 16 ? words[16].Replace("^", ",") : "";
+            level["Placing"] = int.Parse(words[17]);
 
             levels.Add(level);
         }
@@ -72,7 +73,7 @@ public class LevelController: MonoBehaviour
     {
         songs = new List<AudioClip>();
         songs.Add(null);
-        for(int i = 1; i < levels.Count ; i++)
+        for (int i = 1; i < levels.Count; i++)
         {
             songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
             Debug.Log(songs[i].name);
@@ -94,7 +95,7 @@ public class LevelController: MonoBehaviour
     public void printLevel(int levelNumber)
     {
         Dictionary<string, object> level = levels[levelNumber];
-        foreach(KeyValuePair<string, object> kvp in level)
+        foreach (KeyValuePair<string, object> kvp in level)
         {
             Debug.Log(string.Format("{0}={1}", kvp.Key, kvp.Value));
         }
@@ -102,7 +103,8 @@ public class LevelController: MonoBehaviour
 
     public void Update()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera")){
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+        {
             Debug.Log(o.GetComponent<AudioSource>().clip.name);
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
@@ -110,7 +112,7 @@ public class LevelController: MonoBehaviour
                 o.GetComponent<AudioSource>().Play();
             }
         }
-        
+
     }
 
 
@@ -146,9 +148,17 @@ public class LevelController: MonoBehaviour
         currentLevel++;
         oldLevel = currentLevel;
         // check for if we need to go to editing scene
-        // else call these next two lines
-        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
-        loadLevel();
+        if ((int)levels[currentLevel]["Placing"] != 0)
+        {
+            // go to editing mode scene
+            SceneManager.LoadScene("EditingMode");
+        }
+        else
+        {
+            // else call these next two lines
+            SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+            loadLevel();
+        }
     }
 
     public void loadLevel()
@@ -160,7 +170,8 @@ public class LevelController: MonoBehaviour
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
-            if(o.scene.name != "" + levels[currentLevel]["Scene"]){
+            if (o.scene.name != "" + levels[currentLevel]["Scene"])
+            {
                 SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
             }
 
@@ -185,7 +196,8 @@ public class LevelController: MonoBehaviour
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
             o.SetActive((bool)levels[level]["Plant2Enabled"]);
         Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
-        if(!spillPos.Equals(new Vector3(0,0,0)))
+        if (!spillPos.Equals(new Vector3(0, 0, 0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
+        Debug.Log("gets to end of load level");
     }
 }

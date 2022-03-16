@@ -73,10 +73,12 @@ public class Customer : MonoBehaviour
         // order.SetActive(true);
     }
 
-    private int randomizeOrder() {
+    private int randomizeOrder()
+    {
         Scene scene = SceneManager.GetActiveScene();
         int n;
-        if (scene.name == "Tutorial" || scene.name == "Cafe1") {
+        if (scene.name == "Tutorial" || scene.name == "Cafe1")
+        {
             n = 1;
 
             spriteRenderer.sprite = coffeeSprite;
@@ -85,25 +87,29 @@ public class Customer : MonoBehaviour
 
             coffeePrefab.SetActive(true);
         }
-        else {
+        else
+        {
             // Randomize order
-            n = (int)Random.Range(0,4);
+            n = (int)Random.Range(0, 4);
 
-            if (n == 1) {
+            if (n == 1)
+            {
                 spriteRenderer.sprite = coffeeSprite;
                 float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
                 coffeePrefab.SetActive(true);
             }
-            else if (n == 2) {
+            else if (n == 2)
+            {
                 spriteRenderer.sprite = bobaSprite;
                 float scale = 0.2f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
                 bobaPrefab.SetActive(true);
             }
-            else {
+            else
+            {
                 spriteRenderer.sprite = matchaSprite;
                 float scale = 0.2f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
@@ -114,36 +120,45 @@ public class Customer : MonoBehaviour
         return n;
     }
 
-    private float calculateScore(GameObject drink) {
+    private float calculateScore(GameObject drink)
+    {
         // check if the order match the given drink
         float rawScore;
         float finalScore;
-        if (randomOrder == 1 && drink.transform.name == "objectCoffee") {
+        if (randomOrder == 1 && drink.transform.name == "objectCoffee")
+        {
             rawScore = 3;
         }
-        else if (randomOrder == 2 && drink.transform.name == "objectBoba") {
+        else if (randomOrder == 2 && drink.transform.name == "objectBoba")
+        {
             rawScore = 3;
         }
-        else if (randomOrder == 3 && drink.transform.name == "objectMatcha") {
+        else if (randomOrder == 3 && drink.transform.name == "objectMatcha")
+        {
             rawScore = 3;
         }
-        else {
+        else
+        {
             rawScore = 1;
         }
-        
+
         float ratio = seatTimer.getRemainingTimeRatio();
 
-        if (ratio < 0.34) {
+        if (ratio < 0.34)
+        {
             finalScore = rawScore - 2;
         }
-        else if (ratio >= 0.34 && ratio < 0.68) {
+        else if (ratio >= 0.34 && ratio < 0.68)
+        {
             finalScore = rawScore - 1;
         }
-        else {
+        else
+        {
             finalScore = rawScore;
         }
 
-        if (finalScore < 0) {
+        if (finalScore < 0)
+        {
             return 0;
         }
         return finalScore;
@@ -155,7 +170,7 @@ public class Customer : MonoBehaviour
 
         ScoreSystem.incrementScore(calculateScore(drink));
         ScoreSystem.incrementCustomer();
-        
+
         Debug.Log("Drinking");
         order.SetActive(false);
         StartCoroutine(RemoveDrinkDelayed(drink));
@@ -192,13 +207,15 @@ public class Customer : MonoBehaviour
     {
         if (GameController.GC.paused || GameController.GC.stopped)
         {
-            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<NavMeshAgent>().isStopped = true; // causing an error
             return;
         }
 
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
-        if (seatTimer.timeHasEnd() && !isServed) {
-            if (atWaitingArea) {
+        if (seatTimer.timeHasEnd() && !isServed)
+        {
+            if (atWaitingArea)
+            {
                 atWaitingArea = false;
                 SeatingData.waitingCustomers.Remove(this);
             }
@@ -209,7 +226,7 @@ public class Customer : MonoBehaviour
             }
             angryUI.SetActive(true);
             order.SetActive(false);
-            leaveCafe(true); 
+            leaveCafe(true);
         }
 
         // Don't do anything if the character is a default prefab
@@ -299,7 +316,7 @@ public class Customer : MonoBehaviour
                     shouldDisplayOrder = true;
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
-                    
+
                     //customerCanvas.SetActive(false);
                     seatTimer.gameObject.SetActive(true);
                     seatTimer.startTimer(); // start the customer timer
@@ -318,7 +335,8 @@ public class Customer : MonoBehaviour
         }
 
         // Move to destination
-        if (toWaitingArea ) {
+        if (toWaitingArea)
+        {
             GetComponent<NavMeshAgent>().SetDestination(destination);
         }
 
@@ -337,7 +355,7 @@ public class Customer : MonoBehaviour
             }
         }
 
-     
+
 
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 2f)
@@ -380,7 +398,8 @@ public class Customer : MonoBehaviour
             controller.removeArrow(true);
         }*/
 
-        if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
+        if (decreaseScore && ScoreSystem.getCurrentScore() > 0)
+        {
             ScoreSystem.decrementScore(1);
         }
     }
