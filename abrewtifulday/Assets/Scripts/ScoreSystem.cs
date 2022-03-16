@@ -33,7 +33,7 @@ public class ScoreSystem : MonoBehaviour
     public static void setScore(float score) {
         instance.score = score;
         instance.heartBar.SetProgress(instance.score);
-        instance.SetFinalScoreText();
+        //instance.SetFinalScoreText();
     }
 
     public static float completionPercentage() {
@@ -48,10 +48,10 @@ public class ScoreSystem : MonoBehaviour
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
-            instance.SetFinalScoreText();
-            Debug.Log($"Current Score: {instance.score}");
-
+            //instance.SetFinalScoreText();
+            Debug.Log($"LEVEL: {LevelController.LC.currentLevel}");
             instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
+            Debug.Log($"SCORE: {instance.playerScores[LevelController.LC.currentLevel]}");
         }
     }
 
@@ -63,7 +63,7 @@ public class ScoreSystem : MonoBehaviour
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
-            instance.SetFinalScoreText();
+            //instance.SetFinalScoreText();
 
             instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
         }
@@ -73,9 +73,10 @@ public class ScoreSystem : MonoBehaviour
         return instance.playerScores[LevelController.LC.currentLevel];
     }
 
-    private void SetFinalScoreText()
+    public static void SetFinalScoreText()
     {
-        finalScoreText.text = instance.score.ToString() + "\nCustomers Served!";
+        Debug.Log($"LEVEL END: {LevelController.LC.currentLevel}");
+        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{instance.playerScores[LevelController.LC.currentLevel]} Hearts Collected";
     }
 
     // public static bool gameIsRunning() {
@@ -96,6 +97,7 @@ public class ScoreSystem : MonoBehaviour
 
     public static void incrementCustomer() {
         instance.customerServed[LevelController.LC.currentLevel] = instance.customerServed[LevelController.LC.currentLevel] + 1;
+        Debug.Log($"CUSTOMER: {instance.customerServed[LevelController.LC.currentLevel]}");
     }
 
     public static int getCurrentLevelCustomerServedCount() {

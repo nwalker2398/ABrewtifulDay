@@ -61,6 +61,7 @@ public class Timer : MonoBehaviour
         if (timeRemaining <= 0)
         {
             Debug.Log("Time is up.");
+            ScoreSystem.SetFinalScoreText();
             dailyRecapPanel.SetActive(true);
             GameController.GC.StopGame();
             return true;
