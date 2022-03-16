@@ -472,7 +472,7 @@ public class Customer : MonoBehaviour
             controller.removeArrow(true);
         }*/
 
-        if (decreaseScore && ScoreSystem.getCurrentScore() > 0) {
+        if (decreaseScore && ScoreSystem.getCurrentLevelScore() > 0) {
             //ScoreSystem.decrementScore(1);
         }
 

@@ -13,6 +13,9 @@ public class ScoreSystem : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     private int customerCount;
 
+    int [] playerScores = new int[20];
+    int [] customerServed = new int[20];
+
     void Awake()
     {
         instance = this;
@@ -47,6 +50,8 @@ public class ScoreSystem : MonoBehaviour
             instance.heartBar.SetProgress(instance.score);
             instance.SetFinalScoreText();
             Debug.Log($"Current Score: {instance.score}");
+
+            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
         }
     }
 
@@ -59,11 +64,13 @@ public class ScoreSystem : MonoBehaviour
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
             instance.SetFinalScoreText();
+
+            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
         }
     }
 
-    public static float getCurrentScore() {
-        return instance.score;
+    public static float getCurrentLevelScore() {
+        return instance.playerScores[LevelController.LC.currentLevel];
     }
 
     private void SetFinalScoreText()
@@ -88,10 +95,10 @@ public class ScoreSystem : MonoBehaviour
     }
 
     public static void incrementCustomer() {
-        instance.customerCount += 1;
+        instance.customerServed[LevelController.LC.currentLevel] = instance.customerServed[LevelController.LC.currentLevel] + 1;
     }
 
-    public static int getCustomerServedCount() {
-        return instance.customerCount;
+    public static int getCurrentLevelCustomerServedCount() {
+        return instance.customerServed[LevelController.LC.currentLevel];
     }
 }

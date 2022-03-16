@@ -41,8 +41,8 @@ public class PauseScreen : MonoBehaviour
     private void loadMainScreen()
     {
         mainScreen.SetActive(true);
-        heartRatio.text = "Hearts Earned: " + ScoreSystem.getCurrentScore() + "/" + ScoreSystem.getMaxScore();
-        customersServed.text = "Customers Served: " + ScoreSystem.getCustomerServedCount();
+        heartRatio.text = "Hearts Earned: " + ScoreSystem.getCurrentLevelScore() + "/" + ScoreSystem.getMaxScore();
+        customersServed.text = "Customers Served: " + ScoreSystem.getCurrentLevelCustomerServedCount();
     }
 
     public void showHaungsScreen()
