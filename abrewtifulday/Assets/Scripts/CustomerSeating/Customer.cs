@@ -57,6 +57,8 @@ public class Customer : MonoBehaviour
 
     CanvasRenderer timerRenderer;
 
+    private int currentLevel = 1;
+
     void Start()
     {
         timerRenderer = timer.GetComponent<CanvasRenderer>();
@@ -68,12 +70,14 @@ public class Customer : MonoBehaviour
         matchaPrefab.SetActive(false);
         angryUI.SetActive(false);
 
-        randomOrder = randomizeOrder();
-
         // timerRenderer.enabled = false;
         // waitingRoomTimerRenderer.enabled = false;
 
         //customerCanvas.SetActive(false);
+
+        currentLevel = LevelController.LC.currentLevel;
+
+        randomOrder = randomizeOrder();
     }
 
     public void Generate()
@@ -91,7 +95,7 @@ public class Customer : MonoBehaviour
     private int randomizeOrder() {
         Scene scene = SceneManager.GetActiveScene();
         int n;
-        if (scene.name == "Tutorial" || scene.name == "Cafe1") {
+        if (scene.name == "Tutorial") {
             n = 1;
 
             spriteRenderer.sprite = coffeeSprite;
@@ -102,10 +106,10 @@ public class Customer : MonoBehaviour
             order = coffeePrefab;
         }
         else {
-            // Randomize order
-            n = (int)Random.Range(0,4);
+            // coffee only
+            if (1 <= currentLevel && currentLevel <= 9) {
+                n = 1;
 
-            if (n == 1) {
                 spriteRenderer.sprite = coffeeSprite;
                 float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
@@ -113,21 +117,64 @@ public class Customer : MonoBehaviour
                 //coffeePrefab.SetActive(true);
                 order = coffeePrefab;
             }
-            else if (n == 2) {
-                spriteRenderer.sprite = bobaSprite;
-                float scale = 0.2f;
-                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+            // coffee and matcha
+            else if (10 <= currentLevel && currentLevel <= 14) {
+                n = (int)Random.Range(1,3);
+                if (n == 1) {
+                    spriteRenderer.sprite = coffeeSprite;
+                    float scale = 0.3f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                //bobaPrefab.SetActive(true);
-                order = bobaPrefab;
+                    //coffeePrefab.SetActive(true);
+                    order = coffeePrefab;
+                }
+                else {
+                    n = 3;
+                    spriteRenderer.sprite = matchaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //matchaPrefab.SetActive(true);
+                    order = matchaPrefab;
+                }
+            }
+            // coffee, matcha, and boba
+            else if (15 <= currentLevel && currentLevel <= 20) {
+                n = (int)Random.Range(1,4);
+                if (n == 1) {
+                    spriteRenderer.sprite = coffeeSprite;
+                    float scale = 0.3f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //coffeePrefab.SetActive(true);
+                    order = coffeePrefab;
+                }
+                else if (n == 2) {
+                    spriteRenderer.sprite = bobaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //bobaPrefab.SetActive(true);
+                    order = bobaPrefab;
+                }
+                else {
+                    spriteRenderer.sprite = matchaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //matchaPrefab.SetActive(true);
+                    order = matchaPrefab;
+                }
             }
             else {
-                spriteRenderer.sprite = matchaSprite;
-                float scale = 0.2f;
+                n = 1;
+
+                spriteRenderer.sprite = coffeeSprite;
+                float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                //matchaPrefab.SetActive(true);
-                order = matchaPrefab;
+                //coffeePrefab.SetActive(true);
+                order = coffeePrefab;
             }
         }
         return n;
