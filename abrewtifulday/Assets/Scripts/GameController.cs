@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
@@ -32,14 +33,29 @@ public class GameController : MonoBehaviour
                 StopGame();
             }
         }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            foreach(GameObject o in GameObject.FindGameObjectsWithTag("PauseScreen"))
+            {
+                o.GetComponent<PauseScreen>().escPressed();
+            }
+        }
     }
 
     public void StopGame()
     {
         paused = true;
+        stopped = true;
         stopBarista();
     }
-    
+
+    public void resumeGame() {
+        paused = false;
+        stopped = false;
+        resumeCustomers();
+        resumeBarista();
+    }
+
     // Make sure to save state for unpausing later
     public void PauseGame()
     {
@@ -47,10 +63,35 @@ public class GameController : MonoBehaviour
         stopBarista();
     }
 
+    public bool isPaused()
+    {
+        return paused;
+    }
+
     void stopBarista()
     {
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
         barista.GetComponent<CharacterController>().enabled = false;
         barista.GetComponent<Animator>().enabled = false;
+    }
+
+    void resumeBarista()
+    {
+        GameObject barista = GameObject.FindGameObjectWithTag("Barista");
+        barista.GetComponent<CharacterController>().enabled = true;
+        barista.GetComponent<Animator>().enabled = true;
+    }
+
+    void resumeCustomers()
+    {
+        GameObject[] customerObjects = GameObject.FindGameObjectsWithTag("Customer");
+        for (int i = 0; i < customerObjects.Length; i++)
+        {
+            NavMeshAgent n = customerObjects[i].GetComponent<NavMeshAgent>();
+            if (n.isActiveAndEnabled)
+            {
+                n.isStopped = false;
+            }
+        }
     }
 }

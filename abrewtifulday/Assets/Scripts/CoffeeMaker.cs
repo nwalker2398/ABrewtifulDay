@@ -5,7 +5,7 @@ using UnityEngine;
 public class CoffeeMaker : MonoBehaviour
 {
     public static BoxCollider coffeeMakerCollider;
-    private const int COFFEE_WAIT_TIME = 5;
+    private const int COFFEE_WAIT_TIME = 4;
     public GameObject thoughtBubble;
     public GameObject machineDrink;
     private AudioSource audioSource;
@@ -13,6 +13,7 @@ public class CoffeeMaker : MonoBehaviour
     public AudioClip pour;
     public static bool coffeeClicked = false;
     public static bool coffeePickedUp = false;
+    public static bool brewing = false;
 
     void Start()
     {
@@ -21,20 +22,30 @@ public class CoffeeMaker : MonoBehaviour
         coffeeMakerCollider = GetComponent<BoxCollider>();
     }
 
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Coffee!");
+
         Debug.Log(coffeeRange.inCoffeeRange);
-        if (coffeeRange.inCoffeeRange && !thoughtBubble.active)
+        if (coffeeRange.inCoffeeRange && !thoughtBubble.active && !brewing)
         {
-            coffeeClicked = true;
-            StartCoroutine(waitToMake());
             coffeePickedUp = false;
+            coffeeClicked = true;
+            brewing = true;
+            StartCoroutine(waitToMake());
         }
         else if (coffeeRange.inCoffeeRange && thoughtBubble.active)
         {
-            coffeeClicked = false;
+            brewing = false;
             pickUpCoffee();
             coffeePickedUp = true;
+            coffeeClicked = false;
         }        
     }
 

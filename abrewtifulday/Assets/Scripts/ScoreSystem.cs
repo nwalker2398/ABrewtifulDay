@@ -13,6 +13,9 @@ public class ScoreSystem : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     private int customerCount;
 
+    int [] playerScores = new int[20];
+    int [] customerServed = new int[20];
+
     void Awake()
     {
         instance = this;
@@ -22,8 +25,15 @@ public class ScoreSystem : MonoBehaviour
         return instance.maxScore;
     }
 
+    public static void setMaxScore(int maxScore)
+    {
+         instance.maxScore = maxScore;
+    }
+
     public static void setScore(float score) {
         instance.score = score;
+        instance.heartBar.SetProgress(instance.score);
+        //instance.SetFinalScoreText();
     }
 
     public static float completionPercentage() {
@@ -38,7 +48,10 @@ public class ScoreSystem : MonoBehaviour
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
-            instance.SetFinalScoreText();
+            //instance.SetFinalScoreText();
+            Debug.Log($"LEVEL: {LevelController.LC.currentLevel}");
+            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
+            Debug.Log($"SCORE: {instance.playerScores[LevelController.LC.currentLevel]}");
         }
     }
 
@@ -50,17 +63,20 @@ public class ScoreSystem : MonoBehaviour
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
             instance.heartBar.SetProgress(instance.score);
-            instance.SetFinalScoreText();
+            //instance.SetFinalScoreText();
+
+            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
         }
     }
 
-    public static float getCurrentScore() {
-        return instance.score;
+    public static float getCurrentLevelScore() {
+        return instance.playerScores[LevelController.LC.currentLevel];
     }
 
-    private void SetFinalScoreText()
+    public static void SetFinalScoreText()
     {
-        finalScoreText.text = instance.score.ToString() + "\nCustomers Served!";
+        Debug.Log($"LEVEL END: {LevelController.LC.currentLevel}");
+        instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{instance.playerScores[LevelController.LC.currentLevel]}/{instance.maxScore} Hearts Collected";
     }
 
     // public static bool gameIsRunning() {
@@ -80,10 +96,11 @@ public class ScoreSystem : MonoBehaviour
     }
 
     public static void incrementCustomer() {
-        instance.customerCount += 1;
+        instance.customerServed[LevelController.LC.currentLevel] = instance.customerServed[LevelController.LC.currentLevel] + 1;
+        Debug.Log($"CUSTOMER: {instance.customerServed[LevelController.LC.currentLevel]}");
     }
 
-    public static int getCustomerServedCount() {
-        return instance.customerCount;
+    public static int getCurrentLevelCustomerServedCount() {
+        return instance.customerServed[LevelController.LC.currentLevel];
     }
 }

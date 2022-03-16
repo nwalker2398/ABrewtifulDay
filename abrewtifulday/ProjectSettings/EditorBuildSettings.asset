@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/StartSceneBasic.unity
     guid: 23504fece2e774024806ff08053c7863
   - enabled: 1
+    path: Assets/Scenes/Backstory.unity
+    guid: 844042fa909584e50920ab77effa463a
+  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
-    guid: 670a9b15a6f7346938c802ef1d55d5c6
+    guid: 18f156147c8564d09a423ee664922ce7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Cafe1.unity
     guid: 2fdc4603f356742f9a2a3e02adaf2ace

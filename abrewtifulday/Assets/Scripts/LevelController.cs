@@ -12,6 +12,7 @@ public class LevelController : MonoBehaviour
     public Dictionary<string, object> currentLevelData;
     public List<AudioClip> songs;
     public GameObject spillPrefab;
+    public bool unlimitedHearts = false;
 
     private int oldLevel;
 
@@ -76,7 +77,7 @@ public class LevelController : MonoBehaviour
         for (int i = 1; i < levels.Count; i++)
         {
             songs.Add(Resources.Load<AudioClip>("Music/Song" + i));
-            Debug.Log(songs[i].name);
+            // Debug.Log(songs[i].name);
         }
     }
 
@@ -105,7 +106,6 @@ public class LevelController : MonoBehaviour
     {
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
-            Debug.Log(o.GetComponent<AudioSource>().clip.name);
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
                 loadLevel();
@@ -115,6 +115,13 @@ public class LevelController : MonoBehaviour
 
     }
 
+    public static void toggleUnlimitedHearts()
+    {
+        LC.unlimitedHearts = !LC.unlimitedHearts;
+        Debug.Log("Unlimited hearts = " + LC.unlimitedHearts);
+        if (LC.unlimitedHearts)
+            ScoreSystem.setScore(ScoreSystem.getMaxScore());
+    }
 
     void setLevel(int l)
     {
@@ -138,7 +145,6 @@ public class LevelController : MonoBehaviour
     public static void nextLevel()
     {
         if (LC != null)
-
             LC.instanceNextLevel();
     }
 
@@ -161,9 +167,25 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    public static void mainMenu()
+    {
+        Debug.Log("Main Menu");
+        SceneManager.LoadScene("StartSceneBasic");
+        LC.die();
+    }
+
+    public void die()
+    {
+        GameObject.Destroy(this);
+        this.enabled = false;
+        return;
+    }
+
     public void loadLevel()
     {
         int level = currentLevel;
+
+
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
@@ -198,6 +220,17 @@ public class LevelController : MonoBehaviour
         Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
         if (!spillPos.Equals(new Vector3(0, 0, 0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
+        ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
+        ScoreSystem.setScore(0);
+        GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
+        ProgressBar pb = progressBar.GetComponent<ProgressBar>();
+        print(pb);
+        pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
+        pb.SetInitialProgress(0);
+        if (unlimitedHearts)
+            ScoreSystem.setScore(ScoreSystem.getMaxScore());
+
+        GameController.GC.resumeGame();
         Debug.Log("gets to end of load level");
     }
 }

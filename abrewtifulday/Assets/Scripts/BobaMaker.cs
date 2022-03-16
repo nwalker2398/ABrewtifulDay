@@ -11,6 +11,7 @@ public class BobaMaker : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip bell;
     public AudioClip pour;
+    private bool brewing = false;
 
     void Start()
     {
@@ -19,15 +20,24 @@ public class BobaMaker : MonoBehaviour
         bobaMakerCollider = GetComponent<BoxCollider>();
     }
 
+    void Update() 
+    {
+        if (GameController.GC.stopped) {
+            brewing = false;
+        }
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Boba!");
         Debug.Log(BobaRange.inBobaRange);
-        if (BobaRange.inBobaRange && !thoughtBubble.active)
+        if (BobaRange.inBobaRange && !thoughtBubble.active && !brewing)
         {
+            brewing = true;
             StartCoroutine(waitToMake());
         }
         else if (BobaRange.inBobaRange && thoughtBubble.active)
         {
+            brewing = false;
             pickUpBoba();
         }        
     }

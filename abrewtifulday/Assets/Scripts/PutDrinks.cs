@@ -53,13 +53,13 @@ public class PutDrinks : MonoBehaviour
 
             // Only deliver drinks if barista is close to the customer
             GameObject barista = trayCoffee = GameObject.FindGameObjectWithTag("Barista");
-            if (Vector3.Distance(barista.transform.position, hitInfo.transform.gameObject.transform.position) > 1f)
+            if (Vector3.Distance(barista.transform.position, hitInfo.transform.gameObject.transform.position) > 1.5f)
             {
                 return;
             }
 
             // if we have a drink to serve, put the drink onto the object
-            if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name) {
+            if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name && hitInfo.transform.gameObject.GetComponent<Customer>().atSeat == true) {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
                 Tray.instance.curDrink.SetActive(false);
                 //trayCoffee.SetActive(false);

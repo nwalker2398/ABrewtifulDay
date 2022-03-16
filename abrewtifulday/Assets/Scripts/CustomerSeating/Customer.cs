@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class Customer : MonoBehaviour
     [SerializeField] SeatingController controller;
     [SerializeField] Vector3 waitingArea = new Vector3(-2.5f, 0f, -3.5f);
     [SerializeField] Vector3 returnArea = new Vector3(-10f, 0f, -10f);
+    private Vector3 insideCafe = new Vector3(-5.5f, 0f, 0f); // x position of the door of the cafe
 
     public bool toWaitingArea = false;
     public bool atWaitingArea = false;
+
+    public bool toWaitingLine = false;
+    public bool atWaitingLine = false;
+
+    private bool hasLeft = false;
+    private float selfDestructTime = 5f;
+    private bool timerIsOn = false;
 
     private Chair seat;
     private bool toSeat = false;
@@ -23,13 +32,12 @@ public class Customer : MonoBehaviour
     private bool leaveIfFull = true;
     private bool shouldDisplayOrder = false;
     private bool shouldMove = false;
-    private float waitingSeatTime = 0f;
-    private float waitingRoomTime = 0f;
+    [SerializeField] float waitingSeatTime = 60f;
+    [SerializeField] float waitingRoomTime = 20f;
     private bool rotate = false;
     private float drinkTime = 6f;
 
-    [SerializeField] CustomerTimer seatTimer;
-    [SerializeField] CustomerTimer waitingRoomTimer;
+    [SerializeField] CustomerTimer timer;
     public bool isServed = false;
     [SerializeField] GameObject angryUI;
 
@@ -47,8 +55,14 @@ public class Customer : MonoBehaviour
 
     private int randomOrder;
 
+    CanvasRenderer timerRenderer;
+
+    private int currentLevel = 1;
+
     void Start()
     {
+        timerRenderer = timer.GetComponent<CanvasRenderer>();
+
         order.SetActive(false);
 
         coffeePrefab.SetActive(false);
@@ -56,12 +70,14 @@ public class Customer : MonoBehaviour
         matchaPrefab.SetActive(false);
         angryUI.SetActive(false);
 
-        randomOrder = randomizeOrder();
-
-        waitingRoomTimer.gameObject.SetActive(false);
-        //seatTimer.gameObject.SetActive(false);
+        // timerRenderer.enabled = false;
+        // waitingRoomTimerRenderer.enabled = false;
 
         //customerCanvas.SetActive(false);
+
+        currentLevel = LevelController.LC.currentLevel;
+
+        randomOrder = randomizeOrder();
     }
 
     public void Generate()
@@ -71,13 +87,16 @@ public class Customer : MonoBehaviour
         shouldMove = true;
         toWaitingArea = true;
         // order.SetActive(true);
+
+        // timer.startTimer(waitingRoomTime);
+        hideOrder();
     }
 
     private int randomizeOrder()
     {
         Scene scene = SceneManager.GetActiveScene();
         int n;
-        if (scene.name == "Tutorial" || scene.name == "Cafe1")
+        if (scene.name == "Tutorial")
         {
             n = 1;
 
@@ -85,36 +104,89 @@ public class Customer : MonoBehaviour
             float scale = 0.3f;
             spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-            coffeePrefab.SetActive(true);
+            //coffeePrefab.SetActive(true);
+            order = coffeePrefab;
         }
         else
         {
-            // Randomize order
-            n = (int)Random.Range(0, 4);
-
-            if (n == 1)
+            // coffee only
+            if (1 <= currentLevel && currentLevel <= 9)
             {
+                n = 1;
+
                 spriteRenderer.sprite = coffeeSprite;
                 float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                coffeePrefab.SetActive(true);
+                //coffeePrefab.SetActive(true);
+                order = coffeePrefab;
             }
-            else if (n == 2)
+            // coffee and matcha
+            else if (10 <= currentLevel && currentLevel <= 14)
             {
-                spriteRenderer.sprite = bobaSprite;
-                float scale = 0.2f;
-                spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+                n = (int)Random.Range(1, 3);
+                if (n == 1)
+                {
+                    spriteRenderer.sprite = coffeeSprite;
+                    float scale = 0.3f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                bobaPrefab.SetActive(true);
+                    //coffeePrefab.SetActive(true);
+                    order = coffeePrefab;
+                }
+                else
+                {
+                    n = 3;
+                    spriteRenderer.sprite = matchaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //matchaPrefab.SetActive(true);
+                    order = matchaPrefab;
+                }
+            }
+            // coffee, matcha, and boba
+            else if (15 <= currentLevel && currentLevel <= 20)
+            {
+                n = (int)Random.Range(1, 4);
+                if (n == 1)
+                {
+                    spriteRenderer.sprite = coffeeSprite;
+                    float scale = 0.3f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //coffeePrefab.SetActive(true);
+                    order = coffeePrefab;
+                }
+                else if (n == 2)
+                {
+                    spriteRenderer.sprite = bobaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //bobaPrefab.SetActive(true);
+                    order = bobaPrefab;
+                }
+                else
+                {
+                    spriteRenderer.sprite = matchaSprite;
+                    float scale = 0.2f;
+                    spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
+
+                    //matchaPrefab.SetActive(true);
+                    order = matchaPrefab;
+                }
             }
             else
             {
-                spriteRenderer.sprite = matchaSprite;
-                float scale = 0.2f;
+                n = 1;
+
+                spriteRenderer.sprite = coffeeSprite;
+                float scale = 0.3f;
                 spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
 
-                matchaPrefab.SetActive(true);
+                //coffeePrefab.SetActive(true);
+                order = coffeePrefab;
             }
         }
         return n;
@@ -142,7 +214,7 @@ public class Customer : MonoBehaviour
             rawScore = 1;
         }
 
-        float ratio = seatTimer.getRemainingTimeRatio();
+        float ratio = timer.getRemainingTimeRatio();
 
         if (ratio < 0.34)
         {
@@ -207,25 +279,28 @@ public class Customer : MonoBehaviour
     {
         if (GameController.GC.paused || GameController.GC.stopped)
         {
-            GetComponent<NavMeshAgent>().isStopped = true; // causing an error
+            if (GetComponent<NavMeshAgent>().isActiveAndEnabled)
+            {
+                GetComponent<NavMeshAgent>().isStopped = true;
+            }
             return;
         }
 
         // If character is atSeat or atWaitingArea but is not being served or seated, and the time is up, then leave
-        if (seatTimer.timeHasEnd() && !isServed)
+        if (timer.timeHasEnd() && !isServed)
         {
-            if (atWaitingArea)
-            {
-                atWaitingArea = false;
-                SeatingData.waitingCustomers.Remove(this);
-            }
+            // if (atWaitingArea) {
+            //     atWaitingArea = false;
+            //     SeatingData.waitingCustomers.Remove(this);
+            // }
             if (atSeat)
             {
                 seat.seatedCustomer = false;
                 seat.GetComponent<NavMeshObstacle>().enabled = true;
             }
-            angryUI.SetActive(true);
             order.SetActive(false);
+
+            angryUI.SetActive(true);
             leaveCafe(true);
         }
 
@@ -272,6 +347,12 @@ public class Customer : MonoBehaviour
                         leaveIfFull = false;
                     }
                 }
+
+                if (timer.timeHasEnd())
+                {
+                    leaveCafe(false);
+                    angryUI.SetActive(true);
+                }
             });
 
 
@@ -285,7 +366,15 @@ public class Customer : MonoBehaviour
             {
                 toWaitingArea = false;
                 atWaitingArea = true;
-                //timer.startTimer(); // start the customer timer
+
+                // timer.startTimer(waitingRoomTime);
+            }
+
+            // Start timer only when customer pass the cafe door
+            if (!timerIsOn && transform.position.x > insideCafe.x)
+            {
+                timer.startTimer(waitingRoomTime);
+                timerIsOn = true;
             }
         }
 
@@ -293,8 +382,7 @@ public class Customer : MonoBehaviour
         // Remove chair glow once reached
         if (toSeat)
         {
-            waitingRoomTimer.pauseTimer();
-
+            timer.pauseTimer();
             // Check if customer reached destination
             if (distanceToDestination() < 0.1)
             {
@@ -317,9 +405,12 @@ public class Customer : MonoBehaviour
                     controller.removeChairGlow(seat);
                     seat.GetComponent<NavMeshObstacle>().enabled = true;
 
-                    //customerCanvas.SetActive(false);
-                    seatTimer.gameObject.SetActive(true);
-                    seatTimer.startTimer(); // start the customer timer
+                    //timerRenderer.enabled = true;
+                    timer.startTimer(waitingSeatTime);
+                    timer.GetComponent<Image>().color = new Color32(181, 190, 148, 255);
+                    timer.transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(60, 179, 113, 160);
+
+                    showOrder();
                 }
             }
             else
@@ -343,25 +434,32 @@ public class Customer : MonoBehaviour
         // Leave cafe if waiting for more than 20 seconds in the waiting area
         if (atWaitingArea)
         {
-            waitingRoomTimer.gameObject.SetActive(true);
-            waitingRoomTimer.startTimer();
             //waitingRoomTime += Time.deltaTime;
 
-            if (waitingRoomTimer.timeHasEnd())
+            if (timer.timeHasEnd())
             {
                 leaveCafe(false);
                 angryUI.SetActive(true);
-                waitingRoomTimer.gameObject.SetActive(false);
             }
         }
-
-
 
         // Remove customer once they leave the cafe
         if (Vector3.Distance(transform.position, returnArea) < 2f)
         {
             SeatingData.waitingCustomers.Remove(this);
+            gameObject.SetActive(false);
             Destroy(this);
+        }
+
+        // Self destruct customer when they stuck
+        if (hasLeft)
+        {
+            selfDestructTime -= Time.deltaTime;
+            if (selfDestructTime <= 0)
+            {
+                SeatingData.waitingCustomers.Remove(this);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -385,6 +483,8 @@ public class Customer : MonoBehaviour
     {
         hideOrder();
 
+        hideTimer();
+
         atWaitingArea = false;
 
         destination = returnArea;
@@ -398,18 +498,42 @@ public class Customer : MonoBehaviour
             controller.removeArrow(true);
         }*/
 
-        if (decreaseScore && ScoreSystem.getCurrentScore() > 0)
+        if (decreaseScore && ScoreSystem.getCurrentLevelScore() > 0)
         {
-            ScoreSystem.decrementScore(1);
+            //ScoreSystem.decrementScore(1);
+        }
+
+        hasLeft = true;
+    }
+
+    private void hideOrder()
+    {
+        order.SetActive(false);
+        // coffeePrefab.SetActive(false);
+        // bobaPrefab.SetActive(false);
+        // matchaPrefab.SetActive(false);
+    }
+
+    private void showOrder()
+    {
+        order.SetActive(true);
+    }
+
+    private void hideImage(GameObject gameObject)
+    {
+        //gameObject.GetComponent<Image>().enabled = false;
+        //timer.transform.GetChild(0).gameObject.active = false;
+
+        Image[] childrenImages = gameObject.GetComponentsInChildren<Image>();
+        foreach (Image img in childrenImages)
+        {
+            img.enabled = false;
         }
     }
 
-    void hideOrder()
+    private void hideTimer()
     {
-        order.SetActive(false);
-        coffeePrefab.SetActive(false);
-        bobaPrefab.SetActive(false);
-        matchaPrefab.SetActive(false);
-        seatTimer.gameObject.SetActive(false);
+        timer.GetComponent<Image>().enabled = false;
+        timer.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = false;
     }
 }

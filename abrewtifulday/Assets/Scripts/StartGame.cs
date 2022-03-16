@@ -13,4 +13,8 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene("Tutorial");
     }
+    public void StartBackstory()
+    {
+        SceneManager.LoadScene("Backstory");
+    }
 }

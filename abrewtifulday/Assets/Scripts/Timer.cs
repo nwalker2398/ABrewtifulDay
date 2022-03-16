@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused)
+        if (!GameController.GC.isPaused() && !isPaused)
         {
             timeHasEnd(timeRemaining);
             if (timeRemaining >= 0)
@@ -61,6 +61,7 @@ public class Timer : MonoBehaviour
         if (timeRemaining <= 0)
         {
             Debug.Log("Time is up.");
+            ScoreSystem.SetFinalScoreText();
             dailyRecapPanel.SetActive(true);
             GameController.GC.StopGame();
             return true;
