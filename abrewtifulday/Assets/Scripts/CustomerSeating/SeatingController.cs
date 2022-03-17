@@ -56,7 +56,7 @@ public class SeatingController : MonoBehaviour
             int numCustomers = (int)LevelController.LC.currentLevelData["CustomersPerWave"];
             for (int i = 0; i < numCustomers; i++)
             {
-                Vector3 location = customerStartLocation + new Vector3(-i*2, 0, i*2);
+                Vector3 location = customerStartLocation + new Vector3(-i * 2, 0, i * 2);
                 generateCustomer(location);
             }
         }
@@ -141,7 +141,8 @@ public class SeatingController : MonoBehaviour
         SeatingData.selectedCustomer = null;
     }
 
-    public void removeCustomerGlow(Customer c) {
+    public void removeCustomerGlow(Customer c)
+    {
         //Renderer oldRenderer = c.gameObject.GetComponent<Renderer>();
         //oldRenderer.material = c.defaultMaterial;
         //oldRenderer.material = c.defaultMaterial;

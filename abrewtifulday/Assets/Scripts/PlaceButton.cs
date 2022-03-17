@@ -34,7 +34,13 @@ public class PlaceButton : MonoBehaviour
         tables = GameObject.Find("Tables");
         // versions: 1 = howls picture, 2 = cagliostro picture, 3 = wallpaper
         // 4 = plant (fiddle leaf)
-        version = 3; // development mode -- need to change
+        // version = 3; // development mode -- need to change
+        version = LevelController.LC.getPlacing();
+        if (version == 0)
+        {
+            Debug.Log("not supposed to be here");
+            version = 1;
+        }
         if (version == 2)
         {
             gift.SetActive(false);

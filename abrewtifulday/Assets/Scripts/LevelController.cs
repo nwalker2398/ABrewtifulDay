@@ -108,7 +108,10 @@ public class LevelController : MonoBehaviour
         {
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
-                loadLevel();
+                if ((int)levels[currentLevel]["Placing"] == 0)
+                {
+                    loadLevel();
+                }
                 o.GetComponent<AudioSource>().Play();
             }
         }
@@ -156,6 +159,8 @@ public class LevelController : MonoBehaviour
         // check for if we need to go to editing scene
         if ((int)levels[currentLevel]["Placing"] != 0)
         {
+            Debug.Log("gets to here. level[placing] = " + levels[currentLevel]["Placing"]);
+            // do the dialog box stuff
             // go to editing mode scene
             SceneManager.LoadScene("EditingMode");
         }
@@ -165,6 +170,19 @@ public class LevelController : MonoBehaviour
             SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
             loadLevel();
         }
+    }
+
+    public void LoadLevelAfterEdit()
+    {
+        Debug.Log("Open shop Button clicked");
+        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+        Debug.Log("Next scene loaded");
+        loadLevel();
+    }
+
+    public int getPlacing()
+    {
+        return (int)levels[currentLevel]["Placing"];
     }
 
     public static void mainMenu()
@@ -184,8 +202,6 @@ public class LevelController : MonoBehaviour
     public void loadLevel()
     {
         int level = currentLevel;
-
-
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
@@ -222,11 +238,15 @@ public class LevelController : MonoBehaviour
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
         ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
         ScoreSystem.setScore(0);
-        GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
-        ProgressBar pb = progressBar.GetComponent<ProgressBar>();
-        print(pb);
-        pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
-        pb.SetInitialProgress(0);
+        if ((int)levels[level]["Placing"] == 0)
+        {
+            // doesn't do this in editing mode
+            GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
+            ProgressBar pb = progressBar.GetComponent<ProgressBar>();
+            print(pb);
+            pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
+            pb.SetInitialProgress(0);
+        }
         if (unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
 

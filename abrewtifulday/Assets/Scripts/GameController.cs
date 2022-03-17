@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            foreach(GameObject o in GameObject.FindGameObjectsWithTag("PauseScreen"))
+            foreach (GameObject o in GameObject.FindGameObjectsWithTag("PauseScreen"))
             {
                 o.GetComponent<PauseScreen>().escPressed();
             }
@@ -49,7 +49,8 @@ public class GameController : MonoBehaviour
         stopBarista();
     }
 
-    public void resumeGame() {
+    public void resumeGame()
+    {
         paused = false;
         stopped = false;
         resumeCustomers();
@@ -71,15 +72,21 @@ public class GameController : MonoBehaviour
     void stopBarista()
     {
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
-        barista.GetComponent<CharacterController>().enabled = false;
-        barista.GetComponent<Animator>().enabled = false;
+        if (barista != null)
+        {
+            barista.GetComponent<CharacterController>().enabled = false;
+            barista.GetComponent<Animator>().enabled = false;
+        }
     }
 
     void resumeBarista()
     {
         GameObject barista = GameObject.FindGameObjectWithTag("Barista");
-        barista.GetComponent<CharacterController>().enabled = true;
-        barista.GetComponent<Animator>().enabled = true;
+        if (barista != null)
+        {
+            barista.GetComponent<CharacterController>().enabled = true;
+            barista.GetComponent<Animator>().enabled = true;
+        }
     }
 
     void resumeCustomers()
