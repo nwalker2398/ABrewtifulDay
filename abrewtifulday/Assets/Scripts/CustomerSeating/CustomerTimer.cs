@@ -24,7 +24,7 @@ public class CustomerTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused)
+        if (!isPaused && !GameController.GC.paused)
         {
             if (timeRemaining >= 0)
             {
