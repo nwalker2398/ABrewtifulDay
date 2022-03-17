@@ -118,6 +118,7 @@ public class LevelController : MonoBehaviour
             {
                 if ((int)levels[currentLevel]["Placing"] == 0)
                 {
+                    Debug.Log("update function, placing is 0");
                     loadLevel();
                 }
                 o.GetComponent<AudioSource>().Play();
@@ -246,15 +247,11 @@ public class LevelController : MonoBehaviour
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
         ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
         ScoreSystem.setScore(0);
-        if ((int)levels[level]["Placing"] == 0)
-        {
-            // doesn't do this in editing mode
-            GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
-            ProgressBar pb = progressBar.GetComponent<ProgressBar>();
-            print(pb);
-            pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
-            pb.SetInitialProgress(0);
-        }
+        GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
+        ProgressBar pb = progressBar.GetComponent<ProgressBar>();
+        print(pb);
+        pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
+        pb.SetInitialProgress(0);
         if (unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
 
