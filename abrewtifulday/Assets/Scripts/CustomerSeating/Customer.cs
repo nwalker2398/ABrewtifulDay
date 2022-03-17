@@ -59,6 +59,8 @@ public class Customer : MonoBehaviour
 
     private int currentLevel = 1;
 
+    private bool hasDecrementScore = false;
+
     void Start()
     {
         timerRenderer = timer.GetComponent<CanvasRenderer>();
@@ -472,8 +474,9 @@ public class Customer : MonoBehaviour
             controller.removeArrow(true);
         }*/
 
-        if (decreaseScore && ScoreSystem.getCurrentLevelScore() > 0) {
+        if (!hasDecrementScore && decreaseScore && ScoreSystem.getCurrentLevelScore() > 0) {
             ScoreSystem.decrementScore(1);
+            hasDecrementScore = true;
         }
 
         hasLeft = true;

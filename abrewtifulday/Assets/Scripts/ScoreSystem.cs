@@ -42,15 +42,22 @@ public class ScoreSystem : MonoBehaviour
 
     public static void incrementScore(float points)
     {
-        if (!instance.heartBar.IsDone())
-        {
-            instance.score += points;
-            //instance.scoreText.SetText(instance.score.ToString());
-            Debug.Log($"Increment Score: {instance.score}");
-            instance.heartBar.SetProgress(instance.score);
-            //instance.SetFinalScoreText();
-            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
-        }
+        // if (!instance.heartBar.IsDone())
+        // {
+        //     instance.score += points;
+        //     //instance.scoreText.SetText(instance.score.ToString());
+        //     Debug.Log($"Score: {instance.score}/{instance.maxScore}");
+        //     instance.heartBar.SetProgress(instance.score);
+        //     //instance.SetFinalScoreText();
+        //     instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
+        // }
+
+        instance.score += points;
+        //instance.scoreText.SetText(instance.score.ToString());
+        Debug.Log($"Score: {instance.score}/{instance.maxScore}");
+        instance.heartBar.SetProgress(instance.score);
+        //instance.SetFinalScoreText();
+        instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
     }
 
     public static void decrementScore(float points)

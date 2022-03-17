@@ -174,7 +174,6 @@ public class LevelController: MonoBehaviour
         int level = currentLevel;
 
 
-
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
 

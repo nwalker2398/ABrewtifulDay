@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    private float maxProgress;
+    private float maxProgress = 99;
 
     void Start() {
         slider.maxValue = ScoreSystem.getMaxScore();
@@ -26,10 +26,12 @@ public class ProgressBar : MonoBehaviour
     }
 
     public void SetProgress(float progress) {
+        Debug.Log($"Set progress: {progress}/{maxProgress}");
         slider.value = progress;
     }
 
     public bool IsDone() {
+        Debug.Log($"Is done: value: {slider.value} / {maxProgress}");
         if (slider.value >= maxProgress) {
             Debug.Log("Progress is done.");
             return true;
