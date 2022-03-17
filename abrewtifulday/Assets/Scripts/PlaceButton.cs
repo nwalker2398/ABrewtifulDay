@@ -187,6 +187,7 @@ public class PlaceButton : MonoBehaviour
     void newVoid()
     {
         endPanel.SetActive(true);
+        Debug.Log("gets here//endpanel active");
     }
     void wallpapervoid()
     {
@@ -231,5 +232,10 @@ public class PlaceButton : MonoBehaviour
         wallpaperChoice = newWallPaper3;
         startPanel.SetActive(false);
         startedPlacement = true;
+    }
+
+    public void LoadLevelAfterEdit()
+    {
+        LevelController.LC.loadLevelAfterEdit();
     }
 }

@@ -172,7 +172,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void LoadLevelAfterEdit()
+    public void loadLevelAfterEdit()
     {
         Debug.Log("Open shop Button clicked");
         SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
