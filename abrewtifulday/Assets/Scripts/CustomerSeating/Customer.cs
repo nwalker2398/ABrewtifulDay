@@ -473,7 +473,7 @@ public class Customer : MonoBehaviour
         }*/
 
         if (decreaseScore && ScoreSystem.getCurrentLevelScore() > 0) {
-            //ScoreSystem.decrementScore(1);
+            ScoreSystem.decrementScore(1);
         }
 
         hasLeft = true;

@@ -46,7 +46,7 @@ public class ScoreSystem : MonoBehaviour
         {
             instance.score += points;
             //instance.scoreText.SetText(instance.score.ToString());
-            //Debug.Log(instance.score);
+            Debug.Log($"Increment Score: {instance.score}");
             instance.heartBar.SetProgress(instance.score);
             //instance.SetFinalScoreText();
             instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
@@ -60,6 +60,7 @@ public class ScoreSystem : MonoBehaviour
             instance.score -= points;
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
+            Debug.Log($"Decrement Score: {instance.score}");
             instance.heartBar.SetProgress(instance.score);
             //instance.SetFinalScoreText();
 
@@ -74,9 +75,9 @@ public class ScoreSystem : MonoBehaviour
     public static void SetFinalScoreText()
     {
         int custServed = instance.playerScores[LevelController.LC.currentLevel];
-        if (custServed > instance.maxScore) {
-            custServed = instance.maxScore;
-        }
+        // if (custServed > instance.maxScore) {
+        //     custServed = instance.maxScore;
+        // }
         instance.finalScoreText.text = $"{instance.customerServed[LevelController.LC.currentLevel]} Customers Served\n{custServed}/{instance.maxScore} Hearts Collected";
     }
 
