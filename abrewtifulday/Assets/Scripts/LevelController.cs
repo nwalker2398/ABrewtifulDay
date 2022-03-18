@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("does awake stuff");
         if (LC != null)
         {
             GameObject.Destroy(this);
@@ -39,7 +40,6 @@ public class LevelController : MonoBehaviour
         levels.Add(new Dictionary<string, object>());
         string big_string = "1,Tutorial,10,0,1,5,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,0|0|0,FALSE,,0\n2,Cafe1,10,0,1,15,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,0|0|0,FALSE,,0\n3,Cafe1,10,1,2,18,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,0|0|0,FALSE,,0\n4,Cafe1,9,1,2,21,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,0|0|0,FALSE,I noticed your walls are looking a little bare^ so I got you this poster! Thanks for making such great coffee!,1\n5,Cafe1,9,2,2,24,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,0|0|0,FALSE,,0\n6,Cafe1,8,2,2,27,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,0|0|0,FALSE,You're doing such a great job! I grew these plants in my garden and I think they would look great in your shop if you want them!,0\n7,Cafe1,8,2,2,30,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,0|0|0,FALSE,,0\n8,Cafe1,8,3,3,40,TRUE,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,0|0|0,FALSE,Did you hear? It's national COFFEE day!! How exciting^ I bet you'll have a ton of customers today!,0\n9,Cafe1,7,3,2,33,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,0|0|0,FALSE,Hey^ I have some extra paint. Each can is the perfect amount for your walls. If you pick one of these colors^ I can paint up the walls for you! Your coffee has helped me through all my hardest workdays ;),3\n10,Cafe2,7,2,3,25,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,FALSE,FALSE,0|0|0,FALSE,Wow^ your shop is busy these days. I'm a carpenter^ so let me make you a few more tables. As a thanks for making the best coffee in town!,0\n11,Cafe2,7,1,3,27,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,FALSE,0|0|0,FALSE,Your coffee is soooo tasty! I think you could be really good at making matcha drinks too. Here^ have my machine^ I don't use it enough.,0\n12,Cafe2,7,3,2,29,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,FALSE,0|0|0,FALSE,,0\n13,Cafe2,7,3,2,31,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,FALSE,This is my favorite cafe! I made this art for you and you can put it up if you want.,2\n14,Cafe2,6,2,2,33,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,12|0|46,FALSE,,0\n15,Cafe3,6,1,4,30,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,FALSE,Hello I see that the last two tables I made for you are getting a lot of use! Let me make you a couple more. Keep up the good work!,0\n16,Cafe3,6,2,2,31,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,FALSE,Have you heard of this amaaaazing drink called Boba? I think you would be good at making it! Here's a boba machine to help you get started!,0\n17,Cafe3,6,3,3,32,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,FALSE,,0\n18,Cafe3,6,3,2,33,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,TRUE,Hi! I saw that you like plants and I have this fiddle leaf fig tree that I can't take care of anymore. I want you to have it!,4\n19,Cafe3,6,2,2,34,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,TRUE,,0\n20,Cafe3,6,2,3,35,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,25|0|30,TRUE,,0\n21,Cafe3,6,3,4,41,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,0|0|0,TRUE,Guess what?! It's national DRINK day! I hope it goes well for you today^ all your drinks are so tasty!,0";
         TextAsset level_csv_ta = Resources.Load<TextAsset>("levels");
-        Debug.Log(level_csv_ta);
         foreach (string line in level_csv_ta.text.Split('\n')) //File.ReadLines("Assets/Resources/levels.csv")
         {
             if (i == 0)
@@ -49,7 +49,6 @@ public class LevelController : MonoBehaviour
             }
             Dictionary<string, object> level = new Dictionary<string, object>();
             string[] words = line.Split(',');
-            Debug.Log(string.Join(",", words));
             if (words.Length > 1)
             {
                 level["Scene"] = words[1];
@@ -75,7 +74,6 @@ public class LevelController : MonoBehaviour
             }
         }
         Debug.Log("Loaded " + levels.Count + " levels.");
-        Debug.Log(big_string);
     }
 
     public void getSongs()
@@ -97,8 +95,8 @@ public class LevelController : MonoBehaviour
         getSongs();
         currentLevelData = levels[currentLevel];
         loadLevel();
-        Debug.Log("Loading level!");
-        Debug.Log(currentLevel);
+        // Debug.Log("Loading level!");
+        // Debug.Log(currentLevel);
     }
 
     public void printLevel(int levelNumber)
@@ -106,7 +104,7 @@ public class LevelController : MonoBehaviour
         Dictionary<string, object> level = levels[levelNumber];
         foreach (KeyValuePair<string, object> kvp in level)
         {
-            Debug.Log(string.Format("{0}={1}", kvp.Key, kvp.Value));
+            // Debug.Log(string.Format("{0}={1}", kvp.Key, kvp.Value));
         }
     }
 
@@ -116,12 +114,16 @@ public class LevelController : MonoBehaviour
         {
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
-                if ((int)levels[currentLevel]["Placing"] == 0)
+                if ((int)levels[currentLevel - 1]["Placing"] == 0)
                 {
                     Debug.Log("update function, placing is 0");
                     loadLevel();
+
+                    Debug.Log("should only happen once");
+                    Debug.Log(o.GetComponent<AudioSource>().clip.name);
+                    Debug.Log(songs[currentLevel].name);
+                    o.GetComponent<AudioSource>().Play();
                 }
-                o.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -130,14 +132,14 @@ public class LevelController : MonoBehaviour
     public static void toggleUnlimitedHearts()
     {
         LC.unlimitedHearts = !LC.unlimitedHearts;
-        Debug.Log("Unlimited hearts = " + LC.unlimitedHearts);
+        // Debug.Log("Unlimited hearts = " + LC.unlimitedHearts);
         if (LC.unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
     }
 
     void setLevel(int l)
     {
-        Debug.Log("Setting level to " + l);
+        // Debug.Log("Setting level to " + l);
         currentLevel = l;
         loadLevel();
         oldLevel = currentLevel;
@@ -166,7 +168,7 @@ public class LevelController : MonoBehaviour
         currentLevel++;
         oldLevel = currentLevel;
         // check for if we need to go to editing scene
-        if ((int)levels[currentLevel]["Placing"] != 0)
+        if ((int)levels[currentLevel - 1]["Placing"] != 0)
         {
             Debug.Log("gets to here. level[placing] = " + levels[currentLevel]["Placing"]);
             // do the dialog box stuff
@@ -184,9 +186,10 @@ public class LevelController : MonoBehaviour
     public void loadLevelAfterEdit()
     {
         Debug.Log("Open shop Button clicked");
-        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
-        Debug.Log("Next scene loaded");
         loadLevel();
+        SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+        loadLevel();
+        Debug.Log("Next scene loaded: " + currentLevel);
     }
 
     public int getPlacing()
@@ -219,6 +222,7 @@ public class LevelController : MonoBehaviour
         {
             if (o.scene.name != "" + levels[currentLevel]["Scene"])
             {
+                Debug.Log("Switches scenes, before: " + o.scene.name);
                 SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
             }
 
@@ -249,13 +253,13 @@ public class LevelController : MonoBehaviour
         ScoreSystem.setScore(0);
         GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
         ProgressBar pb = progressBar.GetComponent<ProgressBar>();
-        print(pb);
+        // print(pb);
         pb.SetMaxProgress((int)levels[level]["HeartQuota"]);
         pb.SetInitialProgress(0);
         if (unlimitedHearts)
             ScoreSystem.setScore(ScoreSystem.getMaxScore());
 
         GameController.GC.resumeGame();
-        Debug.Log("gets to end of load level");
+        Debug.Log("gets to end of load level, level = " + level);
     }
 }
