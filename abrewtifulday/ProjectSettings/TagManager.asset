@@ -28,6 +28,7 @@ TagManager:
   - CustomerGenerator
   - PauseScreen
   - ProgressBar
+  - DialogBox
   layers:
   - Default
   - TransparentFX

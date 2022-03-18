@@ -828,7 +828,7 @@ PrefabInstance:
     - target: {fileID: 4016034185697114396, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: dailyRecapPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 312100316}
     - target: {fileID: 4016034185697114397, guid: ce8e60e5910df4346b0c2e1866e737bf, type: 3}
       propertyPath: m_Color.b
       value: 0.61960787
@@ -1268,8 +1268,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5154430263171853121, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+--- !u!1 &312100316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5154430263171853121, guid: 1b27bbce8860a44769d4154926bc456a, type: 3}
+  m_PrefabInstance: {fileID: 312100315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &323467451
 GameObject:
   m_ObjectHideFlags: 0
@@ -5808,6 +5817,106 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4137727885089914676, guid: 017116cb4280b48eca9d618e6bb8a86c, type: 3}
   m_PrefabInstance: {fileID: 1888428097}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1922224429
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413073, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_Name
+      value: DialogBoxScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 742802881859413074, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_TagString
+      value: DialogBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1015270229}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseDialogBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076086909098742664, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+--- !u!114 &1922224430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 742802881786666705, guid: c548a8657e8b14e4ca5a159bb5f27356, type: 3}
+  m_PrefabInstance: {fileID: 1922224429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2006058576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6727,6 +6836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelController
       objectReference: {fileID: 0}
+    - target: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
+      propertyPath: dialogText
+      value: 
+      objectReference: {fileID: 1922224430}
     - target: {fileID: 5288643094365328531, guid: df809665c3f241c4cb26b61a10c0ef08, type: 3}
       propertyPath: spillPrefab
       value: 

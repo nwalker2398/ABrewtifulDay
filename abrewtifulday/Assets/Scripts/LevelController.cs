@@ -14,6 +14,8 @@ public class LevelController : MonoBehaviour
     public GameObject spillPrefab;
     public bool unlimitedHearts = false;
 
+    public TextMeshProUGUI dialogText;
+
     private int oldLevel;
 
     private int didEdits = 0; // 0 when the edit hasn't been done, 1 when it has
@@ -208,6 +210,18 @@ public class LevelController : MonoBehaviour
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
 
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("DialogBox"))
+        {
+            if ((int)levels[currentLevel - 1]["Placing"] != 0)
+            {
+                dialogText.text = (string)levels[currentLevel - 1]["Dialog"];
+            }
+            else
+            {
+                o.SetActive(false);
+            }
+        }
+
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
         {
             if (o.scene.name != "" + levels[currentLevel]["Scene"])
@@ -265,5 +279,11 @@ public class LevelController : MonoBehaviour
 
         GameController.GC.resumeGame();
         Debug.Log("gets to end of load level, level = " + level);
+    }
+
+    public void CloseDialogBox()
+    {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("DialogBox"))
+            o.SetActive(false);
     }
 }
