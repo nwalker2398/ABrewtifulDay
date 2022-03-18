@@ -16,6 +16,8 @@ public class LevelController : MonoBehaviour
 
     private int oldLevel;
 
+    private int didEdits = 0; // 0 when the edit hasn't been done, 1 when it has
+
     void Awake()
     {
         Debug.Log("does awake stuff");
@@ -114,16 +116,14 @@ public class LevelController : MonoBehaviour
         {
             if (o.GetComponent<AudioSource>().clip.name != songs[currentLevel].name)
             {
-                if ((int)levels[currentLevel - 1]["Placing"] == 0)
-                {
-                    Debug.Log("update function, placing is 0");
-                    loadLevel();
+                Debug.Log("update function, placing is 0");
+                loadLevel();
 
-                    Debug.Log("should only happen once");
-                    Debug.Log(o.GetComponent<AudioSource>().clip.name);
-                    Debug.Log(songs[currentLevel].name);
-                    o.GetComponent<AudioSource>().Play();
-                }
+                Debug.Log("should only happen once");
+                Debug.Log(o.GetComponent<AudioSource>().clip.name);
+                Debug.Log(songs[currentLevel].name);
+                o.GetComponent<AudioSource>().Play();
+
             }
         }
 
@@ -167,30 +167,20 @@ public class LevelController : MonoBehaviour
         Debug.Log("Next Level: " + (currentLevel + 1));
         currentLevel++;
         oldLevel = currentLevel;
-        // check for if we need to go to editing scene
-        if ((int)levels[currentLevel - 1]["Placing"] != 0)
-        {
-            Debug.Log("gets to here. level[placing] = " + levels[currentLevel]["Placing"]);
-            // do the dialog box stuff
-            // go to editing mode scene
-            SceneManager.LoadScene("EditingMode");
-        }
-        else
-        {
-            // else call these next two lines
-            SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
-            loadLevel();
-        }
-    }
-
-    public void loadLevelAfterEdit()
-    {
-        Debug.Log("Open shop Button clicked");
-        loadLevel();
+        // else call these next two lines
         SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
         loadLevel();
-        Debug.Log("Next scene loaded: " + currentLevel);
     }
+
+    // public void loadLevelAfterEdit()
+    // {
+    //     Debug.Log("Open shop Button clicked");
+    //     loadLevel();
+    //     SceneManager.LoadScene("" + levels[currentLevel]["Scene"]);
+    //     Debug.Log("Next scene loaded: " + currentLevel);
+    //     foreach (GameObject o in GameObject.FindGameObjectsWithTag("MainCamera"))
+    //         Debug.Log("Scene: " + o.scene.name);
+    // }
 
     public int getPlacing()
     {

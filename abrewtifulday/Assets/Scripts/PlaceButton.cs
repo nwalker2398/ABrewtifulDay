@@ -238,9 +238,4 @@ public class PlaceButton : MonoBehaviour
         startedPlacement = true;
     }
 
-    public void LoadLevelAfterEdit()
-    {
-        progressBar.SetActive(true);
-        LevelController.LC.loadLevelAfterEdit();
-    }
 }
