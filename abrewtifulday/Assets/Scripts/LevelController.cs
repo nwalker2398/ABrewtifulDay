@@ -206,6 +206,7 @@ public class LevelController : MonoBehaviour
     public void loadLevel()
     {
         int level = currentLevel;
+        Debug.Log("Loading Level.");
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("UI"))
             o.GetComponentInChildren<TextMeshProUGUI>().text = "Day " + level;
@@ -234,14 +235,18 @@ public class LevelController : MonoBehaviour
             o.GetComponent<AudioSource>().Play();
         }
 
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation")) {
             o.SetActive((bool)levels[level]["CoffeeEnabled"]);
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
+            o.transform.Find("CoffeeMaker").GetComponent<CoffeeMaker>().resetMachine();
+        }
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation")) {
             o.SetActive((bool)levels[level]["MatchaEnabled"]);
+            o.transform.Find("MatchaMachine").GetComponent<MatchaMaker>().resetMachine();
+        }
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("BobaStation"))
         {
             o.SetActive((bool)levels[level]["BobaEnabled"]);
-            Debug.Log("done boba");
+            o.transform.Find("BobaMachine").GetComponent<BobaMaker>().resetMachine();
         }
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture1"))
             o.SetActive((bool)levels[level]["Picture1Enabled"]);

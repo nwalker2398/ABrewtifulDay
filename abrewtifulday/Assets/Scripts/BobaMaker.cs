@@ -27,6 +27,11 @@ public class BobaMaker : MonoBehaviour
         }
     }
 
+    public void resetMachine() {
+        brewing = false;
+        Debug.Log("Reset Boba machine.");
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Boba!");
         Debug.Log(BobaRange.inBobaRange);

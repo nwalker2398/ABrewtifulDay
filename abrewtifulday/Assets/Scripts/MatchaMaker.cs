@@ -27,6 +27,11 @@ public class MatchaMaker : MonoBehaviour
         }
     }
 
+    public void resetMachine() {
+        brewing = false;
+        Debug.Log("Reset Matcha machine.");
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Matcha!");
         Debug.Log(matchaRange.inMatchaRange);

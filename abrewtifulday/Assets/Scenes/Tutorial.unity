@@ -2367,7 +2367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 17957287451765880, guid: 2e9cd0955e06d4af9b9eb131d01c7d33, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: CoffeeStation
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e9cd0955e06d4af9b9eb131d01c7d33, type: 3}
