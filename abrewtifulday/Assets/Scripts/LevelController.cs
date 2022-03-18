@@ -235,7 +235,10 @@ public class LevelController : MonoBehaviour
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
             o.SetActive((bool)levels[level]["MatchaEnabled"]);
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("BobaStation"))
+        {
             o.SetActive((bool)levels[level]["BobaEnabled"]);
+            Debug.Log("done boba");
+        }
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Picture1"))
             o.SetActive((bool)levels[level]["Picture1Enabled"]);
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant1"))
@@ -247,8 +250,19 @@ public class LevelController : MonoBehaviour
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Plant2"))
             o.SetActive((bool)levels[level]["Plant2Enabled"]);
         Vector3 spillPos = (Vector3)levels[level]["CoffeeSpillLocation"];
+
+        Debug.Log("Enabling things check");
+        Debug.Log((bool)levels[level]["CoffeeEnabled"] + "coffee");
+        Debug.Log((bool)levels[level]["MatchaEnabled"] + "matcha");
+        Debug.Log((bool)levels[level]["BobaEnabled"] + "boba");
+        Debug.Log((bool)levels[level]["Picture1Enabled"] + "picture1");
+        Debug.Log((bool)levels[level]["Plant1Enabled"] + "plant1");
+        Debug.Log((bool)levels[level]["Picture2Enabled"] + "picture2");
+        Debug.Log((bool)levels[level]["Plant2Enabled"] + "plant2");
+
         if (!spillPos.Equals(new Vector3(0, 0, 0)))
             Instantiate(spillPrefab, spillPos, Quaternion.Euler(0, 90, 0));
+
         ScoreSystem.setMaxScore((int)levels[level]["HeartQuota"]);
         ScoreSystem.setScore(0);
         GameObject progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
