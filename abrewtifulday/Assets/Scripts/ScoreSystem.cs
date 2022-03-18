@@ -42,21 +42,39 @@ public class ScoreSystem : MonoBehaviour
 
     public static void incrementScore(float points)
     {
-        if (!instance.heartBar.IsDone())
-        {
-            instance.score += points;
-            //instance.scoreText.SetText(instance.score.ToString());
-            //Debug.Log(instance.score);
-            instance.heartBar.SetProgress(instance.score);
-            //instance.SetFinalScoreText();
-            instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
-        }
+        // if (!instance.heartBar.IsDone())
+        // {
+        //     instance.score += points;
+        //     //instance.scoreText.SetText(instance.score.ToString());
+        //     //Debug.Log(instance.score);
+        //     instance.heartBar.SetProgress(instance.score);
+        //     //instance.SetFinalScoreText();
+        //     instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
+        // }
+
+        instance.score += points;
+        //instance.scoreText.SetText(instance.score.ToString());
+        //Debug.Log(instance.score);
+        instance.heartBar.SetProgress(instance.score);
+        //instance.SetFinalScoreText();
+        instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
     }
 
     public static void decrementScore(float points)
     {
-        if (!instance.heartBar.IsDone())
-        {
+        Debug.Log("Decrement score");
+        // if (!instance.heartBar.IsDone())
+        // {
+        //     instance.score -= points;
+        //     //instance.scoreText.SetText(instance.score.ToString());
+        //     //Debug.Log(instance.score);
+        //     instance.heartBar.SetProgress(instance.score);
+        //     //instance.SetFinalScoreText();
+
+        //     instance.playerScores[LevelController.LC.currentLevel] = instance.playerScores[LevelController.LC.currentLevel] + (int)points;
+        // }
+        
+        if (instance.score > 0) {
             instance.score -= points;
             //instance.scoreText.SetText(instance.score.ToString());
             //Debug.Log(instance.score);
