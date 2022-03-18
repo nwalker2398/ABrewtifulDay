@@ -213,7 +213,7 @@ public class LevelController : MonoBehaviour
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("DialogBox"))
         {
-            if ((int)levels[currentLevel - 1]["Placing"] != 0)
+            if (!string.Equals((string)levels[currentLevel - 1]["Dialog"], ""))
             {
                 (GameObject.Find("Dialog")).GetComponent<TextMeshProUGUI>().text = (string)levels[currentLevel - 1]["Dialog"];
             }
