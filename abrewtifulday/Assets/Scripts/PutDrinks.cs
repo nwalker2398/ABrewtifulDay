@@ -23,7 +23,7 @@ public class PutDrinks : MonoBehaviour
     [SerializeField] GameObject timerIcon;
     [SerializeField] GameObject heartIcon;
 
-    private GameObject tray; 
+    private GameObject tray;
     private GameObject trayCoffee;
     private Camera camera;
 
@@ -38,13 +38,15 @@ public class PutDrinks : MonoBehaviour
         camera = Camera.main;
     }
 
-    void OnMouseDown() {
+    void OnMouseDown()
+    {
         Debug.Log("Table clicked.");
         // cast a ray from the coffee tray.
         Ray putRay = new Ray(tray.transform.position, tray.transform.forward);
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
+        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        {
             // Only deliver drinks to customers
             if (hitInfo.transform.tag != "Customer")
             {
@@ -59,13 +61,14 @@ public class PutDrinks : MonoBehaviour
             }
 
             // if we have a drink to serve, put the drink onto the object
-            if (Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name && hitInfo.transform.gameObject.GetComponent<Customer>().atSeat == true) {
+            if (Tray.instance.curDrink != null && Tray.instance.curDrink.active && objectCoffee.transform.parent.name == hitInfo.transform.gameObject.name && hitInfo.transform.gameObject.GetComponent<Customer>().atSeat == true)
+            {
                 Debug.Log("Object: " + objectCoffee.transform.parent.name + ", Hit Info: " + hitInfo.transform.gameObject.name);
                 Tray.instance.curDrink.SetActive(false);
                 //trayCoffee.SetActive(false);
                 GameObject drink = null;
 
-                if(Tray.instance.curDrink == Tray.instance.trayCoffee)
+                if (Tray.instance.curDrink == Tray.instance.trayCoffee)
                 {
                     objectCoffee.SetActive(true);
                     drink = objectCoffee;
@@ -84,10 +87,10 @@ public class PutDrinks : MonoBehaviour
                 heartIcon.SetActive(true);
 
                 //TODO: check if Tray.instance.curDrink == the ordered drink to see if score should be higher than 1
-                
+
                 hitInfo.transform.gameObject.GetComponent<Customer>().Drink(drink.transform.position, drink);
             }
-            
+
             // pick the coffee from the object
             // else if (trayCoffee.active == false && objectCoffee.active == true) {
             //     trayCoffee.active = true;

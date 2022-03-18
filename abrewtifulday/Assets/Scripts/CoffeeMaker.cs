@@ -29,6 +29,13 @@ public class CoffeeMaker : MonoBehaviour
         }
     }
 
+    public void resetMachine() {
+        coffeeClicked = false;
+        coffeePickedUp = false;
+        brewing = false;
+        Debug.Log("Reset Coffee machine.");
+    }
+
     void OnMouseDown() {
         Debug.Log("Clicking Coffee!");
 

@@ -29,12 +29,16 @@ public class PlaceButton : MonoBehaviour
     private int version = 1;
     private Material wallpaperChoice;
 
+    private GameObject progressBar;
+
     void Start()
     {
         tables = GameObject.Find("Tables");
         // versions: 1 = howls picture, 2 = cagliostro picture, 3 = wallpaper
         // 4 = plant (fiddle leaf)
         // version = 3; // development mode -- need to change
+        progressBar = GameObject.FindGameObjectWithTag("ProgressBar");
+        progressBar.SetActive(false);
         version = LevelController.LC.getPlacing();
         if (version == 0)
         {
@@ -187,6 +191,7 @@ public class PlaceButton : MonoBehaviour
     void newVoid()
     {
         endPanel.SetActive(true);
+        Debug.Log("gets here//endpanel active");
     }
     void wallpapervoid()
     {
@@ -232,4 +237,5 @@ public class PlaceButton : MonoBehaviour
         startPanel.SetActive(false);
         startedPlacement = true;
     }
+
 }
