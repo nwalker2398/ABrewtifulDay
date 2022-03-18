@@ -215,7 +215,7 @@ public class LevelController : MonoBehaviour
         {
             if ((int)levels[currentLevel - 1]["Placing"] != 0)
             {
-                dialogText.text = (string)levels[currentLevel - 1]["Dialog"];
+                (GameObject.Find("Dialog")).GetComponent<TextMeshProUGUI>().text = (string)levels[currentLevel - 1]["Dialog"];
             }
             else
             {
@@ -235,11 +235,13 @@ public class LevelController : MonoBehaviour
             o.GetComponent<AudioSource>().Play();
         }
 
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation")) {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("CoffeeStation"))
+        {
             o.SetActive((bool)levels[level]["CoffeeEnabled"]);
             o.transform.Find("CoffeeMaker").GetComponent<CoffeeMaker>().resetMachine();
         }
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation")) {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MatchaStation"))
+        {
             o.SetActive((bool)levels[level]["MatchaEnabled"]);
             o.transform.Find("MatchaMachine").GetComponent<MatchaMaker>().resetMachine();
         }
@@ -286,9 +288,4 @@ public class LevelController : MonoBehaviour
         Debug.Log("gets to end of load level, level = " + level);
     }
 
-    public void CloseDialogBox()
-    {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("DialogBox"))
-            o.SetActive(false);
-    }
 }
